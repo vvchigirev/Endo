@@ -1,0 +1,5 @@
+Хорошие ссылки по Qt:
+    https://habr.com/ru/company/skillfactory/blog/599599/
+Инсталяция Qt6:
+    https://www.riverbankcomputing.com/static/Docs/PyQt6/installation.html#building-and-installing-from-source
+    https://pypi.org/project/PyQt6/#files
