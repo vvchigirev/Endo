@@ -4,7 +4,7 @@ from ....common.base_classes.models.person import Person
 class DoctorModel(Person):
     """ Модель. Доктор"""
 
-    def __init__(self, kode, l_name="", f_name="", m_name=""):
+    def __init__(self, kode, l_name: str = "", f_name: str = "", m_name: str = ""):
         """ Конструктор
         :param kode: Код
         :param l_name: Фамилия
