@@ -1,0 +1,3 @@
+Работа с XML файлами:
+    https://pythobyte.com/reading-and-writing-xml-files-in-python-4800946f/
+    https://python-scripts.com/xml-python
