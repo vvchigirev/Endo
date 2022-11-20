@@ -13,8 +13,10 @@ class DeviceModel(BaseDictModel):
         super().__init__(code, name=name)
 
     # region Свойства
+    
     @property
     def code(self):
-        """ Свойство. Код инструмента """
+        """ Свойство. Код прибора """
         return self.id
+    
     # endregion
