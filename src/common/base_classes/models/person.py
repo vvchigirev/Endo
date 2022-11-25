@@ -32,7 +32,7 @@ class Person(BaseModel):
 
         return self.__last_name
 
-    @property.setter
+    @last_name.setter
     def last_name(self, value):
         """ Свойство (установка). Фамилия
         :param value: Значение
@@ -46,7 +46,7 @@ class Person(BaseModel):
 
         return self.__last_name
 
-    @property.setter
+    @first_name.setter
     def first_name(self, value):
         """  Свойство (установка).Имя
         :param value: значение
@@ -62,7 +62,7 @@ class Person(BaseModel):
 
         return self.__middle_name
 
-    @property.setter
+    @middle_name.setter
     def middle_name(self, value):
         """ Свойство (установка). Отчество
         :param value: Значение
