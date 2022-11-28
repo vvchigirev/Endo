@@ -44,7 +44,7 @@ class Person(BaseModel):
     def first_name(self):
         """ Свойство.Имя """
 
-        return self.__last_name
+        return self.__first_name
 
     @first_name.setter
     def first_name(self, value):
@@ -52,7 +52,7 @@ class Person(BaseModel):
         :param value: значение
         """
 
-        self.__last_name = value
+        self.__first_name = value
 
     @property
     def middle_name(self):
