@@ -1,11 +1,8 @@
 import xml.etree.ElementTree as ET
 
-from xml.etree.ElementTree import ElementTree
-
-from ...common.consts.Keys import Keys
 from ..data.xml_doctors import XmlDoctors
 from ..data.xml_organs import XmlOrgans
-from ...dict.doctors.models.doctor_model import DoctorModel
+
 
 FILE = ".\data\data.xml"
 
