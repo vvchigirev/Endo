@@ -42,7 +42,20 @@
         <Doctor>
             <code>2</code><last_name>Ив</last_name><f_name>И</f_name><m_name>И</m_name>
         </Doctor>
-        <Doctor><code>2</code><last_name>Ив</last_name><f_name>И</f_name><m_name>И</m_name>
+        <Doctor>
+            <code>2</code><last_name>Ив</last_name><f_name>И</f_name><m_name>И</m_name>
+        </Doctor>
+        <Doctor>
+            <code>2</code><last_name>Ив</last_name><f_name>И</f_name><m_name>И</m_name>
+        </Doctor>
+        <Doctor>
+            <code>2</code><last_name>Ив</last_name><f_name>И</f_name><m_name>И</m_name>
+        </Doctor>
+        <Doctor>
+            <code>10</code><last_name>Сергеев</last_name><f_name>Сергей</f_name><m_name>Сергееч</m_name>
+        </Doctor>
+        <Doctor>
+            <code>10</code><last_name>Сергеев</last_name><f_name>Сергей</f_name><m_name>Сергееч</m_name>
         </Doctor>
     </Doctors>
     <Organs>
