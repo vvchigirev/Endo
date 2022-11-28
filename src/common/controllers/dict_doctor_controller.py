@@ -1,4 +1,4 @@
-from ...dict.doctors.models.doctor_model import DoctorModel
+from ...dict.doctors.model.doctor_model import DoctorModel
 from ..data.xml_data_provider import XmlDataProvider
 from ..data.xml_doctors import XmlDoctors
 
@@ -24,9 +24,9 @@ class ControllerDictDoctor:
 
         return None
 
-    def get_el(self, kode):
+    def get_el(self, сode):
         """ Получение врача по коду
-        :param kode: Код врача
+        :param сode: Код врача
         :return: Модель. Врач
         """
 

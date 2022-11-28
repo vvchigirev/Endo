@@ -2,7 +2,7 @@ import xml.etree.ElementTree as ET
 
 from ..base_classes.base_xml_element import BaseXmlElement
 from ...common.consts.Keys import Keys
-from ...dict.doctors.models.doctor_model import DoctorModel
+from ...dict.doctors.model.doctor_model import DoctorModel
 
 
 class XmlDoctors(BaseXmlElement):
@@ -29,37 +29,6 @@ class XmlDoctors(BaseXmlElement):
 
         pass
 
-    # def create(self, doctor: DoctorModel):
-    #     """ Создание xml элемента для модели доктора
-    #     :param doctor: Модель Доктор
-    #     :return: xml элемент для сущности Доктор
-    #     """
-    #
-    #     print(": XmlDoctors.create()")
-    #
-    #     print("self.element_name=", self.element_name)
-    #
-    #     xml_doctor = ET.Element(self.element_name)
-    #     print("xml_doctor=", xml_doctor)
-    #     ET.dump(xml_doctor)
-    #
-    #     code = ET.SubElement(xml_doctor, "code")
-    #     code.text = str(doctor.kode)
-    #
-    #     last_name = ET.SubElement(xml_doctor, "last_name")
-    #     last_name.text = doctor.last_name
-    #
-    #     first_name = ET.SubElement(xml_doctor, "f_name")
-    #     first_name.text = doctor.first_name
-    #
-    #     middle_name = ET.SubElement(xml_doctor, "m_name")
-    #     middle_name.text = doctor.middle_name
-    #
-    #     ET.dump(xml_doctor)
-    #
-    #     # self.__x
-    #
-    #     return xml_doctor
     def create(self, xml_element, doctor: DoctorModel):
         """ Создание xml элемента для модели доктора
         :param xml_element: корневой xml элемент
@@ -72,7 +41,7 @@ class XmlDoctors(BaseXmlElement):
         print("doctor=", doctor)
 
         code = ET.SubElement(xml_element, "code")
-        code.text = str(doctor.kode)
+        code.text = str(doctor.code)
 
         last_name = ET.SubElement(xml_element, "last_name")
         last_name.text = doctor.last_name

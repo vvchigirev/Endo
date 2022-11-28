@@ -20,6 +20,7 @@ class DoctorModel(Person):
     def code(self):
         """ Свойство. Код врача """
         return self.id
+
     # endregion
 
     def __str__(self):
@@ -27,6 +28,6 @@ class DoctorModel(Person):
         :return:
         """
 
-        s = f'({self.code}) {self.fam_io}'
+        s = f'["DoctorModel"] ({self.code}) {self.fam_io}'
 
         return s
