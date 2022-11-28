@@ -3,7 +3,7 @@ from PyQt5 import uic
 from PyQt5.QtWidgets import QMainWindow, QAction, qApp
 from PyQt5.QtGui import QIcon
 
-from ...dict.doctors.models.doctor_model import DoctorModel
+from ...dict.doctors.model.doctor_model import DoctorModel
 from ...common.controllers.dict_doctor_controller import ControllerDictDoctor
 from ...common.data.xml_data_provider import XmlDataProvider
 
@@ -115,7 +115,7 @@ class MainWindow(QMainWindow, FORM_CLASS):
         # doctor = DoctorModel(19, "Иванов", "Петр", "Сидорович")
         # print("doctor= ", doctor)
 
-        doctor = DoctorModel(2, "Ив", "И", "И")
+        doctor = DoctorModel(10, "Сергеев", "Сергей", "Сергееч")
         self.__controller_doctors.add_el(doctor)
 
         self.__controller_doctors.add_el(doctor)
