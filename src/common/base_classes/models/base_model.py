@@ -22,7 +22,7 @@ class BaseModel:
 
         return self.__id
 
-    @property.setter
+    @id.setter
     def id(self, value):
         """ Свойство (установка). Идентификатор
         :param value: Присваемое значение
@@ -35,6 +35,7 @@ class BaseModel:
         """ Свойство. Признак удаления
         :return:
         """
+
         return self.__is_delete
 
     # endregion
