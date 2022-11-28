@@ -22,7 +22,15 @@ class ControllerDictDoctor:
         :return: Список моделей врачей
         """
 
-        return None
+        doctors = []
+
+        doctor1 = DoctorModel(50, "Ivanov", "Ivan", "Ivanovich")
+        doctors.append(doctor1)
+
+        doctor2 = DoctorModel(51, "Petrov", "Petr", "Petrovich")
+        doctors.append(doctor2)
+
+        return doctors
 
     def get_el(self, сode):
         """ Получение врача по коду
