@@ -22,7 +22,6 @@ class XmlDoctors(BaseXmlElement):
 
         print(": XmlDoctors.select_doctors()")
 
-        # doctors = [DoctorModel]
         doctors = []
 
         for xml_doctor in xml_element:
@@ -56,13 +55,28 @@ class XmlDoctors(BaseXmlElement):
 
         return DoctorModel(code, l_name, f_name, m_name)
 
-    def get_doctor(self, code):
+    def get_doctor(self, xml_element, code):
         """ Получение доктора по коду
+        :param xml_element: xml элеммент группы врачей
         :param code: Код докора
         :return: Модель Доктор
         """
 
-        pass
+        print(": XmlDoctors.get_doctor()")
+
+        s = self.element_name + "[code='" + str(code) + "']"
+        el = xml_element.find(s)
+
+        if el:
+            doctor = self.gen_doctor_model_from_xml_element(el)
+            return doctor
+        else:
+            s = self.element_name + "[@code='" + str(code) + "']"
+            el = xml_element.find(s)
+            if el is not None:
+                doctor = self.gen_doctor_model_from_xml_element(el)
+                return doctor
+        return None
 
     def create_xml_doctor(self, xml_element, doctor: DoctorModel):
         """ Создание xml элемента для модели Врача
@@ -106,7 +120,7 @@ class XmlDoctors(BaseXmlElement):
         xml_element.set("first_name", doctor.first_name)
         xml_element.set("middle_name", doctor.middle_name)
 
-        ET.dump(xml_element)
+        # ET.dump(xml_element)
 
     def update(self, doctor: DoctorModel):
         """ Обновление xml элемента для сущности Доктор

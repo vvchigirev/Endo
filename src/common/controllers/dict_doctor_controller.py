@@ -27,33 +27,40 @@ class ControllerDictDoctor:
 
         doctors = []
 
-        # doctor1 = DoctorModel(50, "Ivanov", "Ivan", "Ivanovich")
-        # doctors.append(doctor1)
-        # doctor2 = DoctorModel(51, "Petrov", "Petr", "Petrovich")
-        # doctors.append(doctor2)
+        try:
+            # doctor1 = DoctorModel(50, "Ivanov", "Ivan", "Ivanovich")
+            # doctors.append(doctor1)
+            # doctor2 = DoctorModel(51, "Petrov", "Petr", "Petrovich")
+            # doctors.append(doctor2)
 
-        # print("doctors=", doctors)
+            # print("doctors=", doctors)
 
-        xml_element = self.__data_provider.select_elements(self.__xml_doctors.group_name)
-        if xml_element is not None:
-            doctors = self.__xml_doctors.select_doctors(xml_element)
+            xml_element = self.__data_provider.select_elements(self.__xml_doctors.group_name)
+            if xml_element is not None:
+                doctors = self.__xml_doctors.select_doctors(xml_element)
+        except Exception as e:
+            message = "Ошибка получения списка врачей!"
+            print(message, e)
+            raise BusinеssException(message)
 
         return doctors
 
-    def get_doctor(self, сode):
+    def get_doctor(self, code):
         """ Получение Врача по коду
         :param сode: Код врача
         :return: Модель. Врач
         """
 
+        print("code=", code)
         try:
-            return True
+            xml_element = self.__data_provider.select_elements(self.__xml_doctors.group_name)
+            if xml_element is not None:
+                return self.__xml_doctors.get_doctor(xml_element, code)
+
         except Exception as e:
             message = "Ошибка добавления врача"
             print(message, e)
             raise BusinеssException(message)
-
-        return doc
 
     def create_doctor(self, doctor: DoctorModel):
         """ Добавление сущности Врач
