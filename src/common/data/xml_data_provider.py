@@ -47,7 +47,7 @@ class XmlDataProvider:
             if find is None:
                 ET.SubElement(self.__root, element.group_name)
 
-        ET.dump(self.__tree)
+        # ET.dump(self.__tree)
 
     def write(self):
         """ Запись данных в xml файл """
@@ -56,19 +56,34 @@ class XmlDataProvider:
 
         ET.dump(self.__tree)
 
-        self.__tree.write(FILE, encoding="utf-8", method="xml")
+        # self.__tree.write(FILE, encoding="utf-8", method="xml")
+        self.__tree.write(FILE, encoding="utf-8",)
 
-    def select_elements(self):
+    def select_elements(self, group_name):
         """ Получение списка элементов указанной группы
+        :param group_name: Наименование группы
         :return:
         """
 
         print(": XmlDataProvider.select_elements()")
 
+        if not group_name:
+            return None
+
+        if self.__root:
+            element = self.__root.find(group_name)
+
+            # print("element=", element)
+            # ET.dump(element)
+
+            return element
+
+        return None
+
     def create_element(self, group_name=None, element_name=None):
         """ Добавление элемента в xml документ
         :param group_name: Наименование группы куда добавить элемент
-        :param element_name: Наименование добавляемый элемент
+        :param element_name: Наименование добавляемого элемента
         """
 
         print(": XmlDataProvider.create_element()")

@@ -28,6 +28,7 @@ class DoctorModel(Person):
         :return:
         """
 
-        s = f'["DoctorModel"] ({self.code}) {self.fam_io}'
+        # s = f'["DoctorModel"] ({self.code}) {self.fam_io}'
+        s = f'["DoctorModel"] ({self.code}) {self.fio}'
 
         return s
