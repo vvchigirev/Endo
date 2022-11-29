@@ -56,28 +56,20 @@ class XmlDoctors(BaseXmlElement):
 
     def create_attribs(self, xml_element, doctor: DoctorModel):
         """ Создание xml элемента для модели доктора
+        :param xml_element: xml элемент
         :param doctor: Модель Доктор
         :return: xml элемент для сущности Доктор
         """
 
-        print(": XmlDoctors.create()")
+        print(": XmlDoctors.create_attribs()")
 
         print("xml_element=", xml_element)
         print("doctor=", doctor)
 
-        # print("self.element_name=", self.element_name)
-
-        code = ET.SubElement(xml_element, "code")
-        code.text = str(doctor.kode)
-
-        last_name = ET.SubElement(xml_element, "last_name")
-        last_name.text = doctor.last_name
-
-        first_name = ET.SubElement(xml_element, "f_name")
-        first_name.text = doctor.first_name
-
-        middle_name = ET.SubElement(xml_element, "m_name")
-        middle_name.text = doctor.middle_name
+        xml_element.set("code", str(doctor.code))
+        xml_element.set("last_name", doctor.last_name)
+        xml_element.set("first_name", doctor.first_name)
+        xml_element.set("middle_name", doctor.middle_name)
 
         ET.dump(xml_element)
 
