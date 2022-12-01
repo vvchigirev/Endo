@@ -28,7 +28,7 @@ class XmlDataProvider:
 
     @property
     def root(self):
-        """Свойство. Корневой элемент"""
+        """ Свойство. Корневой элемент """
 
         return self.__root
 

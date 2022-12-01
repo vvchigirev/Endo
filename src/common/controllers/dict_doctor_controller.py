@@ -50,7 +50,7 @@ class ControllerDictDoctor:
             return None
 
         except Exception as e:
-            message = "Ошибка добавления врача"
+            message = "Ошибка получения врача"
             print(message, e)
             raise BusinеssException(message)
 
@@ -84,10 +84,18 @@ class ControllerDictDoctor:
         :param doctor: Модель - Врач
         :return: Результат выполнения
         """
+
         print(": ControllerDictDoctor.update_doctor()")
 
         try:
-            print(f"Изменим врача: f{doctor}")
+            if not self.get_doctor(doctor.code):
+                print(f"Врачь с кодом {doctor.code} не существует!")
+                return False
+
+            if not self.__xml_doctors.update_doctor(doctor):
+                print("Врач НЕ изменен !!!")
+                return False
+
             return True
         except Exception as e:
             message = "Ошибка изменения врача"
@@ -103,7 +111,7 @@ class ControllerDictDoctor:
 
         try:
             doctor = self.get_doctor(code)
-            if not  doctor:
+            if not doctor:
                 print(f"Врача с кодом {code} не найден!")
                 return False
 

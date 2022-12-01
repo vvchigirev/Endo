@@ -9,14 +9,14 @@ from ...dict.doctors.model.doctor_model import DoctorModel
 class XmlDoctors(BaseSections):
     """ Xml Сруктура для сущностей Врачей """
 
-    __xml_provider: XmlDataProvider = None  # Провайдер данных XML
+    __xml_provider = None  # Провайдер данных XML
 
     def __init__(self, xml_provider: XmlDataProvider = None):
         """ Конструктор
         :param xml_provider: Xml провайдер
         """
 
-        self.__xml_provider = xml_provider
+        self.__xml_provider: XmlDataProvider = xml_provider
 
         self.group_name = Keys.DOCTORS
         self.element_name = Keys.DOCTOR
@@ -158,13 +158,36 @@ class XmlDoctors(BaseSections):
 
         return True
 
-    def update_doctor(self, xml_element, doctor: DoctorModel):
+    def update_doctor(self, doctor: DoctorModel):
         """ Обновление xml элемента для сущности Доктор
         :param xml_element: xml элеммент группы врачей
         :param doctor: Модель Доктор
         :return: xml
         """
-        pass
+
+        print(": XmlDoctors.update_doctor()")
+
+        if not self.__xml_provider.root:
+            return False
+
+        xml_group = self.__xml_provider.root.find(self.group_name)
+
+        str_search = self.element_name + "[code='" + str(doctor.code) + "']"
+        xml_doctor = xml_group.find(str_search)
+
+        if xml_doctor:
+            last_name = xml_doctor.find("last_name")
+            last_name.text = doctor.last_name
+
+            first_name = xml_doctor.find("first_name")
+            first_name.text = doctor.first_name
+
+            middle_name = xml_doctor.find("middle_name")
+            middle_name.text = doctor.middle_name
+
+            return True
+
+        return False
 
     def delete_doctor(self, code):
         """ Удуление xml элемента по коду
