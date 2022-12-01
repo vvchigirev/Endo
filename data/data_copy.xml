@@ -1,0 +1,42 @@
+<Endo>
+    <Doctors>
+        <Doctor>
+            <code>1</code>
+            <last_name>Иванов</last_name>
+            <first_name>Иван</first_name>
+            <middle_name>Иванови</middle_name>
+        </Doctor>
+        <Doctor>
+            <code>6</code>
+            <last_name>Петров</last_name>
+            <first_name>Петр</first_name>
+            <middle_name>Петрович</middle_name>
+        </Doctor>
+        <Doctor>
+            <code>5</code><last_name>Сидоров</last_name><first_name>Сидр</first_name><middle_name>Сидорович</middle_name>
+        </Doctor>
+        <Doctor>
+            <code>5</code><last_name>Сидоров</last_name><first_name>Сидр</first_name><middle_name>Сидорович</middle_name>
+        </Doctor>
+        <Doctor>
+            <code>5</code><last_name>Сидоров</last_name><first_name>Сидр</first_name><middle_name>Сидорович</middle_name>
+        </Doctor>
+        <Doctor>
+            <code>5</code><last_name>Сидоров</last_name><first_name>Сидр</first_name><middle_name>Сидорович</middle_name>
+        </Doctor>
+        <Doctor>
+            <code>10</code><last_name>Сидоров</last_name><first_name>Сидр</first_name><middle_name>Сидорович</middle_name>
+        </Doctor>
+        <Doctor>
+            <code>15</code><last_name>Сидоров1</last_name><first_name>Сидр1</first_name><middle_name> </middle_name>
+        </Doctor>
+        <Doctor>
+            <code>19</code><last_name>Иванов</last_name><first_name>Петр</first_name><middle_name>Сидорович</middle_name>
+        </Doctor>
+
+        <Doctor code="100" first_name="Сергей1" last_name="Сергеев1" middle_name="Сергееч1" />
+        <Doctor code="101" first_name="Сергей2" last_name="Сергеев2" middle_name="Сергееч2" />
+    </Doctors>
+    <Organs>
+    </Organs>
+</Endo>
