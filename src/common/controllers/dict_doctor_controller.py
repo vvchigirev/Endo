@@ -104,34 +104,19 @@ class ControllerDictDoctor:
         try:
             doctor = self.get_doctor(code)
             if not  doctor:
-                print(f"Врача с кодом {code} не существует!")
+                print(f"Врача с кодом {code} не найден!")
                 return False
-            else:
-                print(f'{doctor}')
-
-
-            # if doctor:
-            #     print(f"Удалим врача: {code}")
-            #     xml_element = self.__data_provider.select_elements(self.__xml_doctors.group_name)
-            #     if xml_element is not None:
-            #         return self.__xml_doctors.delete_doctor(xml_element, code)
-            # else:
-            #     print(f'Врач под кодом-{code} не найден!')
-            #     return False
 
             try:
                 if doctor:
-                    print(f"Удалим врача: {code}")
+                    print(f"Удалим врача с кодом: {code}")
 
-                if not self.__xml_provider.root:
-                    return False
-
-                xml_group = self.__xml_provider.root.find(self.group_name)
-                self.__xml_doctors.delete_doctor()
+                if self.__xml_doctors.delete_doctor(code):
+                    return True
 
                 return False
             except Exception as e:
-                message = "Ошибка добавления врача"
+                message = "Ошибка удаления врача"
                 print(message + ": ", e)
                 raise BusinеssException(message)
 

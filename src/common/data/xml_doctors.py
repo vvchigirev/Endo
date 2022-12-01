@@ -166,10 +166,25 @@ class XmlDoctors(BaseSections):
         """
         pass
 
-    def delete_doctor(self, xml_element, code):
+    def delete_doctor(self, code):
         """ Удуление xml элемента по коду
         :param xml_element: xml элеммент группы врачей
         :param code: Код докора
         :return:
         """
-        pass
+
+        print(": XmlDoctors.delete_doctor()")
+
+        if not self.__xml_provider.root:
+            return False
+
+        xml_group = self.__xml_provider.root.find(self.group_name)
+
+        str_search = self.element_name + "[code='" + str(code) + "']"
+        element = xml_group.find(str_search)
+
+        if element:
+            xml_group.remove(element)
+            return True
+
+        return False
