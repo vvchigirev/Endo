@@ -23,22 +23,29 @@ class MainWindow(QMainWindow, FORM_CLASS):
         super(MainWindow, self).__init__()
         self.setupUi(self)
 
-        self.__init_ui()
+        self.__prepare_ui()
 
         self.__xml_provider = XmlDataProvider()
         self.__xml_provider.read()
 
         self.__controller_doctors = ControllerDictDoctor(self.__xml_provider)
 
-    def __init_ui(self):
-        """ Инициализания интерфейса """
+    def __prepare_ui(self):
+        """ Подготовка интерфейса """
 
-        print(": MainWindow.__init_ui()")
+        print(": MainWindow.__prepare_ui()")
 
         self.setWindowTitle("Система эндоскопического отделения")
 
         self.__create_menu()
         self.statusBar().showMessage('Ready')
+
+        self.pushBtnDict.clicked.connect(self.__on_puchBtnDict_clicked)
+        self.pushFind.clicked.connect(self.__on_puchBtnFind_clicked)
+
+        self.pushButtonAdd.clicked.connect(self.__on_pushButtonAdd_clicked)
+        self.pushButtonUpdate.clicked.connect(self.__on_pushButtonUpdate_clicked)
+        self.pushButtonRemove.clicked.connect(self.__on_pushButtonRemove_clicked)
 
         self.puchBtn.clicked.connect(self.__on_puchBtn_clicked)
         self.toolBtn.clicked.connect(self.__on_toolBtn_clicked)
@@ -75,28 +82,69 @@ class MainWindow(QMainWindow, FORM_CLASS):
     def closeEvent(self, event):
         print(": MainWindow.closeEvent()")
 
-        # xml = XmlDataPrivider()
-        # xml.add_pribors()
-        # xml.add_doctors()
-
-        # XmlDataProvider.write()
         # self.__xmlData.write()
 
     def __on_click_menu_item_data_load(self):
         print("Загрузить данные")
 
         doctor = DoctorModel(1, "Иванов", "Иван", "Иванови")
-        self.__controller_doctors.add_el(doctor)
+        self.__controller_doctors.create_doctor(doctor)
 
-        doctor = DoctorModel(5, "Сидоров", "Сидр", "Сидорови")
-        self.__controller_doctors.add_el(doctor)
-
-        # XmlDataPrivider.add_doctor(doctor)
+        # doctor = DoctorModel(5, "Сидоров", "Сидр", "Сидорови")
+        # self.__controller_doctors.create_doctor(doctor)
 
     def __on_click_menu_item_data_save(self):
         print("Сохранить данные")
 
         # self.xmlData.write()
+
+    def __on_puchBtnDict_clicked(self):
+        """ Обработчик нажатия на кнопку 'Справлчник' """
+
+        list_doctors = self.__controller_doctors.select_doctors()
+        for doctor in list_doctors:
+            print(f'- {doctor}')
+
+    def __on_puchBtnFind_clicked(self):
+        """ Обработчик нажатия на кнопку 'Найти' """
+
+        code = 100
+        doctor = self.__controller_doctors.get_doctor(code)
+        if doctor:
+            print(f'- {doctor}')
+        else:
+            print(f'Врач под кодом-{code} не найден!')
+
+    def __on_pushButtonAdd_clicked(self):
+        """ Обработчик нажатия на кнопку 'Обновить' """
+
+        # doctor = DoctorModel(25, "Петров", "Петр", "Петрович")
+        doctor = DoctorModel(125, "1", "1", "1")
+
+        if self.__controller_doctors.create_doctor(doctor):
+            print(f'Врач {doctor} успешно добавлен')
+        else:
+            print(f'Врач {doctor} НЕ добавлен !!!')
+
+    def __on_pushButtonUpdate_clicked(self):
+        """ Обработчик нажатия на кнопку 'Обновить' """
+
+        doctor = DoctorModel(125, "3", "3", "3")
+        if self.__controller_doctors.update_doctor(doctor):
+            print(f'Врач {doctor} успешно обновлен')
+        else:
+            print(f'Врач {doctor} НЕ обновлен !!!')
+
+
+    def __on_pushButtonRemove_clicked(self):
+        """ Обработчик нажатия на кнопку 'Удалить' """
+
+        code = 5
+
+        if self.__controller_doctors.delete_doctor(code):
+            print(f'Врач с кодом-{code} успешно удален!')
+        else:
+            print(f'Врач с кодом: {code} не удален!')
 
     def __on_puchBtn_clicked(self):
         print(": MainWindow.__on_puchBtn_clicked()")
@@ -107,15 +155,13 @@ class MainWindow(QMainWindow, FORM_CLASS):
         print(": MainWindow.__on_puchBtn_clicked()")
 
         # doctor = DoctorModel(1, "Иванов", "Иван", "Иванови")
-        # self.__controller_doctors.add_el(doctor)
+        # self.__controller_doctors.create_doctor(doctor)
 
         # doctor = DoctorModel(5, "Петров", "Петр", "Петрович")
-        # self.__controller_doctors.add_el(doctor)
-        #
+        # self.__controller_doctors.create_doctor(doctor)
+
         # doctor = DoctorModel(19, "Иванов", "Петр", "Сидорович")
         # print("doctor= ", doctor)
 
-        doctor = DoctorModel(10, "Сергеев", "Сергей", "Сергееч")
-        self.__controller_doctors.add_el(doctor)
-
-        self.__controller_doctors.add_el(doctor)
+        doctor = DoctorModel(150, "Сергеев1", "Сергей1", "Сергееч1")
+        self.__controller_doctors.create_doctor(doctor)
