@@ -1,8 +1,8 @@
 from ...common.consts.Keys import Keys
-from ..base_classes.base_xml_element import BaseXmlElement
+from ..base_classes.base_sections import BaseSections
 
 
-class XmlOrgans(BaseXmlElement):
+class XmlOrgans(BaseSections):
     """ Xml Сруктура для сущностей Органов """
 
     def __init__(self):

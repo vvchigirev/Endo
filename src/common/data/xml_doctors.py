@@ -1,37 +1,47 @@
 import xml.etree.ElementTree as ET
 
-from ..base_classes.base_xml_element import BaseXmlElement
+from ..base_classes.base_sections import BaseSections
 from ...common.consts.Keys import Keys
+from .xml_data_provider import XmlDataProvider
 from ...dict.doctors.model.doctor_model import DoctorModel
 
 
-class XmlDoctors(BaseXmlElement):
+class XmlDoctors(BaseSections):
     """ Xml Сруктура для сущностей Врачей """
 
-    def __init__(self):
-        """ Конструктор """
+    __xml_provider: XmlDataProvider = None  # Провайдер данных XML
+
+    def __init__(self, xml_provider: XmlDataProvider = None):
+        """ Конструктор
+        :param xml_provider: Xml провайдер
+        """
+
+        self.__xml_provider = xml_provider
 
         self.group_name = Keys.DOCTORS
         self.element_name = Keys.DOCTOR
 
-    def select_doctors(self, xml_element):
+    def select_doctors(self):
         """ Получение списка Врачей
-        :param xml_element: xml элеммент группы врачей
         :return: Список моделей Врачей
         """
 
         print(": XmlDoctors.select_doctors()")
 
+        if not self.__xml_provider.root:
+            return []
+
         doctors = []
 
-        for xml_doctor in xml_element:
-            # print("xml_doctor=", xml_doctor)
-            # print(xml_doctor.tag)
+        xml_group = self.__xml_provider.root.find(self.group_name)
 
-            doctor:DoctorModel = self.gen_doctor_model_from_xml_element(xml_doctor)
-            # print(doctor)
+        if xml_group:
+            print("xml_group=", xml_group)
+            for xml_doctor in xml_group.findall(self.element_name):
+                doctor: DoctorModel = self.gen_doctor_model_from_xml_element(xml_doctor)
 
-            doctors.append(doctor)
+                doctors.append(doctor)
+
         return doctors
 
     def gen_doctor_model_from_xml_element(self, xml_element):
@@ -55,7 +65,7 @@ class XmlDoctors(BaseXmlElement):
 
         return DoctorModel(code, l_name, f_name, m_name)
 
-    def get_doctor(self, xml_element, code):
+    def get_doctor(self, code):
         """ Получение доктора по коду
         :param xml_element: xml элеммент группы врачей
         :param code: Код докора
@@ -64,19 +74,47 @@ class XmlDoctors(BaseXmlElement):
 
         print(": XmlDoctors.get_doctor()")
 
-        s = self.element_name + "[code='" + str(code) + "']"
-        el = xml_element.find(s)
+        if not self.__xml_provider.root:
+            return None
 
-        if el:
-            doctor = self.gen_doctor_model_from_xml_element(el)
+        xml_group = self.__xml_provider.root.find(self.group_name)
+
+        str_search = self.element_name + "[code='" + str(code) + "']"
+        element = xml_group.find(str_search)
+
+        if element:
+            doctor = self.gen_doctor_model_from_xml_element(element)
             return doctor
         else:
-            s = self.element_name + "[@code='" + str(code) + "']"
-            el = xml_element.find(s)
-            if el is not None:
-                doctor = self.gen_doctor_model_from_xml_element(el)
+            str_search = self.element_name + "[@code='" + str(code) + "']"
+            element = xml_group.find(str_search)
+            if element is not None:
+                doctor = self.gen_doctor_model_from_xml_element(element)
                 return doctor
         return None
+
+    def create_doctor(self, doctor: DoctorModel, is_attribs = False):
+        """ Создание xml элемента для модели Врача
+        :param doctor: Модель Врвча
+        :return: Результат выполнения
+        """
+
+        print(": XmlDoctors.create_doctor()")
+
+        if not self.__xml_provider.root:
+            return False
+
+        xml_group = self.__xml_provider.root.find(self.group_name)
+        xml_doctor = ET.SubElement(xml_group, self.element_name)
+
+        if is_attribs:
+            if self.create_xml_doctor_attributes(xml_doctor, doctor):
+                return True
+        else:
+            if self.create_xml_doctor(xml_doctor, doctor):
+                return True
+
+        return False
 
     def create_xml_doctor(self, xml_element, doctor: DoctorModel):
         """ Создание xml элемента для модели Врача
@@ -84,10 +122,7 @@ class XmlDoctors(BaseXmlElement):
         :param doctor: Модель Врвча
         """
 
-        print(": XmlDoctors.create()")
-
-        print("xml_element=", xml_element)
-        print("doctor=", doctor)
+        print(": XmlDoctors.create_xml_doctor()")
 
         code = ET.SubElement(xml_element, "code")
         code.text = str(doctor.code)
@@ -101,7 +136,9 @@ class XmlDoctors(BaseXmlElement):
         middle_name = ET.SubElement(xml_element, "middle_name")
         middle_name.text = doctor.middle_name
 
-        ET.dump(xml_element)
+        # ET.dump(xml_element)
+
+        return True
 
     def create_xml_doctor_attributes(self, xml_element, doctor: DoctorModel):
         """ Создание xml элемента для модели Врача
@@ -112,9 +149,6 @@ class XmlDoctors(BaseXmlElement):
 
         print(": XmlDoctors.create_attribs()")
 
-        print("xml_element=", xml_element)
-        print("doctor=", doctor)
-
         xml_element.set("code", str(doctor.code))
         xml_element.set("last_name", doctor.last_name)
         xml_element.set("first_name", doctor.first_name)
@@ -122,16 +156,20 @@ class XmlDoctors(BaseXmlElement):
 
         # ET.dump(xml_element)
 
-    def update(self, doctor: DoctorModel):
+        return True
+
+    def update_doctor(self, xml_element, doctor: DoctorModel):
         """ Обновление xml элемента для сущности Доктор
+        :param xml_element: xml элеммент группы врачей
         :param doctor: Модель Доктор
         :return: xml
         """
         pass
 
-    def delete(self, code):
+    def delete_doctor(self, xml_element, code):
         """ Удуление xml элемента по коду
-        :param code: Код доктора
+        :param xml_element: xml элеммент группы врачей
+        :param code: Код докора
         :return:
         """
         pass

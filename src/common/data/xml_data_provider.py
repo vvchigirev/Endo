@@ -1,8 +1,7 @@
 import xml.etree.ElementTree as ET
 
-from ..data.xml_doctors import XmlDoctors
-from ..data.xml_organs import XmlOrgans
-
+from .sections.section_doctors import SectionDoctors
+from .sections.section_organs import SectionOrgans
 
 FILE = ".\data\data.xml"
 
@@ -12,11 +11,7 @@ class XmlDataProvider:
 
     __tree = None
     __root = None
-
-    __parent_elements = [
-        XmlDoctors(),
-        XmlOrgans(),
-    ]
+    __sections = None      # Спислк обязательных секций d xml документе
 
     def __init__(self):
         """ Конструктор """
@@ -24,7 +19,20 @@ class XmlDataProvider:
         self.__tree = None
         self.__root = None
 
+        self.__sections = [
+            SectionDoctors(),
+            SectionOrgans()
+        ]
+
     # region Свойства
+
+    @property
+    def root(self):
+        """Свойство. Корневой элемент"""
+
+        return self.__root
+
+    # endregion
 
     def read(self):
         """ Чтение xml файла """
@@ -42,12 +50,12 @@ class XmlDataProvider:
             self.__root = ET.Element("Endo")
             self.__tree = ET.ElementTree(self.__root)
 
-        for element in XmlDataProvider.__parent_elements:
-            find = self.__root.find(element.group_name)
+        for section in self.__sections:
+            find = self.__root.find(section.group_name)
             if find is None:
-                ET.SubElement(self.__root, element.group_name)
+                ET.SubElement(self.__root, section.group_name)
 
-        # ET.dump(self.__tree)
+        # ET.dump(self.__tree) # Отображение считанных данных из xml файла
 
     def write(self):
         """ Запись данных в xml файл """
@@ -57,47 +65,4 @@ class XmlDataProvider:
         ET.dump(self.__tree)
 
         # self.__tree.write(FILE, encoding="utf-8", method="xml")
-        self.__tree.write(FILE, encoding="utf-8",)
-
-    def select_elements(self, group_name):
-        """ Получение списка элементов указанной группы
-        :param group_name: Наименование группы
-        :return:
-        """
-
-        print(": XmlDataProvider.select_elements()")
-
-        if not group_name:
-            return None
-
-        if self.__root:
-            element = self.__root.find(group_name)
-
-            # print("element=", element)
-            # ET.dump(element)
-
-            return element
-
-        return None
-
-    def create_element(self, group_name=None, element_name=None):
-        """ Добавление элемента в xml документ
-        :param group_name: Наименование группы куда добавить элемент
-        :param element_name: Наименование добавляемого элемента
-        """
-
-        print(": XmlDataProvider.create_element()")
-
-        if not group_name:
-            return None
-
-        if self.__root:
-            find_element = self.__root.find(group_name)
-
-            ET.dump(find_element)
-
-            if find_element is not None:
-                element = ET.SubElement(find_element, element_name)
-
-                return element
-        return None
+        self.__tree.write(FILE, encoding="utf-8")

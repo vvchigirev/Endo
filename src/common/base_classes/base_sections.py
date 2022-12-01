@@ -7,7 +7,7 @@ class BaseSections:
     _group_name: str = ""
     _element_name: str = ""
 
-    def __init__(self, el_group_name=None, el_name=None):
+    def __init__(self):
         """ Конструктор """
 
         self._group_name = el_group_name

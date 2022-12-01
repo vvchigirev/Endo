@@ -10,13 +10,13 @@ class ControllerDictDoctor:
     __data_provider: XmlDataProvider = None  # Провайдер данных XML
     __xml_doctors: XmlDoctors = None  # Xml структур для Врачей
 
-    def __init__(self, xml_provider: XmlDataProvider=None):
+    def __init__(self, xml_provider: XmlDataProvider = None):
         """ Конструктор
         :param xml_provider: Xml провайдер
         """
 
         self.__data_provider = xml_provider
-        self.__xml_doctors = XmlDoctors()
+        self.__xml_doctors = XmlDoctors(self.__data_provider)
 
     def select_doctors(self):
         """ Получение списка вречей
@@ -28,16 +28,7 @@ class ControllerDictDoctor:
         doctors = []
 
         try:
-            # doctor1 = DoctorModel(50, "Ivanov", "Ivan", "Ivanovich")
-            # doctors.append(doctor1)
-            # doctor2 = DoctorModel(51, "Petrov", "Petr", "Petrovich")
-            # doctors.append(doctor2)
-
-            # print("doctors=", doctors)
-
-            xml_element = self.__data_provider.select_elements(self.__xml_doctors.group_name)
-            if xml_element is not None:
-                doctors = self.__xml_doctors.select_doctors(xml_element)
+            return self.__xml_doctors.select_doctors()
         except Exception as e:
             message = "Ошибка получения списка врачей!"
             print(message, e)
@@ -47,15 +38,16 @@ class ControllerDictDoctor:
 
     def get_doctor(self, code):
         """ Получение Врача по коду
-        :param сode: Код врача
+        :param code: Код врача
         :return: Модель. Врач
         """
 
-        print("code=", code)
         try:
-            xml_element = self.__data_provider.select_elements(self.__xml_doctors.group_name)
-            if xml_element is not None:
-                return self.__xml_doctors.get_doctor(xml_element, code)
+            if code != "" or code is not None:
+                doctor = self.__xml_doctors.get_doctor(code)
+                return doctor
+
+            return None
 
         except Exception as e:
             message = "Ошибка добавления врача"
@@ -70,16 +62,16 @@ class ControllerDictDoctor:
 
         print(": ControllerDictDoctor.create_doctor()")
 
+        print(f"Добавление врача: f{doctor}")
+
         try:
-            print(f"Добавление врача: f{doctor}")
+            if self.__xml_doctors.get_doctor(doctor.code):
+                print(f"Врачь с кодом {doctor.code} уже существует!")
+                return False
 
-            xml_element = self.__data_provider.create_element(
-                self.__xml_doctors.group_name,
-                self.__xml_doctors.element_name)
-
-            if xml_element is not None:
-                # self.__xml_doctors.create(xml_element, doctor)
-                self.__xml_doctors.create_attribs(xml_element, doctor)
+            if not self.__xml_doctors.create_doctor(doctor):
+                print("Врач не добавлен !!!")
+                return False
 
             return True
         except Exception as e:
@@ -92,6 +84,7 @@ class ControllerDictDoctor:
         :param doctor: Модель - Врач
         :return: Результат выполнения
         """
+        print(": ControllerDictDoctor.update_doctor()")
 
         try:
             print(f"Изменим врача: f{doctor}")
@@ -101,14 +94,47 @@ class ControllerDictDoctor:
             print(message, e)
             raise BusinеssException(message)
 
-    def delete_doctor(self, doctor: DoctorModel):
+    def delete_doctor(self, code):
         """ Удаление сущности Врач
-        :param doctor: Модель - Врач
-        :return: результат выполнения
+        :param code: Код Врача
+        :return: Результат выполнения
         """
+        print(": ControllerDictDoctor.delete_doctor()")
 
         try:
-            print(f"Удалим врача: f{doctor}")
+            doctor = self.get_doctor(code)
+            if not  doctor:
+                print(f"Врача с кодом {code} не существует!")
+                return False
+            else:
+                print(f'{doctor}')
+
+
+            # if doctor:
+            #     print(f"Удалим врача: {code}")
+            #     xml_element = self.__data_provider.select_elements(self.__xml_doctors.group_name)
+            #     if xml_element is not None:
+            #         return self.__xml_doctors.delete_doctor(xml_element, code)
+            # else:
+            #     print(f'Врач под кодом-{code} не найден!')
+            #     return False
+
+            try:
+                if doctor:
+                    print(f"Удалим врача: {code}")
+
+                if not self.__xml_provider.root:
+                    return False
+
+                xml_group = self.__xml_provider.root.find(self.group_name)
+                self.__xml_doctors.delete_doctor()
+
+                return False
+            except Exception as e:
+                message = "Ошибка добавления врача"
+                print(message + ": ", e)
+                raise BusinеssException(message)
+
             return True
         except Exception as e:
             message = "Ошибка удаления врача"
