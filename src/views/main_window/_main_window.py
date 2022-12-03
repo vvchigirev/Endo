@@ -99,7 +99,7 @@ class MainWindow(QMainWindow, FORM_CLASS):
         # self.xmlData.write()
 
     def __on_puchBtnDict_clicked(self):
-        """ Обработчик нажатия на кнопку 'Справлчник' """
+        """ Обработчик нажатия на кнопку 'Справочник' """
 
         list_doctors = self.__controller_doctors.select_doctors()
         for doctor in list_doctors:
@@ -139,11 +139,12 @@ class MainWindow(QMainWindow, FORM_CLASS):
     def __on_pushButtonRemove_clicked(self):
         """ Обработчик нажатия на кнопку 'Удалить' """
 
-        code = 5
-
+        code = int(self.lineEditCodeRemove.text())
         if self.__controller_doctors.delete_doctor(code):
+            self.statusbar.showMessage(f'Врач с кодом-{code} успешно удален!', 3000)
             print(f'Врач с кодом-{code} успешно удален!')
         else:
+            self.statusbar.showMessage(f'Врач с кодом: {code} не удален!', 3000)
             print(f'Врач с кодом: {code} не удален!')
 
     def __on_puchBtn_clicked(self):

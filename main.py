@@ -16,7 +16,7 @@
 # # See PyCharm help at https://www.jetbrains.com/help/pycharm/
 
 import sys
-from .src.views.main_window._main_window import MainWindow
+from src.views.main_window._main_window import MainWindow
 from PyQt5.QtWidgets import QApplication
 
 if __name__ == '__main__':

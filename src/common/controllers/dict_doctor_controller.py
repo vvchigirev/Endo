@@ -66,7 +66,7 @@ class ControllerDictDoctor:
 
         try:
             if self.__xml_doctors.get_doctor(doctor.code):
-                print(f"Врачь с кодом {doctor.code} уже существует!")
+                print(f"Врач с кодом {doctor.code} уже существует!")
                 return False
 
             if not self.__xml_doctors.create_doctor(doctor):
@@ -112,15 +112,15 @@ class ControllerDictDoctor:
         try:
             doctor = self.get_doctor(code)
             if not doctor:
-                print(f"Врача с кодом {code} не найден!")
+                print(f"Врач с кодом {code} не найден!")
                 return False
 
             try:
                 if doctor:
                     print(f"Удалим врача с кодом: {code}")
 
-                if self.__xml_doctors.delete_doctor(code):
-                    return True
+                    if self.__xml_doctors.delete_doctor(code):
+                        return True
 
                 return False
             except Exception as e:

@@ -1,0 +1,5 @@
+1) создать venv (python −m venv)
+2) в cmd перейти в папку [локальная папка проекта]/venv/Scripts и прописать activate
+3) обновить pip командой python —m pip install —upgrade pip
+4) установить нужные библиотеки
+    4.1 pip install pyqt5

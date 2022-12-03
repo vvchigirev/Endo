@@ -13,9 +13,6 @@
             <middle_name>Петрович</middle_name>
         </Doctor>
         <Doctor>
-            <code>5</code><last_name>Сидоров</last_name><first_name>Сидр</first_name><middle_name>Сидорович</middle_name>
-        </Doctor>
-        <Doctor>
             <code>35</code><last_name>Сидоров</last_name><first_name>Сидр</first_name><middle_name>Сидорович</middle_name>
         </Doctor>
         <Doctor>
@@ -43,6 +40,11 @@
         <Doctor>
             <code>125</code><last_name>3</last_name><first_name>3</first_name><middle_name>3</middle_name>
         </Doctor>
+    <Doctor>
+        <code>150</code>
+        <last_name>Сергеев1</last_name><first_name>Сергей1</first_name><middle_name>Сергееч1</middle_name>
+    </Doctor>
     </Doctors>
     <Organs />
+    <Doctors1 />
 </Endo>
