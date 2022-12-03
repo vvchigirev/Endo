@@ -23,7 +23,7 @@ class BaseDictModel(BaseModel):
 
         return self.__name
 
-    @property.setter
+    @name.setter
     def name(self, value):
         """  Свойство (установка).Наименование
         :param value: значение

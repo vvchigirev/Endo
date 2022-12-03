@@ -45,6 +45,6 @@
         <last_name>Сергеев1</last_name><first_name>Сергей1</first_name><middle_name>Сергееч1</middle_name>
     </Doctor>
     </Doctors>
-    <Organs />
+    <Organs><Organ><code>1</code><name>Почка</name></Organ></Organs>
     <Doctors1 />
 </Endo>

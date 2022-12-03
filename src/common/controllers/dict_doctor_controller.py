@@ -132,4 +132,4 @@ class ControllerDictDoctor:
         except Exception as e:
             message = "Ошибка удаления врача"
             print(message, e)
-            raise BusinеssException(message)
+            raise BusinеssException(message, e)
