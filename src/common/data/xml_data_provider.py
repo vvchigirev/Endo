@@ -2,7 +2,7 @@ import xml.etree.ElementTree as ET
 
 from .sections.section_doctors import SectionDoctors
 from .sections.section_organs import SectionOrgans
-
+from .sections.section_devices import SectionDevices
 FILE = ".\data\data.xml"
 
 
@@ -21,7 +21,8 @@ class XmlDataProvider:
 
         self.__sections = [
             SectionDoctors(),
-            SectionOrgans()
+            SectionOrgans(),
+            SectionDevices()
         ]
 
     # region Свойства
