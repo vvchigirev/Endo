@@ -1,12 +1,14 @@
 import os
 from PyQt5 import uic
-from PyQt5.QtWidgets import QMainWindow, QAction, qApp
+from PyQt5.QtWidgets import QMainWindow, QAction, qApp, QMessageBox
 from PyQt5.QtGui import QIcon
 
 from ...dict.organs.model.organ_model import OrganModel
+from ...dict.device.model.device_model import DeviceModel
 from ...dict.doctors.model.doctor_model import DoctorModel
 from ...common.controllers.dict_doctor_controller import ControllerDictDoctor
 from ...common.controllers.dict_organ_controller import ControllerDictOrgan
+from ...common.controllers.dict_device_controller import ControllerDictDevice
 from ...common.data.xml_data_provider import XmlDataProvider
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), '_main_window.ui'))
@@ -16,8 +18,9 @@ class MainWindow(QMainWindow, FORM_CLASS):
     """ Главное окно """
 
     __xml_provider = None  # Провайдер xml документа
-    __controller_doctors: ControllerDictDoctor = None  # Контроллер справочника  врачей
+    __controller_doctors: ControllerDictDoctor = None  # Контроллер справочника врачей
     __controller_organs: ControllerDictOrgan = None
+    __controller_devices: ControllerDictDevice = None
 
     def __init__(self):
         """ Конструктор """
@@ -32,6 +35,7 @@ class MainWindow(QMainWindow, FORM_CLASS):
 
         self.__controller_doctors = ControllerDictDoctor(self.__xml_provider)
         self.__controller_organs = ControllerDictOrgan(self.__xml_provider)
+        self.__controller_devices = ControllerDictDevice(self.__xml_provider)
 
     def __prepare_ui(self):
         """ Подготовка интерфейса """
@@ -54,6 +58,12 @@ class MainWindow(QMainWindow, FORM_CLASS):
         self.pushButtonOrganAdd.clicked.connect(self.__on_pushButtonAdd_organ_clicked)
         self.pushButtonOrganUpdate.clicked.connect(self.__on_pushButtonUpdate_organ_clicked)
         self.pushButtonOrganRemove.clicked.connect(self.__on_pushButtonRemove_organ_clicked)
+
+        self.pushBtnDeviceDict.clicked.connect(self.__on_pushBtnDict_device_clicked)
+        self.pushBtnDeviceFind.clicked.connect(self.__on_pushBtnFind_device_clicked)
+        self.pushButtonDeviceAdd.clicked.connect(self.__on_pushButtonAdd_device_clicked)
+        self.pushButtonDeviceUpdate.clicked.connect(self.__on_pushButtonUpdate_device_clicked)
+        self.pushButtonDeviceRemove.clicked.connect(self.__on_pushButtonRemove_device_clicked)
 
         self.pushBtn.clicked.connect(self.__on_pushBtn_clicked)
         # self.toolBtn.clicked.connect(self.__on_toolBtn_clicked)
@@ -116,7 +126,16 @@ class MainWindow(QMainWindow, FORM_CLASS):
     def __on_pushBtnFind_doctor_clicked(self):
         """ Обработчик нажатия на кнопку 'Найти' """
 
-        code = 100
+        code = None
+
+        if self.lineEditDoctorCode.text():
+            code = int(self.lineEditDoctorCode.text())
+            print(code)
+
+        elif not self.lineEditDoctorCode.text():
+            QMessageBox.critical(self, "Ошибка ", "Заполните все поля!", QMessageBox.Ok)
+            return False
+
         doctor = self.__controller_doctors.get_doctor(code)
         if doctor:
             print(f'- {doctor}')
@@ -126,8 +145,17 @@ class MainWindow(QMainWindow, FORM_CLASS):
     def __on_pushButtonAdd_doctor_clicked(self):
         """ Обработчик нажатия на кнопку 'Добавить' """
 
-        # doctor = DoctorModel(25, "Петров", "Петр", "Петрович")
-        doctor = DoctorModel(125, "1", "1", "1")
+        code = None
+
+        if self.lineEditDoctorCode.text():
+            code = int(self.lineEditDoctorCode.text())
+            print(code)
+
+        elif not self.lineEditDoctorCode.text():
+            QMessageBox.critical(self, "Ошибка ", "Заполните все поля!", QMessageBox.Ok)
+            return False
+
+        doctor = DoctorModel(code, "1", "1", "1")
 
         if self.__controller_doctors.create_doctor(doctor):
             print(f'Врач {doctor} успешно добавлен')
@@ -136,8 +164,18 @@ class MainWindow(QMainWindow, FORM_CLASS):
 
     def __on_pushButtonUpdate_doctor_clicked(self):
         """ Обработчик нажатия на кнопку 'Обновить' """
+        code = None
 
-        doctor = DoctorModel(125, "3", "3", "3")
+        if self.lineEditDoctorCode.text():
+            code = int(self.lineEditDoctorCode.text())
+            print(code)
+
+        elif not self.lineEditDoctorCode.text():
+            QMessageBox.critical(self, "Ошибка ", "Заполните все поля!", QMessageBox.Ok)
+            return False
+
+        doctor = DoctorModel(code, "3", "3", "3")
+
         if self.__controller_doctors.update_doctor(doctor):
             print(f'Врач {doctor} успешно обновлен')
         else:
@@ -146,7 +184,16 @@ class MainWindow(QMainWindow, FORM_CLASS):
     def __on_pushButtonRemove_doctor_clicked(self):
         """ Обработчик нажатия на кнопку 'Удалить' """
 
-        code = int(self.lineEditCodeRemove.text())
+        code = None
+
+        if self.lineEditDoctorCode.text():
+            code = int(self.lineEditDoctorCode.text())
+            print(code)
+
+        elif not self.lineEditDoctorCode.text():
+            QMessageBox.critical(self, "Ошибка ", "Заполните все поля!", QMessageBox.Ok)
+            return False
+
         if self.__controller_doctors.delete_doctor(code):
             self.statusbar.showMessage(f'Врач с кодом-{code} успешно удален!', 3000)
             print(f'Врач с кодом-{code} успешно удален!')
@@ -164,35 +211,63 @@ class MainWindow(QMainWindow, FORM_CLASS):
     def __on_pushBtnFind_organ_clicked(self):
         """ Обработчик нажатия на кнопку 'Найти' """
 
-        code = int(self.__prepare_ui.lineEditOrganCode.text())
+        code = None
+        name = None
+
+        if self.lineEditOrganCode.text() and self.lineEditOrganName.text():
+            code = int(self.lineEditOrganCode.text())
+            name = self.lineEditOrganName.text()
+            print(code, name)
+
+        elif not self.lineEditOrganCode.text() or not self.lineEditOrganName.text():
+            QMessageBox.critical(self, "Ошибка ", "Заполните все поля!", QMessageBox.Ok)
+            return False
         organ = self.__controller_organs.get_organ(code)
         if organ:
-            print(f'- {organ}')
+            print(organ)
         else:
             print(f'Орган под кодом-{code} не найден!')
 
     def __on_pushButtonAdd_organ_clicked(self):
         """ Обработчик нажатия на кнопку 'Добавить' """
 
-        print(": __on_pushButtonAdd_organ_clicked")
+        code = None
+        name = None
 
-        code = int(self.lineEditOrganCode.text())
-        print(code)
+        if self.lineEditOrganCode.text() and self.lineEditOrganName.text():
+            code = int(self.lineEditOrganCode.text())
+            name = self.lineEditOrganName.text()
+            print(code, name)
 
-        organ = OrganModel(code, "Почка")
+        elif not self.lineEditOrganCode.text() or not self.lineEditOrganName.text():
+            QMessageBox.critical(self, "Ошибка ", "Заполните все поля!", QMessageBox.Ok)
+            return False
+
+        organ = OrganModel(code, name)
 
         print(organ)
 
         if self.__controller_organs.creat_organ(organ):
-            print(f'Орган {organ} успешно добавлен')
+            print(f'Орган {name} успешно добавлен')
         else:
-            print(f'Орган {organ} НЕ добавлен !!!')
+            print(f'Орган {name} НЕ добавлен !!!')
 
     def __on_pushButtonUpdate_organ_clicked(self):
         """ Обработчик нажатия на кнопку 'Обновить' """
-        code = int(self.__prepare_ui.lineEditOrganCode.text())
 
-        organ = OrganModel(code, "Жопа")
+        code = None
+        name = None
+
+        if self.lineEditOrganCode.text() and self.lineEditOrganName.text():
+            code = int(self.lineEditOrganCode.text())
+            name = self.lineEditOrganName.text()
+            print(code, name)
+
+        elif not self.lineEditOrganCode.text() or not self.lineEditOrganName.text():
+            QMessageBox.critical(self, "Ошибка ", "Заполните все поля!", QMessageBox.Ok)
+            return False
+
+        organ = OrganModel(code, name)
         if self.__controller_organs.update_organ(organ):
             print(f'Орган {organ} успешно обновлен')
         else:
@@ -200,30 +275,122 @@ class MainWindow(QMainWindow, FORM_CLASS):
 
     def __on_pushButtonRemove_organ_clicked(self):
         """ Обработчик нажатия на кнопку 'Удалить' """
+        print("123")
 
-        code = int(self.lineEditCodeRemove.text())
-        if self.__controller_organs.delete_organ(code):
+        code = None
+        name = None
+
+        if self.lineEditOrganCode.text() and self.lineEditOrganName.text():
+            code = int(self.lineEditOrganCode.text())
+            name = self.lineEditOrganName.text()
+            print(code, name)
+
+        elif not self.lineEditOrganCode.text() or not self.lineEditOrganName.text():
+            QMessageBox.critical(self, "Ошибка ", "Заполните все поля!", QMessageBox.Ok)
+            return False
+
+        if self.__controller_organs.delet_organ(code):
             self.statusbar.showMessage(f'Орган с кодом-{code} успешно удален!', 3000)
             print(f'Орган с кодом-{code} успешно удален!')
         else:
             self.statusbar.showMessage(f'Орган с кодом: {code} не удален!', 3000)
             print(f'Орган с кодом: {code} не удален!')
 
+    def __on_pushBtnDict_device_clicked(self):
+        """ Обработчик нажатия на кнопку 'Справочник' """
+
+        list_devices = self.__controller_devices.select_devices()
+        for device in list_devices:
+            print(f'- {device}')
+
+    def __on_pushBtnFind_device_clicked(self):
+        """ Обработчик нажатия на кнопку 'Найти' """
+
+        code = None
+        name = None
+
+        if self.lineEditDeviceCode.text() and self.lineEditDeviceName.text():
+            code = int(self.lineEditDeviceCode.text())
+            name = self.lineEditDeviceName.text()
+            print(code, name)
+
+        elif not self.lineEditDeviceCode.text() or not self.lineEditDeviceName.text():
+            QMessageBox.critical(self, "Ошибка ", "Заполните все поля!", QMessageBox.Ok)
+            return False
+        device = self.__controller_devices.get_device(code)
+        if device:
+            print(device)
+        else:
+            print(f'Прибор под кодом-{code} не найден!')
+
+    def __on_pushButtonAdd_device_clicked(self):
+        """ Обработчик нажатия на кнопку 'Добавить' """
+
+        code = None
+        name = None
+
+        if self.lineEditDeviceCode.text() and self.lineEditDeviceName.text():
+            code = int(self.lineEditDeviceCode.text())
+            name = self.lineEditDeviceName.text()
+            print(code, name)
+
+        elif not self.lineEditDeviceCode.text() or not self.lineEditDeviceName.text():
+            QMessageBox.critical(self, "Ошибка ", "Заполните все поля!", QMessageBox.Ok)
+            return False
+
+        device = DeviceModel(code, name)
+
+        print(device)
+
+        if self.__controller_devices.creat_device(device):
+            print(f'Прибор {name} успешно добавлен')
+        else:
+            print(f'Прибор {name} НЕ добавлен !!!')
+
+    def __on_pushButtonUpdate_device_clicked(self):
+        """ Обработчик нажатия на кнопку 'Обновить' """
+
+        code = None
+        name = None
+
+        if self.lineEditDeviceCode.text() and self.lineEditDeviceName.text():
+            code = int(self.lineEditDeviceCode.text())
+            name = self.lineEditDeviceName.text()
+            print(code, name)
+
+        elif not self.lineEditDeviceCode.text() or not self.lineEditDeviceName.text():
+            QMessageBox.critical(self, "Ошибка ", "Заполните все поля!", QMessageBox.Ok)
+            return False
+
+        device = DeviceModel(code, name)
+        if self.__controller_devices.update_device(device):
+            print(f'Прибор {device} успешно обновлен')
+        else:
+            print(f'Прибор {device} НЕ обновлен !!!')
+
+    def __on_pushButtonRemove_device_clicked(self):
+        """ Обработчик нажатия на кнопку 'Удалить' """
+        print("123")
+
+        code = None
+        name = None
+
+        if self.lineEditDeviceCode.text() and self.lineEditDeviceName.text():
+            code = int(self.lineEditDeviceCode.text())
+            name = self.lineEditDeviceName.text()
+            print(code, name)
+
+        elif not self.lineEditDeviceCode.text() or not self.lineEditDeviceName.text():
+            QMessageBox.critical(self, "Ошибка ", "Заполните все поля!", QMessageBox.Ok)
+            return False
+
+        if self.__controller_devices.delet_device(code):
+            self.statusbar.showMessage(f'Прибор с кодом-{code} успешно удален!', 3000)
+            print(f'Прибор с кодом-{code} успешно удален!')
+        else:
+            self.statusbar.showMessage(f'Прибор с кодом: {code} не удален!', 3000)
+            print(f'Прибор с кодом: {code} не удален!')
     def __on_pushBtn_clicked(self):
         print(": MainWindow.__on_puchBtn_clicked()")
         self.__xml_provider.write()
 
-    # def __on_toolBtn_clicked(self):
-    #     print(": MainWindow.__on_puchBtn_clicked()")
-    #
-    #     # organ = DoctorModel(1, "Иванов", "Иван", "Иванови")
-    #     # self.__controller_doctors.create_doctor(doctor)
-    #
-    #     # doctor = DoctorModel(5, "Петров", "Петр", "Петрович")
-    #     # self.__controller_doctors.create_doctor(doctor)
-    #
-    #     # doctor = DoctorModel(19, "Иванов", "Петр", "Сидорович")
-    #     # print("doctor= ", doctor)
-    #
-    #     doctor = DoctorModel(150, "Сергеев1", "Сергей1", "Сергееч1")
-    #     self.__controller_doctors.create_doctor(doctor)
