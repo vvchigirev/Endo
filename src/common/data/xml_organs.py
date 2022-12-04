@@ -72,7 +72,7 @@ class XmlOrgans(BaseSections):
 
         xml_group = self.__xml_provider.root.find(self.group_name)
 
-        str_search = self.element_name + "code=['" + str(organ.code) + "']"
+        str_search = self.element_name + "[code='" + str(organ.code) + "']"
         xml_organ = xml_group.find(str_search)
 
         if xml_organ:
@@ -153,7 +153,8 @@ class XmlOrgans(BaseSections):
 
         xml_group = self.__xml_provider.root.find(self.group_name)
 
-        str_search = self.element_name + "code=['" + str(code) + "']"
+        str_search = self.element_name + "[code='" + str(code) + "']"
+
         element = xml_group.find(str_search)
 
         if element:

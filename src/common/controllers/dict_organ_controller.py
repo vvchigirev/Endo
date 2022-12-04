@@ -111,8 +111,9 @@ class ControllerDictOrgan:
 
         try:
             organ = self.get_organ(code)
+            print("organ", organ)
             if not organ:
-                print(f"Органа с кодом f{organ} не найдено")
+                print(f"Органа с кодом {organ} не найдено")
 
             try:
                 if organ and self.__xml_organs.delete_organ(code):
