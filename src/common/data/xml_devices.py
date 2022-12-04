@@ -16,8 +16,8 @@ class XmlDevices(BaseSections):
 
         self.__xml_provider: XmlDataProvider = xml_provider
 
-        self.group_name = Keys.ORGANS
-        self.element_name = Keys.ORGAN
+        self.group_name = Keys.DEVICES
+        self.element_name = Keys.DEVICE
 
     def get_device_model_from_xml_element(self, xml_element):
         """ Генерация модели Прибора из xml элемента
@@ -36,16 +36,18 @@ class XmlDevices(BaseSections):
 
     def get_device(self, code):
         """ Получение прибора по коду
-        :param xml_element: xml элеммент группы приборов
+        :param xml_element: xml элемент группы приборов
         :param code: Код прибора
         :return: Модель Прибор
         """
         print(": device.get_device()")
-
+        print("self.__xml_provider.root=", self.__xml_provider.root)
         if not self.__xml_provider.root:
             return None
 
         xml_group = self.__xml_provider.root.find(self.group_name)
+
+        print("xml_group=", xml_group)
 
         str_search = self.element_name + "[code='" + str(code) + "']"
         element = xml_group.find(str_search)
@@ -67,18 +69,22 @@ class XmlDevices(BaseSections):
         :param device: Модель Прибор
         :return: xml
         """
+        print(": XmlDevices.update_device()")
+
         if not self.__xml_provider.root:
             return False
 
         xml_group = self.__xml_provider.root.find(self.group_name)
 
-        str_search = self.element_name + "code=['" + str(device.code) + "']"
+        str_search = self.element_name + "[code='" + str(device.code) + "']"
         xml_device = xml_group.find(str_search)
+
+        print("xml_devices=", xml_device)
 
         if xml_device:
             name = xml_device.find("name")
             name.text = device.name
-
+            return True
     def select_devices(self):
         """ Получение списка Приборов
         :return: Список моделей Приборов
@@ -153,7 +159,7 @@ class XmlDevices(BaseSections):
 
         xml_group = self.__xml_provider.root.find(self.group_name)
 
-        str_search = self.element_name + "code=['" + str(code) + "']"
+        str_search = self.element_name + "[code='" + str(code) + "']"
         element = xml_group.find(str_search)
 
         if element:

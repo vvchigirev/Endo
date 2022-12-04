@@ -32,7 +32,7 @@ class ControllerDictDevice:
         try:
             return self.__xml_devices.select_devices()
         except Exception as e:
-            message = "Ошибка получения списка врачей!"
+            message = "Ошибка получения списка приборов!"
             print(message, e)
             raise BusinеssException(message)
 
@@ -93,7 +93,7 @@ class ControllerDictDevice:
                 return False
 
             if not self.__xml_devices.update_device(device):
-                print("доктор не изменен")
+                print("прибор не изменен")
                 return False
 
             return True
