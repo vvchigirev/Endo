@@ -8,3 +8,7 @@
     https://ru.hexlet.io/courses/advanced_python/lessons/python_exceptions/theory_unit
     https://devpractice.ru/python-lesson-11-work-with-exceptions/
     https://pythonworld.ru/tipy-dannyx-v-python/isklyucheniya-v-python-konstrukciya-try-except-dlya-obrabotki-isklyuchenij.html
+Работа с Qt:
+    Работа с таблицей:
+    https://python-scripts.com/pyqt5#install-pyqt5-designer
+    https://python-scripts.com/pyqt5

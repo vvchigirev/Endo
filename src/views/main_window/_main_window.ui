@@ -127,7 +127,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButtonDoctorAdd">
+        <widget class="QPushButton" name="pushButtonDoctorCreate">
          <property name="text">
           <string>Добавить</string>
          </property>
@@ -141,7 +141,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButtonDoctorRemove">
+        <widget class="QPushButton" name="pushButtonDoctorDelete">
          <property name="text">
           <string>Удалить</string>
          </property>
@@ -329,6 +329,21 @@
        </item>
       </layout>
      </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="layoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>200</y>
+      <width>411</width>
+      <height>181</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="layoutContaner">
+     <property name="spacing">
+      <number>0</number>
+     </property>
     </layout>
    </widget>
    <widget class="QWidget" name="widget" native="true">
