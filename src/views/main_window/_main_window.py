@@ -3,11 +3,13 @@ from PyQt5 import uic
 from PyQt5.QtWidgets import QMainWindow, QAction, qApp
 from PyQt5.QtGui import QIcon
 
+from ...dict.doctors.views.doctors_list_widget import DocktorListWidget
 from ...dict.organs.model.organ_model import OrganModel
 from ...dict.doctors.model.doctor_model import DoctorModel
 from ...common.controllers.dict_doctor_controller import ControllerDictDoctor
 from ...common.controllers.dict_organ_controller import ControllerDictOrgan
 from ...common.data.xml_data_provider import XmlDataProvider
+
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), '_main_window.ui'))
 
@@ -18,6 +20,7 @@ class MainWindow(QMainWindow, FORM_CLASS):
     __xml_provider = None  # Провайдер xml документа
     __controller_doctors: ControllerDictDoctor = None  # Контроллер справочника  врачей
     __controller_organs: ControllerDictOrgan = None
+    __current_widget_dict = None        # Текущий виджет показывающий справочник
 
     def __init__(self):
         """ Конструктор """
@@ -33,6 +36,8 @@ class MainWindow(QMainWindow, FORM_CLASS):
         self.__controller_doctors = ControllerDictDoctor(self.__xml_provider)
         self.__controller_organs = ControllerDictOrgan(self.__xml_provider)
 
+        self.__current_widget_dict = None
+
     def __prepare_ui(self):
         """ Подготовка интерфейса """
 
@@ -45,9 +50,9 @@ class MainWindow(QMainWindow, FORM_CLASS):
 
         self.pushBtnDoctorDict.clicked.connect(self.__on_pushBtnDict_doctor_clicked)
         self.pushBtnDoctorFind.clicked.connect(self.__on_pushBtnFind_doctor_clicked)
-        self.pushButtonDoctorAdd.clicked.connect(self.__on_pushButtonAdd_doctor_clicked)
-        self.pushButtonDoctorUpdate.clicked.connect(self.__on_pushButtonUpdate_doctor_clicked)
-        self.pushButtonDoctorRemove.clicked.connect(self.__on_pushButtonRemove_doctor_clicked)
+        self.pushButtonDoctorCreate.clicked.connect(self.__on_pushButton_create_doctor_clicked)
+        self.pushButtonDoctorUpdate.clicked.connect(self.__on_pushButton_update_doctor_clicked)
+        self.pushButtonDoctorDelete.clicked.connect(self.__on_pushButton_delete_doctor_clicked)
 
         self.pushBtnOrganDict.clicked.connect(self.__on_pushBtnDict_organ_clicked)
         self.pushBtnOrganFind.clicked.connect(self.__on_pushBtnFind_organ_clicked)
@@ -109,9 +114,23 @@ class MainWindow(QMainWindow, FORM_CLASS):
     def __on_pushBtnDict_doctor_clicked(self):
         """ Обработчик нажатия на кнопку 'Справочник' """
 
-        list_doctors = self.__controller_doctors.select_doctors()
-        for doctor in list_doctors:
-            print(f'- {doctor}')
+
+        # list_doctors: list[DoctorModel] = self.__controller_doctors.select_doctors()
+        # for doctor in list_doctors:
+        #     print(f'- {doctor}')
+
+        list_doctors_widget = DocktorListWidget(self.__xml_provider)
+        self.__current_widget_dict = list_doctors_widget
+
+        # list_doctors_widget.set_data(list_doctors)
+
+        # print("list_doctors_widget=", list_doctors_widget)
+        # print("self.layoutContaner=", self.layoutContaner)
+
+        self.layoutContaner.addWidget(list_doctors_widget)
+
+        print("hello")
+
 
     def __on_pushBtnFind_doctor_clicked(self):
         """ Обработчик нажатия на кнопку 'Найти' """
@@ -123,7 +142,7 @@ class MainWindow(QMainWindow, FORM_CLASS):
         else:
             print(f'Врач под кодом-{code} не найден!')
 
-    def __on_pushButtonAdd_doctor_clicked(self):
+    def __on_pushButton_create_doctor_clicked(self):
         """ Обработчик нажатия на кнопку 'Добавить' """
 
         # doctor = DoctorModel(25, "Петров", "Петр", "Петрович")
@@ -134,7 +153,12 @@ class MainWindow(QMainWindow, FORM_CLASS):
         else:
             print(f'Врач {doctor} НЕ добавлен !!!')
 
-    def __on_pushButtonUpdate_doctor_clicked(self):
+        # if self.__current_widget_dict:
+        #     self.__current_widget_dict.create_elements()
+        # else:
+        #     print("- Виджет текущего справочника не определен !!!")
+
+    def __on_pushButton_update_doctor_clicked(self):
         """ Обработчик нажатия на кнопку 'Обновить' """
 
         doctor = DoctorModel(125, "3", "3", "3")
@@ -143,7 +167,7 @@ class MainWindow(QMainWindow, FORM_CLASS):
         else:
             print(f'Врач {doctor} НЕ обновлен !!!')
 
-    def __on_pushButtonRemove_doctor_clicked(self):
+    def __on_pushButton_delete_doctor_clicked(self):
         """ Обработчик нажатия на кнопку 'Удалить' """
 
         code = int(self.lineEditCodeRemove.text())
@@ -153,6 +177,10 @@ class MainWindow(QMainWindow, FORM_CLASS):
         else:
             self.statusbar.showMessage(f'Врач с кодом: {code} не удален!', 3000)
             print(f'Врач с кодом: {code} не удален!')
+
+        # if self.__current_widget_dict:
+        #     self.__current_widget_dict.delete_element()
+
 
     def __on_pushBtnDict_organ_clicked(self):
         """ Обработчик нажатия на кнопку 'Справочник' """

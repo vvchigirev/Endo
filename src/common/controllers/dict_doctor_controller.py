@@ -25,7 +25,7 @@ class ControllerDictDoctor:
 
         print(": ControllerDictDoctor.select_doctors()")
 
-        doctors = []
+        doctors = [DoctorModel]
 
         try:
             return self.__xml_doctors.select_doctors()
