@@ -4,15 +4,15 @@ from ....common.base_classes.models.person import Person
 class DoctorModel(Person):
     """ Модель. Доктор"""
 
-    def __init__(self, code, l_name: str = "", f_name: str = "", m_name: str = ""):
+    def __init__(self, code, last_name: str = "", first_name: str = "", middle_name: str = ""):
         """ Конструктор
         :param code: Код
-        :param l_name: Фамилия
-        :param f_name: Имя
-        :param m_name: Отчество
+        :param last_name: Фамилия
+        :param first_name: Имя
+        :param middle_name: Отчество
         """
 
-        super().__init__(code, first_name=f_name, last_name=l_name, middle_name=m_name)
+        super().__init__(code, first_name=first_name, last_name=last_name, middle_name=middle_name)
 
     # region Свойства
 
