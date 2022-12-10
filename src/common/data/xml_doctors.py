@@ -198,17 +198,23 @@ class XmlDoctors(BaseSections):
 
         print(": XmlDoctors.delete_doctor()")
 
-        if not self.__xml_provider.root:
-            return False
+        try:
+            if not self.__xml_provider.root:
+                return False
 
-        xml_group = self.__xml_provider.root.find(self.group_name)
+            xml_group = self.__xml_provider.root.find(self.group_name)
 
-        str_search = self.element_name + "[code='" + str(code) + "']"
-        print("str=", str_search)
-        element = xml_group.find(str_search)
+            print("xml_group=", xml_group)
 
-        if element:
-            xml_group.remove(element)
-            return True
+            str_search = self.element_name + "[code='" + str(code) + "']"
+            print("str=", str_search)
+            element = xml_group.find(str_search)
+
+            print("element=", element)
+            if element:
+                xml_group.remove(element)
+                return True
+        except Exception as e:
+            print("e=", e)
 
         return False

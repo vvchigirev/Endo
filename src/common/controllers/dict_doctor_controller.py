@@ -119,8 +119,14 @@ class ControllerDictDoctor:
                 if doctor:
                     print(f"Удалим врача с кодом: {code}")
 
-                    if self.__xml_doctors.delete_doctor(code):
+                    result = self.__xml_doctors.delete_doctor(code)
+                    print("result=", result)
+                    # if self.__xml_doctors.delete_doctor(code):
+                    if result:
+                        print("Врач удален!")
                         return True
+                    else:
+                        print("Врач не удален!")
 
                 return False
             except Exception as e:
