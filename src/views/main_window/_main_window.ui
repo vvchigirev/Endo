@@ -53,8 +53,8 @@
    <widget class="QWidget" name="widget" native="true">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>200</y>
+      <x>20</x>
+      <y>160</y>
       <width>711</width>
       <height>146</height>
      </rect>
@@ -66,13 +66,6 @@
      <item row="0" column="0">
       <widget class="QWidget" name="widget_2" native="true">
        <layout class="QGridLayout" name="gridLayout_2">
-        <item row="0" column="0">
-         <widget class="QPushButton" name="pushButtonDictRefresh">
-          <property name="text">
-           <string>Обновить</string>
-          </property>
-         </widget>
-        </item>
         <item row="1" column="0">
          <widget class="QPushButton" name="pushButtonDictCreate">
           <property name="text">
@@ -94,6 +87,13 @@
           </property>
          </widget>
         </item>
+        <item row="0" column="0">
+         <widget class="QPushButton" name="pushButtonDictRefresh">
+          <property name="text">
+           <string>Обновить</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
      </item>
@@ -108,219 +108,6 @@
        <property name="leftMargin">
         <number>5</number>
        </property>
-      </layout>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="widget_3" native="true">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>30</y>
-      <width>731</width>
-      <height>105</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout">
-       <item>
-        <spacer name="doctorHorizontalSpacer">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QLabel" name="lableDoctor">
-         <property name="text">
-          <string>Врачи</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="lineEditDoctorCode">
-         <property name="text">
-          <string/>
-         </property>
-         <property name="placeholderText">
-          <string>Введите нужный код</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushBtnDoctorDict">
-         <property name="text">
-          <string>Справочник</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushBtnDoctorFind">
-         <property name="text">
-          <string>Найти</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButtonDoctorCreate">
-         <property name="text">
-          <string>Добавить</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButtonDoctorUpdate">
-         <property name="text">
-          <string>Обновить</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButtonDoctorDelete">
-         <property name="text">
-          <string>Удалить</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="organHorizontalLayout_">
-       <item>
-        <spacer name="organHorizontalSpacer">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QLabel" name="lableOrgan">
-         <property name="text">
-          <string>Органы</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="lineEditOrganCode">
-         <property name="placeholderText">
-          <string>Введите нужный код</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushBtnOrganDict">
-         <property name="text">
-          <string>Справочник</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushBtnOrganFind">
-         <property name="text">
-          <string>Найти</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButtonOrganAdd">
-         <property name="text">
-          <string>Добавить</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButtonOrganUpdate">
-         <property name="text">
-          <string>Обновить</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButtonOrganRemove">
-         <property name="text">
-          <string>Удалить</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="organHorizontalLayout_1">
-       <item>
-        <spacer name="organHorizontalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QLabel" name="lableOrgan_2">
-         <property name="text">
-          <string>Приборы</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="lineEditOrganCode_2">
-         <property name="placeholderText">
-          <string>Введите нужный код</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushBtnDictDevice">
-         <property name="text">
-          <string>Справочник</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushBtnDictDeviceFind">
-         <property name="text">
-          <string>Найти</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButtonDictDeviceAdd">
-         <property name="text">
-          <string>Добавить</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButtonDictDeviceUpdate">
-         <property name="text">
-          <string>Обновить</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButtonDictDeviceRemove">
-         <property name="text">
-          <string>Удалить</string>
-         </property>
-        </widget>
-       </item>
       </layout>
      </item>
     </layout>
@@ -349,7 +136,7 @@
      <property name="title">
       <string>Персонал</string>
      </property>
-     <addaction name="menuDictDoctors"/>
+     <addaction name="menuItemDictDoctors"/>
      <addaction name="menuDictNurse"/>
     </widget>
     <addaction name="menuDictEmployees"/>
@@ -379,7 +166,7 @@
     <string>Врачи</string>
    </property>
   </action>
-  <action name="menuDictDoctors">
+  <action name="menuItemDictDoctors">
    <property name="text">
     <string>Врачи</string>
    </property>

@@ -12,3 +12,5 @@
     Работа с таблицей:
     https://python-scripts.com/pyqt5#install-pyqt5-designer
     https://python-scripts.com/pyqt5
+    Работа с Menu/ToolBarами
+    https://dev-gang.ru/article/python-i-pyqt-sozdanie-menu-panelei-instrumentov-i-strok-sostojanija-l7ubf6mm7n/
