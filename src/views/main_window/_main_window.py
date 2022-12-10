@@ -3,10 +3,11 @@ from PyQt5 import uic
 from PyQt5.QtWidgets import QMainWindow, QAction, qApp, QMessageBox
 from PyQt5.QtGui import QIcon
 
-from ...dict.doctors.views.doctors_list_widget import DocktorListWidget
+from ...dict.doctors.views.doctors_list_widget import DoctorsListWidget
 from ...dict.organs.model.organ_model import OrganModel
 from ...dict.device.model.device_model import DeviceModel
 from ...dict.doctors.model.doctor_model import DoctorModel
+from ...common.base_classes.views.base_dict_model_list_widget import BaseDictModelListWidget
 from ...common.controllers.dict_doctor_controller import ControllerDictDoctor
 from ...common.controllers.dict_organ_controller import ControllerDictOrgan
 from ...common.controllers.dict_device_controller import ControllerDictDevice
@@ -23,7 +24,7 @@ class MainWindow(QMainWindow, FORM_CLASS):
     __controller_doctors: ControllerDictDoctor = None  # Контроллер справочника врачей
     __controller_organs: ControllerDictOrgan = None
     __controller_devices: ControllerDictDevice = None
-    __current_widget_dict = None        # Текущий виджет показывающий справочник
+    __current_widget_dict:BaseDictModelListWidget = None        # Текущий виджет показывающий справочник
 
     def __init__(self):
         """ Конструктор """
@@ -52,7 +53,7 @@ class MainWindow(QMainWindow, FORM_CLASS):
         self.__create_menu()
         self.statusBar().showMessage('Ready')
 
-        self.pushBtnDoctorDict.clicked.connect(self.__on_pushBtnDict_doctor_clicked)
+        self.pushBtnDoctorDict.clicked.connect(self.__on_clicked_pushBtnDict_doctor)
         self.pushBtnDoctorFind.clicked.connect(self.__on_pushBtnFind_doctor_clicked)
         self.pushButtonDoctorCreate.clicked.connect(self.__on_pushButton_create_doctor_clicked)
         self.pushButtonDoctorUpdate.clicked.connect(self.__on_pushButton_update_doctor_clicked)
@@ -64,11 +65,16 @@ class MainWindow(QMainWindow, FORM_CLASS):
         self.pushButtonOrganUpdate.clicked.connect(self.__on_pushButtonUpdate_organ_clicked)
         self.pushButtonOrganRemove.clicked.connect(self.__on_pushButtonRemove_organ_clicked)
 
-        self.pushBtnDeviceDict.clicked.connect(self.__on_pushBtnDict_device_clicked)
-        self.pushBtnDeviceFind.clicked.connect(self.__on_pushBtnFind_device_clicked)
-        self.pushButtonDeviceAdd.clicked.connect(self.__on_pushButtonAdd_device_clicked)
-        self.pushButtonDeviceUpdate.clicked.connect(self.__on_pushButtonUpdate_device_clicked)
-        self.pushButtonDeviceRemove.clicked.connect(self.__on_pushButtonRemove_device_clicked)
+        self.pushBtnDictDevice.clicked.connect(self.__on_pushBtnDict_device_clicked)
+        self.pushBtnDictDeviceFind.clicked.connect(self.__on_pushBtnFind_device_clicked)
+        self.pushButtonDictDeviceAdd.clicked.connect(self.__on_pushButtonAdd_device_clicked)
+        self.pushButtonDictDeviceUpdate.clicked.connect(self.__on_pushButtonUpdate_device_clicked)
+        self.pushButtonDictDeviceRemove.clicked.connect(self.__on_pushButtonRemove_device_clicked)
+
+        self.pushButtonDictRefresh.clicked.connect(self.__on_clicked_pushButtonDictRefresh)
+        self.pushButtonDictCreate.clicked.connect(self.__on_clicked_pushButtonDictCreate)
+        self.pushButtonDictUpdate.clicked.connect(self.__on_clicked_pushButtonDictUpdate)
+        self.pushButtonDictDelete.clicked.connect(self.__on_clicked_pushButtonDictDelete)
 
         self.pushBtn.clicked.connect(self.__on_pushBtn_clicked)
         # self.toolBtn.clicked.connect(self.__on_toolBtn_clicked)
@@ -121,15 +127,16 @@ class MainWindow(QMainWindow, FORM_CLASS):
 
         # self.xmlData.write()
 
-    def __on_pushBtnDict_doctor_clicked(self):
+    def __on_clicked_pushBtnDict_doctor(self):
         """ Обработчик нажатия на кнопку 'Справочник' """
 
+        print(": MainWindow.__on_clicked_pushBtnDict_doctor")
 
         # list_doctors: list[DoctorModel] = self.__controller_doctors.select_doctors()
         # for doctor in list_doctors:
         #     print(f'- {doctor}')
 
-        list_doctors_widget = DocktorListWidget(self.__xml_provider)
+        list_doctors_widget = DoctorsListWidget(self.__xml_provider, parent=self)
         self.__current_widget_dict = list_doctors_widget
 
         # list_doctors_widget.set_data(list_doctors)
@@ -418,7 +425,56 @@ class MainWindow(QMainWindow, FORM_CLASS):
         else:
             self.statusbar.showMessage(f'Прибор с кодом: {code} не удален!', 3000)
             print(f'Прибор с кодом: {code} не удален!')
+
     def __on_pushBtn_clicked(self):
         print(": MainWindow.__on_puchBtn_clicked()")
         self.__xml_provider.write()
 
+    def __on_clicked_pushButtonDictRefresh(self):
+        """ Обработчик события нажатия на кнопку 'Обновить' """
+
+        print(": MainWindow.pushButtonDictRefresh()")
+
+        if self.__current_widget_dict:
+            self.__current_widget_dict.refresh()
+
+    def __on_clicked_pushButtonDictCreate(self):
+        """ Обработчик события нажатия на кнопку 'Добавить' """
+
+        print(": MainWindow.__on_clicked_pushButtonDictCreate()")
+
+        # # QMessageBox.information(self, "Инфо", "Добавим модель", QMessageBox.Ok)
+        #
+        # doctor = DoctorModel(55, "Иванов", "Иван", "Иванович")
+        # edit_doctor_widget = DoctorEditWidget(doctor, self)
+        # print("edit_doctor_widget=", edit_doctor_widget)
+        #
+        # edit_dlg = ModelEditDialog(edit_doctor_widget)
+        # edit_dlg.show()
+        # result = edit_dlg.exec_()
+        # if result:
+        #     model_edit = edit_dlg.get_model()
+        #     print("model_edit=", model_edit)
+        #
+        #     print("Форма закрылась положительно")
+        # else:
+        #     print("Форма закрылась отрицательно!")
+
+        if self.__current_widget_dict:
+            self.__current_widget_dict.create_element()
+
+    def __on_clicked_pushButtonDictUpdate(self):
+        """ Обработчик события нажатия на кнопку 'Изменить' """
+
+        print(": MainWindow.__on_clicked_pushButtonDictUpdate()")
+
+        if self.__current_widget_dict:
+            self.__current_widget_dict.update_element()
+
+    def __on_clicked_pushButtonDictDelete(self):
+        """ Обработчик события нажатия на кнопку 'Удалить' """
+
+        print(": MainWindow.__on_clicked_pushButtonDictDelete()")
+
+        if self.__current_widget_dict:
+            self.__current_widget_dict.delete_element()
