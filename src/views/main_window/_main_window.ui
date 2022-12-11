@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>600</height>
+    <height>595</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -66,17 +66,17 @@
      <item row="0" column="0">
       <widget class="QWidget" name="widget_2" native="true">
        <layout class="QGridLayout" name="gridLayout_2">
-        <item row="1" column="0">
-         <widget class="QPushButton" name="pushButtonDictCreate">
-          <property name="text">
-           <string>Добавить</string>
-          </property>
-         </widget>
-        </item>
         <item row="2" column="0">
          <widget class="QPushButton" name="pushButtonDictUpdate">
           <property name="text">
            <string>Изменить</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QPushButton" name="pushButtonDictRefresh">
+          <property name="text">
+           <string>Обновить</string>
           </property>
          </widget>
         </item>
@@ -87,10 +87,10 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="0">
-         <widget class="QPushButton" name="pushButtonDictRefresh">
+        <item row="1" column="0">
+         <widget class="QPushButton" name="pushButtonDictCreate">
           <property name="text">
-           <string>Обновить</string>
+           <string>Добавить</string>
           </property>
          </widget>
         </item>
@@ -110,6 +110,27 @@
        </property>
       </layout>
      </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>20</y>
+      <width>271</width>
+      <height>131</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="layoutContaner_2">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <property name="sizeConstraint">
+      <enum>QLayout::SetFixedSize</enum>
+     </property>
+     <property name="leftMargin">
+      <number>5</number>
+     </property>
     </layout>
    </widget>
   </widget>
@@ -140,6 +161,7 @@
      <addaction name="menuDictNurse"/>
     </widget>
     <addaction name="menuDictEmployees"/>
+    <addaction name="menuItemDictOrgans"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuDicts"/>
@@ -174,6 +196,11 @@
   <action name="menuDictNurse">
    <property name="text">
     <string>Медсестры</string>
+   </property>
+  </action>
+  <action name="menuItemDictOrgans">
+   <property name="text">
+    <string>Органы</string>
    </property>
   </action>
  </widget>

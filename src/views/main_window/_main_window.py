@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import QMainWindow, QAction, qApp, QMessageBox
 from PyQt5.QtGui import QIcon
 
 from ...dict.doctors.views.doctors_list_widget import DoctorsListWidget
+from ...dict.organs.views.organ_list_widget import OrgansListWidget
 from ...dict.organs.model.organ_model import OrganModel
 from ...dict.device.model.device_model import DeviceModel
 from ...dict.doctors.model.doctor_model import DoctorModel
@@ -53,7 +54,8 @@ class MainWindow(QMainWindow, FORM_CLASS):
         self.__create_menu()
         self.statusBar().showMessage('Ready')
 
-        self.menuItemDictDoctors.triggered.connect(self.__on_clicked_pushBtnDict_doctor)
+        self.menuItemDictDoctors.triggered.connect(self.__on_triggered_menuItemDictDoctors)
+        self.menuItemDictOrgans.triggered.connect(self.__on_triggered_menuItemDictOrgans)
 
         self.pushButtonDictRefresh.clicked.connect(self.__on_clicked_pushButtonDictRefresh)
         self.pushButtonDictCreate.clicked.connect(self.__on_clicked_pushButtonDictCreate)
@@ -111,24 +113,33 @@ class MainWindow(QMainWindow, FORM_CLASS):
 
         # self.xmlData.write()
 
-    def __on_clicked_pushBtnDict_doctor(self):
+    def __on_triggered_menuItemDictDoctors(self):
         """ Обработчик нажатия на кнопку 'Справочник' """
 
-        print(": MainWindow.__on_clicked_pushBtnDict_doctor")
+        print(": MainWindow.__on_triggered_menuItemDictDoctors")
 
         list_doctors_widget = DoctorsListWidget(self.__xml_provider, parent=self)
         self.__current_widget_dict = list_doctors_widget
 
         self.layoutContaner.addWidget(list_doctors_widget)
 
+    def __on_triggered_menuItemDictOrgans(self):
+        """ Обработчик выбора пункта меню 'Справочник Органов' """
 
+        print(": MainWindow.__on_triggered_menuItemDictOrgans")
 
-    def __on_pushBtnDict_organ_clicked(self):
-        """ Обработчик нажатия на кнопку 'Справочник' """
+        # list_organs = self.__controller_organs.select_organs()
+        # for organ in list_organs:
+        #     print(f'- {organ}')
 
-        list_organs = self.__controller_organs.select_organs()
-        for organ in list_organs:
-            print(f'- {organ}')
+        list_organs_widget = OrgansListWidget(self.__xml_provider, parent=self)
+        print('list_organs_widget:', list_organs_widget)
+
+        self.__current_widget_dict = list_organs_widget
+
+        # self.layoutContaner.addWidget(list_organs_widget)
+        self.layoutContaner_2.addWidget(list_organs_widget)
+
 
 
     def __on_pushBtnDict_device_clicked(self):
