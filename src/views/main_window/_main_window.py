@@ -44,6 +44,9 @@ class MainWindow(QMainWindow, FORM_CLASS):
 
         self.__current_widget_dict = None
 
+        list_organs_widget = OrgansListWidget(self.__xml_provider, parent=self)
+        self.layoutContaner_2.addWidget(list_organs_widget)
+
     def __prepare_ui(self):
         """ Подготовка интерфейса """
 
@@ -56,6 +59,7 @@ class MainWindow(QMainWindow, FORM_CLASS):
 
         self.menuItemDictDoctors.triggered.connect(self.__on_triggered_menuItemDictDoctors)
         self.menuItemDictOrgans.triggered.connect(self.__on_triggered_menuItemDictOrgans)
+        self.menuItemDictEndoskop.triggered.connect(self.__on_triggered_menuItemDictEndoskop)
 
         self.pushButtonDictRefresh.clicked.connect(self.__on_clicked_pushButtonDictRefresh)
         self.pushButtonDictCreate.clicked.connect(self.__on_clicked_pushButtonDictCreate)
@@ -137,17 +141,20 @@ class MainWindow(QMainWindow, FORM_CLASS):
 
         self.__current_widget_dict = list_organs_widget
 
-        # self.layoutContaner.addWidget(list_organs_widget)
+        self.layoutContaner.addWidget(list_organs_widget)
         self.layoutContaner_2.addWidget(list_organs_widget)
 
+    def __on_triggered_menuItemDictEndoskop(self):
+        """ Обработчик выбора пункта меню 'Справочник 'Эндоскопий'' """
 
+        print(": MainWindow.__on_triggered_menuItemDictEndoskop")
 
-    def __on_pushBtnDict_device_clicked(self):
-        """ Обработчик нажатия на кнопку 'Справочник' """
-
-        list_devices = self.__controller_devices.select_devices()
-        for device in list_devices:
-            print(f'- {device}')
+    # def __on_pushBtnDict_device_clicked(self):
+    #     """ Обработчик нажатия на кнопку 'Справочник' """
+    #
+    #     list_devices = self.__controller_devices.select_devices()
+    #     for device in list_devices:
+    #         print(f'- {device}')
 
     def __on_pushBtn_clicked(self):
         print(": MainWindow.__on_puchBtn_clicked()")
