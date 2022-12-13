@@ -39,14 +39,19 @@ class MainWindow(QMainWindow, FORM_CLASS):
         self.__xml_provider = XmlDataProvider()
         self.__xml_provider.read()
 
-        self.__controller_doctors = ControllerDictDoctor(self.__xml_provider)
+        print("XmlDataProvider.root=", XmlDataProvider.root)
+        print("self.__xml_provider.root=", self.__xml_provider.root)
+
+        # ***
+        # self.__controller_doctors = ControllerDictDoctor(self.__xml_provider)
+        self.__controller_doctors = ControllerDictDoctor()
         self.__controller_organs = ControllerDictOrgan(self.__xml_provider)
         self.__controller_devices = ControllerDictDevice(self.__xml_provider)
 
         self.__current_widget_dict = None
 
-        list_organs_widget = OrgansListWidget(self.__xml_provider, parent=self)
-        self.layoutContaner_2.addWidget(list_organs_widget)
+        # list_organs_widget = OrgansListWidget(self.__xml_provider, parent=self)
+        # self.layoutContaner_2.addWidget(list_organs_widget)
 
     def __prepare_ui(self):
         """ Подготовка интерфейса """
@@ -94,7 +99,7 @@ class MainWindow(QMainWindow, FORM_CLASS):
         menu_operation.addAction(load_action)
         menu_operation.addAction(save_action)
 
-        menu_dict = menubar.addMenu('Справочники')
+        # menu_dict = menubar.addMenu('Справочники')
 
         self.toolbar = self.addToolBar('Exit')
         self.toolbar.addAction(exit_action)

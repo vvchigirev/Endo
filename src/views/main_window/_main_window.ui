@@ -167,6 +167,7 @@
     <addaction name="separator"/>
     <addaction name="menuItemDictOrgans"/>
     <addaction name="menuItemDictEndoskop"/>
+    <addaction name="separator"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuDicts"/>
