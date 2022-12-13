@@ -11,12 +11,14 @@ class XmlDoctors(BaseSections):
 
     __xml_provider = None  # Провайдер данных XML
 
-    def __init__(self, xml_provider: XmlDataProvider = None):
+    def __init__(self):
         """ Конструктор
         :param xml_provider: Xml провайдер
         """
 
-        self.__xml_provider: XmlDataProvider = xml_provider
+        print(": XmlDoctors.__init__()")
+
+        self.__xml_provider: XmlDataProvider = XmlDataProvider()
 
         self.group_name = Keys.DOCTORS
         self.element_name = Keys.DOCTOR
@@ -28,7 +30,7 @@ class XmlDoctors(BaseSections):
 
         print(": XmlDoctors.select_doctors()")
 
-        if not self.__xml_provider.root:
+        if not XmlDataProvider.root:
             return []
 
         doctors = []

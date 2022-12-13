@@ -10,13 +10,15 @@ class ControllerDictDoctor:
     __data_provider: XmlDataProvider = None  # Провайдер данных XML
     __xml_doctors: XmlDoctors = None  # Xml структур для Врачей
 
-    def __init__(self, xml_provider: XmlDataProvider = None):
+    def __init__(self):
         """ Конструктор
         :param xml_provider: Xml провайдер
         """
 
-        self.__data_provider = xml_provider
-        self.__xml_doctors = XmlDoctors(self.__data_provider)
+        print(": ControllerDictDoctor.__init__()")
+
+        self.__data_provider = XmlDataProvider()
+        self.__xml_doctors = XmlDoctors()
 
     def select_doctors(self):
         """ Получение списка вречей
@@ -32,7 +34,7 @@ class ControllerDictDoctor:
         except Exception as e:
             message = "Ошибка получения списка врачей!"
             print(message, e)
-            raise BusinеssException(message)
+            raise BusinеssException(message, e)
 
         return doctors
 

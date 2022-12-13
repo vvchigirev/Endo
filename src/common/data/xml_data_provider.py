@@ -3,6 +3,9 @@ import xml.etree.ElementTree as ET
 from .sections.section_doctors import SectionDoctors
 from .sections.section_organs import SectionOrgans
 from .sections.section_devices import SectionDevices
+from .sections.section_endos import SectionEndos
+
+
 FILE = ".\data\data.xml"
 
 
@@ -11,19 +14,29 @@ class XmlDataProvider:
 
     __tree = None
     __root = None
-    __sections = None      # Спислк обязательных секций d xml документе
+    # __sections = None      # Спислк обязательных секций d xml документе
+    __sections = [
+        SectionDoctors(),
+        SectionOrgans(),
+        SectionDevices(),
+        SectionEndos()
+    ]
+
+    def __new__(cls):
+        print(": XmlDataProvider.__new__()")
+
+        if not hasattr(cls, 'instance'):
+            cls.instance = super(XmlDataProvider, cls).__new__(cls)
+
+        print("cls.__sections=", cls.__sections)
+
+        print("cls.instance=", cls.instance)
+        return cls.instance
 
     def __init__(self):
         """ Конструктор """
 
-        self.__tree = None
-        self.__root = None
-
-        self.__sections = [
-            SectionDoctors(),
-            SectionOrgans(),
-            SectionDevices()
-        ]
+        print(": XmlDataProvider.__init__()")
 
     # region Свойства
 
@@ -32,6 +45,11 @@ class XmlDataProvider:
         """ Свойство. Корневой элемент """
 
         return self.__root
+
+    @root.setter
+    def root(self, value):
+        """ Свойство(сетер). Корневой элемент """
+        self.__root = value
 
     # endregion
 

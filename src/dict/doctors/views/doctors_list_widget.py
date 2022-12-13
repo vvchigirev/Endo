@@ -20,7 +20,6 @@ class DoctorsListWidget(BaseDictModelListWidget, FORM_CLASS):
     """ Виджет. Список врачей """
 
     __table_model = None            # Модель таблицы
-    __xml_provider = None
     __controller_doctors = None     # Крнтроллер справочника докторов
 
     def __init__(self, xml_provider: XmlDataProvider, parent=None):
@@ -33,8 +32,7 @@ class DoctorsListWidget(BaseDictModelListWidget, FORM_CLASS):
 
         super(DoctorsListWidget, self).__init__(parent)
 
-        self.__xml_provider = xml_provider
-        self.__controller_doctors = ControllerDictDoctor(self.__xml_provider)
+        self.__controller_doctors = ControllerDictDoctor()
 
         try:
             # super(DoctorsListWidget, self).__init__()
