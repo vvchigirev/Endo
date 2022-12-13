@@ -9,3 +9,5 @@ class Keys:
     DEVICE = "Device"
     ORGANS = "Organs"
     ORGAN = "Organ"
+    ENDOS = "Endos"
+    ENDO = "Endo"
