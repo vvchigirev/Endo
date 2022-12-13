@@ -5,7 +5,7 @@ from PyQt5.QtGui import QIcon
 
 from ...dict.doctors.views.doctors_list_widget import DoctorsListWidget
 from ...dict.device.views.device_list_widget import DevicesListWidget
-#from ...dict.endos.views.endos_list_widget import EndosListWidget
+from ...dict.endos.views.endos_list_widget import EndosListWidget
 from ...dict.organs.views.organ_list_widget import OrgansListWidget
 from ...dict.organs.model.organ_model import OrganModel
 from ...dict.device.model.device_model import DeviceModel
@@ -144,9 +144,27 @@ class MainWindow(QMainWindow, FORM_CLASS):
 
         self.__current_widget_dict = list_organs_widget
 
+        # self.layoutContaner_2.addWidget(list_organs_widget)
         self.layoutContaner.addWidget(list_organs_widget)
-        self.layoutContaner_2.addWidget(list_organs_widget)
 
+    def __on_triggered_menuItemDictEndos(self):
+        """ Обработчик выбора пункта меню 'Справочник 'Эндоскопий'' """
+
+        print(": MainWindow.__on_triggered_menuItemDictEndos")
+
+        list_endos_widget = EndosListWidget()
+
+        self.__current_widget_dict = list_endos_widget
+
+        # self.layoutContaner_2.addWidget(list_endos_widget)
+        self.layoutContaner.addWidget(list_endos_widget)
+
+    # def __on_pushBtnDict_device_clicked(self):
+    #     """ Обработчик нажатия на кнопку 'Справочник' """
+    #
+    #     list_devices = self.__controller_devices.select_devices()
+    #     for device in list_devices:
+    #         print(f'- {device}')
     def __on_triggered_menuItemDictEndos(self):
         pass
     def __on_triggered_menuItemDictDevices(self):
