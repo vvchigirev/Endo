@@ -165,8 +165,7 @@ class MainWindow(QMainWindow, FORM_CLASS):
     #     list_devices = self.__controller_devices.select_devices()
     #     for device in list_devices:
     #         print(f'- {device}')
-    def __on_triggered_menuItemDictEndos(self):
-        pass
+
     def __on_triggered_menuItemDictDevices(self):
         devices_widget = DevicesListWidget(self)
         self.layoutContainer.addWidget(devices_widget)
