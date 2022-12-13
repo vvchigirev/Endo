@@ -168,6 +168,7 @@
     <addaction name="menuItemDictOrgans"/>
     <addaction name="menuItemDictEndoskop"/>
     <addaction name="separator"/>
+    <addaction name="actionaaa"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuDicts"/>
@@ -212,6 +213,11 @@
   <action name="menuItemDictEndoskop">
    <property name="text">
     <string>Эндоскопии</string>
+   </property>
+  </action>
+  <action name="actionaaa">
+   <property name="text">
+    <string>aaa</string>
    </property>
   </action>
  </widget>
