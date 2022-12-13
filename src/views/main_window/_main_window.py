@@ -4,6 +4,8 @@ from PyQt5.QtWidgets import QMainWindow, QAction, qApp, QMessageBox
 from PyQt5.QtGui import QIcon
 
 from ...dict.doctors.views.doctors_list_widget import DoctorsListWidget
+from ...dict.device.views.device_list_widget import DevicesListWidget
+#from ...dict.endos.views.endos_list_widget import EndosListWidget
 from ...dict.organs.views.organ_list_widget import OrgansListWidget
 from ...dict.organs.model.organ_model import OrganModel
 from ...dict.device.model.device_model import DeviceModel
@@ -59,7 +61,8 @@ class MainWindow(QMainWindow, FORM_CLASS):
 
         self.menuItemDictDoctors.triggered.connect(self.__on_triggered_menuItemDictDoctors)
         self.menuItemDictOrgans.triggered.connect(self.__on_triggered_menuItemDictOrgans)
-        self.menuItemDictEndoskop.triggered.connect(self.__on_triggered_menuItemDictEndoskop)
+        self.menuItemDictDevices.triggered.connect(self.__on_triggered_menuItemDictDevices)
+        self.menuItemDictEndoskop.triggered.connect(self.__on_triggered_menuItemDictEndos)
 
         self.pushButtonDictRefresh.clicked.connect(self.__on_clicked_pushButtonDictRefresh)
         self.pushButtonDictCreate.clicked.connect(self.__on_clicked_pushButtonDictCreate)
@@ -144,17 +147,11 @@ class MainWindow(QMainWindow, FORM_CLASS):
         self.layoutContaner.addWidget(list_organs_widget)
         self.layoutContaner_2.addWidget(list_organs_widget)
 
-    def __on_triggered_menuItemDictEndoskop(self):
-        """ Обработчик выбора пункта меню 'Справочник 'Эндоскопий'' """
-
-        print(": MainWindow.__on_triggered_menuItemDictEndoskop")
-
-    # def __on_pushBtnDict_device_clicked(self):
-    #     """ Обработчик нажатия на кнопку 'Справочник' """
-    #
-    #     list_devices = self.__controller_devices.select_devices()
-    #     for device in list_devices:
-    #         print(f'- {device}')
+    def __on_triggered_menuItemDictEndos(self):
+        pass
+    def __on_triggered_menuItemDictDevices(self):
+        devices_widget = DevicesListWidget(self)
+        self.layoutContainer.addWidget(devices_widget)
 
     def __on_pushBtn_clicked(self):
         print(": MainWindow.__on_puchBtn_clicked()")
