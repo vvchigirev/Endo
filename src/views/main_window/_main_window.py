@@ -6,13 +6,18 @@ from PyQt5.QtGui import QIcon
 from ...dict.doctors.views.doctors_list_widget import DoctorsListWidget
 from ...dict.endos.views.endos_list_widget import EndosListWidget
 from ...dict.organs.views.organ_list_widget import OrgansListWidget
+from ...dict.device.views.devices_list_widget import DevicesListWidget
+
 from ...dict.organs.model.organ_model import OrganModel
 from ...dict.device.model.device_model import DeviceModel
 from ...dict.doctors.model.doctor_model import DoctorModel
+
 from ...common.base_classes.views.base_dict_model_list_widget import BaseDictModelListWidget
+
 from ...common.controllers.dict_doctor_controller import ControllerDictDoctor
 from ...common.controllers.dict_organ_controller import ControllerDictOrgan
 from ...common.controllers.dict_device_controller import ControllerDictDevice
+
 from ...common.data.xml_data_provider import XmlDataProvider
 
 
@@ -65,6 +70,7 @@ class MainWindow(QMainWindow, FORM_CLASS):
 
         self.menuItemDictDoctors.triggered.connect(self.__on_triggered_menuItemDictDoctors)
         self.menuItemDictOrgans.triggered.connect(self.__on_triggered_menuItemDictOrgans)
+        self.menuItemDictDevices.triggered.connect(self.__on_triggered_menuItemDictDevices)
         self.menuItemDictEndoskop.triggered.connect(self.__on_triggered_menuItemDictEndos)
 
         self.pushButtonDictRefresh.clicked.connect(self.__on_clicked_pushButtonDictRefresh)
@@ -168,6 +174,18 @@ class MainWindow(QMainWindow, FORM_CLASS):
     #     list_devices = self.__controller_devices.select_devices()
     #     for device in list_devices:
     #         print(f'- {device}')
+
+    def __on_triggered_menuItemDictDevices(self):
+        """ Обработчик выбора пункта меню 'Справочник 'Приборов'' """
+
+        print(": MainWindow.__on_triggered_menuItemDictDevices")
+
+        list_devices_widget = DevicesListWidget()
+
+        self.__current_widget_dict = list_devices_widget
+
+        self.layoutContaner.addWidget(list_devices_widget)
+
 
     def __on_pushBtn_clicked(self):
         print(": MainWindow.__on_puchBtn_clicked()")

@@ -166,6 +166,7 @@
     <addaction name="menuDictEmployees"/>
     <addaction name="separator"/>
     <addaction name="menuItemDictOrgans"/>
+    <addaction name="menuItemDictDevices"/>
     <addaction name="menuItemDictEndoskop"/>
     <addaction name="separator"/>
     <addaction name="actionaaa"/>
@@ -218,6 +219,11 @@
   <action name="actionaaa">
    <property name="text">
     <string>aaa</string>
+   </property>
+  </action>
+  <action name="menuItemDictDevices">
+   <property name="text">
+    <string>Приборы</string>
    </property>
   </action>
  </widget>
