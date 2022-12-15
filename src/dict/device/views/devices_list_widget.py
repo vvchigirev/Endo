@@ -24,5 +24,7 @@ class DevicesListWidget(BaseDictModelListWidget, FORM_CLASS):
 
             super(DevicesListWidget, self).__init__(parent)
 
+            self.setupUi(self)
+
         except Exception as e:
             print("e=", e)

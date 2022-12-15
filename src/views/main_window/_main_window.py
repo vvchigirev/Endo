@@ -134,6 +134,9 @@ class MainWindow(QMainWindow, FORM_CLASS):
 
         print(": MainWindow.__on_triggered_menuItemDictDoctors")
 
+        if self.__current_widget_dict:
+            self.__current_widget_dict.hide()
+
         list_doctors_widget = DoctorsListWidget(self.__xml_provider, parent=self)
         self.__current_widget_dict = list_doctors_widget
 
@@ -143,6 +146,9 @@ class MainWindow(QMainWindow, FORM_CLASS):
         """ Обработчик выбора пункта меню 'Справочник Органов' """
 
         print(": MainWindow.__on_triggered_menuItemDictOrgans")
+
+        if self.__current_widget_dict:
+            self.__current_widget_dict.hide()
 
         # list_organs = self.__controller_organs.select_organs()
         # for organ in list_organs:
@@ -160,6 +166,9 @@ class MainWindow(QMainWindow, FORM_CLASS):
         """ Обработчик выбора пункта меню 'Справочник 'Эндоскопий'' """
 
         print(": MainWindow.__on_triggered_menuItemDictEndos")
+
+        if self.__current_widget_dict:
+            self.__current_widget_dict.hide()
 
         list_endos_widget = EndosListWidget()
 
@@ -179,6 +188,9 @@ class MainWindow(QMainWindow, FORM_CLASS):
         """ Обработчик выбора пункта меню 'Справочник 'Приборов'' """
 
         print(": MainWindow.__on_triggered_menuItemDictDevices")
+
+        if self.__current_widget_dict:
+            self.__current_widget_dict.hide()
 
         list_devices_widget = DevicesListWidget()
 
