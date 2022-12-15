@@ -26,7 +26,7 @@
     <string>Справочник приборов</string>
    </property>
   </widget>
-  <widget class="QTableView" name="tableView">
+  <widget class="QTableView" name="table">
    <property name="geometry">
     <rect>
      <x>10</x>
