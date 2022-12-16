@@ -1,7 +1,7 @@
 from ....common.base_classes.models.base_dict_model import *
 
 
-class DeviceModel(BaseDictModel):
+class HospitalModel(BaseDictModel):
     """ Модель. <Больница>"""
 
     def __init__(self, code, name: str = ""):
