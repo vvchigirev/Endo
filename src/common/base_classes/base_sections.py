@@ -4,14 +4,17 @@ import xml.etree.ElementTree as ET
 class BaseSections:
     """ Базовый класс для наименования xml секций """
 
-    _group_name: str = ""
-    _element_name: str = ""
+    __group_name: str = ""
+    __element_name: str = ""
 
-    def __init__(self):
-        """ Конструктор """
+    def __init__(self, el_group_name=None, el_name=None):
+        """ Конструктор
+        :param el_group_name: Наименование группы
+        :param el_name: Наименование элемента
+        """
 
-        self._group_name = el_group_name
-        self._element_name = el_name
+        self.__group_name = el_group_name
+        self.__element_name = el_name
 
     # region Свойства
 
@@ -19,27 +22,27 @@ class BaseSections:
     def group_name(self):
         """ Свойство. Имя группы """
 
-        return self._group_name
+        return self.__group_name
 
     @group_name.setter
     def group_name(self, value):
-        """ Свойство (установка). Имя группы
+        """ Свойство (сетеер). Имя группы
         :param value: Устанавливаемое значение
         """
 
-        self._group_name = value
+        self.__group_name = value
 
     @property
     def element_name(self):
         """ Свойство. Имя элемента """
 
-        return self._element_name
+        return self.__element_name
 
     @element_name.setter
     def element_name(self, value):
-        """ Свойство (установка). Имя элемента """
+        """ Свойство (сеттер). Имя элемента """
 
-        self._element_name = value
+        self.__element_name = value
 
     # endregion
 
@@ -47,6 +50,5 @@ class BaseSections:
         s = ""
         s += "group_name= " + self.group_name + ", "
         s += "element_name= " + self.element_name
-
 
         return s
