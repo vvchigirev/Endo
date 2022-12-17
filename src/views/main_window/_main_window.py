@@ -1,4 +1,5 @@
 import os
+
 from PyQt5 import uic
 from PyQt5.QtWidgets import QMainWindow, QAction, qApp, QMessageBox
 from PyQt5.QtGui import QIcon
@@ -7,17 +8,7 @@ from ...dict.doctors.views.doctors_list_widget import DoctorsListWidget
 from ...dict.endos.views.endos_list_widget import EndosListWidget
 from ...dict.organs.views.organ_list_widget import OrgansListWidget
 from ...dict.device.views.devices_list_widget import DevicesListWidget
-
-from ...dict.organs.model.organ_model import OrganModel
-from ...dict.device.model.device_model import DeviceModel
-from ...dict.doctors.model.doctor_model import DoctorModel
-
 from ...common.base_classes.views.base_dict_model_list_widget import BaseDictModelListWidget
-
-from ...common.controllers.dict_doctor_controller import ControllerDictDoctor
-from ...common.controllers.dict_organ_controller import ControllerDictOrgan
-from ...common.controllers.dict_device_controller import ControllerDictDevice
-
 from ...common.data.xml_data_provider import XmlDataProvider
 
 
@@ -123,7 +114,7 @@ class MainWindow(QMainWindow, FORM_CLASS):
         if self.__current_widget_dict:
             self.__current_widget_dict.hide()
 
-        list_organs_widget = OrgansListWidget(self.__xml_provider, parent=self)
+        list_organs_widget = OrgansListWidget(parent=self)
         self.__current_widget_dict = list_organs_widget
 
         # self.layoutContaner_2.addWidget(list_organs_widget)

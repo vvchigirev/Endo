@@ -47,7 +47,7 @@
     </Doctors>
     <Organs>
         <Organ><code>1</code><name>Почка</name></Organ>
-        <Organ><code>2</code><name>Почка</name></Organ>
+        <Organ><code>2</code><name>Желудок</name></Organ>
     </Organs>
     <Devices>
         <Device>

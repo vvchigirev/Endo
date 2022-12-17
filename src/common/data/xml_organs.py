@@ -9,12 +9,10 @@ from ...dict.organs.model.organ_model import OrganModel
 class XmlOrgans(BaseSections):
     """ Xml Сруктура для сущностей Органов """
 
-    def __init__(self, xml_provider: XmlDataProvider = None):
-        """ Конструктор
-        :param xml_provider: Xml провайдер
-        """
+    def __init__(self):
+        """ Конструктор """
 
-        self.__xml_provider: XmlDataProvider = xml_provider
+        self.__xml_provider: XmlDataProvider = XmlDataProvider()
 
         self.group_name = Keys.ORGANS
         self.element_name = Keys.ORGAN
@@ -84,7 +82,7 @@ class XmlOrgans(BaseSections):
         :return: Список моделей Органов
         """
 
-        print(": select_organ")
+        print(": XmlOrgans.select_organ()")
 
         if not self.__xml_provider.root:
             return []

@@ -1,24 +1,19 @@
 from ..Exceptions.business_exception import BusinеssException
 from ...dict.organs.model.organ_model import OrganModel
-from ..data.xml_data_provider import XmlDataProvider
 from ..data.xml_organs import XmlOrgans
 
 
 class ControllerDictOrgan:
     """ Контроллер Справочник органов """
 
-    __data_provider: XmlDataProvider = None  # Провайдер данных XML
     __xml_organs: XmlOrgans = None  # Xml структур для Органов
 
-    def __init__(self, xml_provider: XmlDataProvider = None):
-        """ Конструктор
-        :param xml_provider: Xml провайдер
-        """
+    def __init__(self):
+        """ Конструктор """
 
         print(": ControllerDictOrgan.__init__()")
 
-        self.__data_provider = xml_provider
-        self.__xml_organs = XmlOrgans(self.__data_provider)
+        self.__xml_organs = XmlOrgans()
 
     def select_organs(self):
         """Получение списка органов
@@ -55,7 +50,7 @@ class ControllerDictOrgan:
             print(message, e)
             raise BusinеssException(message)
 
-    def creat_organ(self, organ: OrganModel):
+    def create_organ(self, organ: OrganModel):
         """ Добавление сущности Орган
         :param organ: Модель - Орган
         :return: Результат выполнения
@@ -102,7 +97,7 @@ class ControllerDictOrgan:
             print(message, e)
             raise BusinеssException(message)
 
-    def delet_organ(self, code):
+    def delete_organ(self, code):
         """ Удаление сущности Орган
         :param code: Код органа
         :return: Результат выполнения

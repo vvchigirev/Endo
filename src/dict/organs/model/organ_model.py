@@ -20,3 +20,12 @@ class OrganModel(BaseDictModel):
         return self.id
 
     # endregion
+
+    def __str__(self):
+        """ Строковое представление модели Органа
+        :return:
+        """
+
+        s = f'["OrganModel"] ({self.code}) {self.name}'
+
+        return s

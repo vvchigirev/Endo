@@ -19,13 +19,14 @@ class OrganEditWidget(BaseModelEditWidget, FORM_CLASS):
 
         print(": OrganEditWidget.__init__()")
 
-        super(OrganEditWidget,self).__init__(parent)
+        super(OrganEditWidget, self).__init__(parent)
         # self.setupUi(self)
 
         self.__organ = organ
 
         self.__prepare_ui()
 
+        print(":End OrganEditWidget.__init__()")
     # region Свойства
 
     @property
@@ -54,6 +55,8 @@ class OrganEditWidget(BaseModelEditWidget, FORM_CLASS):
 
         self.lineEditCode.textChanged.connect(self.__on_lineEditCode_text_changed)
         self.lineEditName.textChanged.connect(self.__on_lineEditName_text_changed)
+
+        print(":End OrganEditWidget.__prepare_ui()")
 
     def __set_fields(self):
         """ Установка значений в поля ввода """
