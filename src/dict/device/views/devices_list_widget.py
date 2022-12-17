@@ -2,6 +2,7 @@ import os
 
 from PyQt5 import uic, QtCore
 from PyQt5.QtWidgets import QWidget
+from PyQt5.QtGui import QStandardItemModel, QStandardItem
 
 from ....common.base_classes.views.base_dict_model_list_widget import BaseDictModelListWidget
 
@@ -10,21 +11,33 @@ FORM_CLASS, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'devices_
 
 
 class DevicesListWidget(BaseDictModelListWidget, FORM_CLASS):
-    """ Виджет. Список эндоскопий """
+    """ Виджет. Список приборов """
 
     def __init__(self, parent=None):
         """ Конструктор
-        :param xml_provider: Провайдер данных xml
         :param parent: Родитель
         """
 
-        try:
+        print(": DevicesListWidget.__init__()")
 
-            print(": DevicesListWidget.__init__()")
+        super(DevicesListWidget, self).__init__(parent)
 
-            super(DevicesListWidget, self).__init__(parent)
+        self.__init_table()
+        self.refresh()
 
-            self.setupUi(self)
+    def __init_table(self):
+        """ Инициализация таблицы данных """
 
-        except Exception as e:
-            print("e=", e)
+        self.__table_model = QStandardItemModel()
+        self.__table_model.setHorizontalHeaderLabels(['Код', 'Наименование'])
+        self.table.setModel(self.__table_model)
+
+    def refresh(self):
+        """Обновление списка Приборов"""
+
+        print(": DevicesListWidget.refresh()")
+
+    def update_element(self):
+        """ Обновление врача """
+
+        print(": DevicesListWidget.update_element()")
