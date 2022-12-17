@@ -8,5 +8,5 @@ class SectionEndos(BaseSections):
     def __init__(self):
         """ Конструктор """
 
-        self.group_name: str = Keys.ENDOS
-        self.element_name: str = Keys.ENDO
+        super(SectionEndos, self).__init__(Keys.ENDOS, Keys.ENDO)
+
