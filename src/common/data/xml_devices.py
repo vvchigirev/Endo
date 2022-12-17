@@ -1,7 +1,7 @@
 import xml.etree.ElementTree as ET
 
 from ..base_classes.base_sections import BaseSections
-from ...common.consts.Keys import Keys
+from .sections.section_organs import SectionOrgans
 from .xml_data_provider import XmlDataProvider
 from ...dict.device.model.device_model import DeviceModel
 
@@ -9,15 +9,12 @@ from ...dict.device.model.device_model import DeviceModel
 class XmlDevices(BaseSections):
     """ Xml Сруктура для сущностей Приборов """
 
-    def __init__(self, xml_provider: XmlDataProvider = None):
-        """ Конструктор
-        :param xml_provider: Xml провайдер
-        """
+    def __init__(self):
+        """ Конструктор """
 
-        self.__xml_provider: XmlDataProvider = xml_provider
+        self.__xml_provider: XmlDataProvider = XmlDataProvider()
 
-        self.group_name = Keys.DEVICES
-        self.element_name = Keys.DEVICE
+        self.__section = SectionOrgans()
 
     def get_device_model_from_xml_element(self, xml_element):
         """ Генерация модели Прибора из xml элемента
@@ -40,23 +37,25 @@ class XmlDevices(BaseSections):
         :param code: Код прибора
         :return: Модель Прибор
         """
+
         print(": device.get_device()")
+
         print("self.__xml_provider.root=", self.__xml_provider.root)
         if not self.__xml_provider.root:
             return None
 
-        xml_group = self.__xml_provider.root.find(self.group_name)
+        xml_group = self.__xml_provider.root.find(self.__section.group_name)
 
         print("xml_group=", xml_group)
 
-        str_search = self.element_name + "[code='" + str(code) + "']"
+        str_search = self.__section.element_name + "[code='" + str(code) + "']"
         element = xml_group.find(str_search)
 
         if element:
             device = self.get_device_model_from_xml_element(element)
             return device
         else:
-            str_search = self.element_name + "[@code='" + str(code) + "']"
+            str_search = self.__section.element_name + "[@code='" + str(code) + "']"
             element = xml_group.find(str_search)
             if element is not None:
                 device = self.get_device_model_from_xml_element(element)
@@ -74,9 +73,9 @@ class XmlDevices(BaseSections):
         if not self.__xml_provider.root:
             return False
 
-        xml_group = self.__xml_provider.root.find(self.group_name)
+        xml_group = self.__xml_provider.root.find(self.__section.group_name)
 
-        str_search = self.element_name + "[code='" + str(device.code) + "']"
+        str_search = self.__section.element_name + "[code='" + str(device.code) + "']"
         xml_device = xml_group.find(str_search)
 
         print("xml_devices=", xml_device)
@@ -97,11 +96,11 @@ class XmlDevices(BaseSections):
 
         devices = []
 
-        xml_group = self.__xml_provider.root.find(self.group_name)
+        xml_group = self.__xml_provider.root.find(self.__section.group_name)
 
         if xml_group:
             print("xml_group=", xml_group)
-            for xml_devices in xml_group.findall(self.element_name):
+            for xml_devices in xml_group.findall(self.__section.element_name):
                 device: DeviceModel = self.get_device_model_from_xml_element(xml_devices)
 
                 devices.append(device)
@@ -133,11 +132,11 @@ class XmlDevices(BaseSections):
         if not self.__xml_provider.root:
             return False
 
-        xml_group = self.__xml_provider.root.find(self.group_name)
+        xml_group = self.__xml_provider.root.find(self.__section.group_name)
 
         print("xml_group=", xml_group)
 
-        xml_device = ET.SubElement(xml_group, self.element_name)
+        xml_device = ET.SubElement(xml_group, self.__section.element_name)
 
         print("xml_device=", xml_device)
 
@@ -157,9 +156,9 @@ class XmlDevices(BaseSections):
         if not self.__xml_provider.root:
             return False
 
-        xml_group = self.__xml_provider.root.find(self.group_name)
+        xml_group = self.__xml_provider.root.find(self.__section.group_name)
 
-        str_search = self.element_name + "[code='" + str(code) + "']"
+        str_search = self.__section.element_name + "[code='" + str(code) + "']"
         element = xml_group.find(str_search)
 
         if element:
