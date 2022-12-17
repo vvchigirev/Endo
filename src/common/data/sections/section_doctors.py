@@ -8,5 +8,4 @@ class SectionDoctors(BaseSections):
     def __init__(self):
         """ Конструктор """
 
-        self.group_name = Keys.DOCTORS
-        self.element_name = Keys.DOCTOR
+        super(SectionDoctors, self).__init__(el_group_name=Keys.DOCTORS, el_name=Keys.DOCTOR)

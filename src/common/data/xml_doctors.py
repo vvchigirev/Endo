@@ -1,6 +1,7 @@
 import xml.etree.ElementTree as ET
 
 from ..base_classes.base_sections import BaseSections
+from .sections.section_doctors import SectionDoctors
 from ...common.consts.Keys import Keys
 from .xml_data_provider import XmlDataProvider
 from ...dict.doctors.model.doctor_model import DoctorModel
@@ -20,8 +21,7 @@ class XmlDoctors(BaseSections):
 
         self.__xml_provider: XmlDataProvider = XmlDataProvider()
 
-        self.group_name = Keys.DOCTORS
-        self.element_name = Keys.DOCTOR
+        self.__section = SectionDoctors()
 
     def select_doctors(self):
         """ Получение списка Врачей
@@ -35,11 +35,11 @@ class XmlDoctors(BaseSections):
 
         doctors = []
 
-        xml_group = self.__xml_provider.root.find(self.group_name)
+        xml_group = self.__xml_provider.root.find(self.__section.group_name)
 
         if xml_group:
-            print("xml_group=", xml_group)
-            for xml_doctor in xml_group.findall(self.element_name):
+            # print("xml_group=", xml_group)
+            for xml_doctor in xml_group.findall(self.__section.element_name):
                 doctor: DoctorModel = self.gen_doctor_model_from_xml_element(xml_doctor)
 
                 doctors.append(doctor)
@@ -79,16 +79,16 @@ class XmlDoctors(BaseSections):
         if not self.__xml_provider.root:
             return None
 
-        xml_group = self.__xml_provider.root.find(self.group_name)
+        xml_group = self.__xml_provider.root.find(self.__section.group_name)
 
-        str_search = self.element_name + "[code='" + str(code) + "']"
+        str_search = self.__section.element_name + "[code='" + str(code) + "']"
         element = xml_group.find(str_search)
 
         if element:
             doctor = self.gen_doctor_model_from_xml_element(element)
             return doctor
         else:
-            str_search = self.element_name + "[@code='" + str(code) + "']"
+            str_search = self.__section.element_name + "[@code='" + str(code) + "']"
             element = xml_group.find(str_search)
             if element is not None:
                 doctor = self.gen_doctor_model_from_xml_element(element)
@@ -106,8 +106,8 @@ class XmlDoctors(BaseSections):
         if not self.__xml_provider.root:
             return False
 
-        xml_group = self.__xml_provider.root.find(self.group_name)
-        xml_doctor = ET.SubElement(xml_group, self.element_name)
+        xml_group = self.__xml_provider.root.find(self.__section.group_name)
+        xml_doctor = ET.SubElement(xml_group, self.__section.element_name)
 
         if is_attribs:
             if self.create_xml_doctor_attributes(xml_doctor, doctor):
@@ -172,9 +172,9 @@ class XmlDoctors(BaseSections):
         if not self.__xml_provider.root:
             return False
 
-        xml_group = self.__xml_provider.root.find(self.group_name)
+        xml_group = self.__xml_provider.root.find(self.__section.group_name)
 
-        str_search = self.element_name + "[code='" + str(doctor.code) + "']"
+        str_search = self.__section.element_name + "[code='" + str(doctor.code) + "']"
         xml_doctor = xml_group.find(str_search)
 
         if xml_doctor:
@@ -204,11 +204,10 @@ class XmlDoctors(BaseSections):
             if not self.__xml_provider.root:
                 return False
 
-            xml_group = self.__xml_provider.root.find(self.group_name)
-
+            xml_group = self.__xml_provider.root.find(self.__section.group_name)
             print("xml_group=", xml_group)
 
-            str_search = self.element_name + "[code='" + str(code) + "']"
+            str_search = self.__section.element_name + "[code='" + str(code) + "']"
             print("str=", str_search)
             element = xml_group.find(str_search)
 
