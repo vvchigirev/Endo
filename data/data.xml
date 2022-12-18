@@ -57,4 +57,25 @@
             <code>2</code><name>молток</name></Device><Device><code>3</code><name>пила</name>
         </Device>
     </Devices>
-<Endos /><Hospitals><Hospital><code>1</code><name>ДГБ</name></Hospital><Hospital><code>2</code><name>КГБ</name></Hospital></Hospitals><Pathologys><Pathology><code>1</code><name>Гастрит</name></Pathology><Pathology><code>2</code><name>Деформация</name></Pathology></Pathologys></Endo>
+<Endos />
+    <Hospitals>
+        <Hospital>
+            <code>1</code>
+            <name>ДГБ</name>
+        </Hospital>
+        <Hospital>
+            <code>2</code>
+            <name>КГБ</name>
+        </Hospital>
+    </Hospitals>
+    <Pathologys>
+        <Pathology>
+            <code>1</code>
+            <name>Гастрит</name>
+        </Pathology>
+        <Pathology>
+            <code>2</code>
+            <name>Деформация</name>
+        </Pathology>
+    </Pathologys>
+</Endo>
