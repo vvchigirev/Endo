@@ -9,6 +9,7 @@ from ...dict.endos.views.endos_list_widget import EndosListWidget
 from ...dict.organs.views.organ_list_widget import OrgansListWidget
 from ...dict.device.views.devices_list_widget import DevicesListWidget
 from ...dict.hospital.views.hospital_list_widget import HospitalsListWidget
+from ...dict.pathology.views.pathologys_list_widget import PathologysListWidget
 
 from ...dict.organs.model.organ_model import OrganModel
 from ...dict.device.model.device_model import DeviceModel
@@ -63,6 +64,7 @@ class MainWindow(QMainWindow, FORM_CLASS):
         self.menuItemDictDevices.triggered.connect(self.__on_triggered_menuItemDictDevices)
         self.menuItemDictEndoskop.triggered.connect(self.__on_triggered_menuItemDictEndos)
         self.menuItemDictHospital.triggered.connect(self.__on_triggered_menuItemDictHospitals)
+        self.menuItemDictPathology.triggered.connect(self.__on_triggered_menuItemDictPathologys)
 
         self.pushButtonDictRefresh.clicked.connect(self.__on_clicked_pushButtonDictRefresh)
         self.pushButtonDictCreate.clicked.connect(self.__on_clicked_pushButtonDictCreate)
@@ -158,6 +160,19 @@ class MainWindow(QMainWindow, FORM_CLASS):
         self.__current_widget_dict = list_hospitals_widget
 
         self.layoutContaner.addWidget(list_hospitals_widget)
+
+    def __on_triggered_menuItemDictPathologys(self):
+        """ Обработчик выбора пункта меню 'Справочник Патологий' """
+
+        print(": MainWindow.__on_triggered_menuItemDictPathologys")
+
+        if self.__current_widget_dict:
+            self.__current_widget_dict.hide()
+
+        list_pathologys_widget = PathologysListWidget(parent=self)
+        self.__current_widget_dict = list_pathologys_widget
+
+        self.layoutContaner.addWidget(list_pathologys_widget)
 
     def __on_pushBtn_clicked(self):
         print(": MainWindow.__on_puchBtn_clicked()")
