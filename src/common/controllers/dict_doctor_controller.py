@@ -1,14 +1,12 @@
 from ..Exceptions.business_exception import BusinеssException
 from ...dict.doctors.model.doctor_model import DoctorModel
-from ..data.xml_data_provider import XmlDataProvider
 from ..data.xml_doctors import XmlDoctors
 
 
 class ControllerDictDoctor:
     """ Контроллерю Справочник докторов """
 
-    __data_provider: XmlDataProvider = None  # Провайдер данных XML
-    __xml_doctors: XmlDoctors = None  # Xml структур для Врачей
+    __xml_doctors: XmlDoctors = None            # Xml структур для Врачей
 
     def __init__(self):
         """ Конструктор
@@ -17,7 +15,6 @@ class ControllerDictDoctor:
 
         print(": ControllerDictDoctor.__init__()")
 
-        self.__data_provider = XmlDataProvider()
         self.__xml_doctors = XmlDoctors()
 
     def select_doctors(self):
@@ -123,7 +120,6 @@ class ControllerDictDoctor:
 
                     result = self.__xml_doctors.delete_doctor(code)
                     print("result=", result)
-                    # if self.__xml_doctors.delete_doctor(code):
                     if result:
                         print("Врач удален!")
                         return True

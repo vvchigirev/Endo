@@ -8,5 +8,5 @@ class SectionOrgans(BaseSections):
     def __init__(self):
         """ Конструктор """
 
-        self.group_name = Keys.ORGANS
-        self.element_name = Keys.ORGAN
+        super(SectionOrgans, self).__init__(Keys.ORGANS, Keys.ORGAN)
+

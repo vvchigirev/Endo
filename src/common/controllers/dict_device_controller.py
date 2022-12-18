@@ -1,24 +1,19 @@
 from ..Exceptions.business_exception import BusinеssException
 from ...dict.device.model.device_model import DeviceModel
-from ..data.xml_data_provider import XmlDataProvider
 from ..data.xml_devices import XmlDevices
 
 
 class ControllerDictDevice:
     """ Контроллер Справочник приборов """
 
-    __data_provider: XmlDataProvider = None  # Провайдер данных XML
     __xml_devices: XmlDevices = None  # Xml структур для Приборов
 
-    def __init__(self, xml_provider: XmlDataProvider = None):
-        """ Конструктор
-        :param xml_provider: Xml провайдер
-        """
+    def __init__(self):
+        """ Конструктор """
 
         print(": ControllerDictDevice.__init__()")
 
-        self.__data_provider = xml_provider
-        self.__xml_devices = XmlDevices(self.__data_provider)
+        self.__xml_devices = XmlDevices()
 
     def select_devices(self):
         """Получение списка приборов
@@ -55,7 +50,7 @@ class ControllerDictDevice:
             print(message, e)
             raise BusinеssException(message)
 
-    def creat_device(self, device: DeviceModel):
+    def create_device(self, device: DeviceModel):
         """ Добавление сущности Прибор
         :param device: Модель - Прибор
         :return: Результат выполнения
@@ -102,7 +97,7 @@ class ControllerDictDevice:
             print(message, e)
             raise BusinеssException(message)
 
-    def delet_device(self, code):
+    def delete_device(self, code):
         """ Удаление сущности Прибор
         :param code: Код прибора
         :return: Результат выполнения

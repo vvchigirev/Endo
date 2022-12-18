@@ -20,10 +20,9 @@ class OrgansListWidget(BaseDictModelListWidget, FORM_CLASS):
     """ Виджет. Список органов """
 
     __table_model = None            # Модель таблицы
-    __xml_provider = None
     __controller_organs = None     # Контроллер справочника докторов
 
-    def __init__(self, xml_provider: XmlDataProvider, parent=None):
+    def __init__(self, parent=None):
         """ Конструктор
         :param xml_provider: Провайдер данных xml
         :param parent: Родитель
@@ -33,35 +32,32 @@ class OrgansListWidget(BaseDictModelListWidget, FORM_CLASS):
 
         super(OrgansListWidget, self).__init__(parent)
 
-        self.__xml_provider = xml_provider
-        self.__controller_organs = ControllerDictOrgan(self.__xml_provider)
+        self.__init_table()
 
-        try:
-            print("xxx")
+        self.__controller_organs = ControllerDictOrgan()
+        self.refresh()
 
-            # # super(OrgansListWidget, self).__init__()
-            # # self.setupUi(self)
-            # print("- 1")
-            # self.__table_model = QStandardItemModel()
-            #
-            # self.__table_model.setHorizontalHeaderLabels(['Код', 'Наименование'])
-            #
-            # print("- 2")
-            #
-            # self.table.setModel(self.__table_model)
-            # # self.table.verticalHeader().hide()
-            # print("- 3")
-            # self.table.resizeColumnsToContents()
-            # self.table.resizeRowsToContents()
-            # self.table.setSortingEnabled(True)
-            # self.table.sortByColumn(
-            #     0, QtCore.Qt.AscendingOrder
-            #     # 0, QtCore.Qt.DescendingOrder
-            # )
-            #
-            # self.refresh()
-        except Exception as e:
-            print("e=", e)
+    def __init_table(self):
+        """ Инициализация таблицы данных """
+
+        print(": OrgansListWidget.__init_table()")
+
+        self.__table_model = QStandardItemModel()
+
+        self.__table_model.setHorizontalHeaderLabels(['Код', 'Наименование'])
+        self.table.setModel(self.__table_model)
+
+        # self.table.setModel(self.__table_model)
+        # # self.table.verticalHeader().hide()
+        # print("- 3")
+        # self.table.resizeColumnsToContents()
+        # self.table.resizeRowsToContents()
+        # self.table.setSortingEnabled(True)
+        # self.table.sortByColumn(
+        #     0, QtCore.Qt.AscendingOrder
+        #     # 0, QtCore.Qt.DescendingOrder
+        # )
+        #
 
     # def set_data(self, list_organs):
     #     """Установка списка моделе органов"""
@@ -89,7 +85,6 @@ class OrgansListWidget(BaseDictModelListWidget, FORM_CLASS):
     def refresh(self):
         """Обновление списка органов"""
 
-
         print(": OrgansListWidget.refresh()")
 
         list_organs = self.__controller_organs.select_organs()
@@ -97,12 +92,17 @@ class OrgansListWidget(BaseDictModelListWidget, FORM_CLASS):
         print("list_organs=", list_organs)
 
         for row, organ in enumerate(list_organs):
+            print("organ=", organ)
+
             item_code = QStandardItem(str(organ.code))
+            print("item_code=", item_code)
             item_name = QStandardItem(organ.name)
+            print("item_name=", item_name)
 
             self.__table_model.setItem(row, 0, item_code)
             self.__table_model.setItem(row, 1, item_name)
 
+            print("self.__table_model=", self.__table_model)
         # self.__table_model.resizeColumnsToContents()
 
         self.table.resizeColumnsToContents()
@@ -115,6 +115,8 @@ class OrgansListWidget(BaseDictModelListWidget, FORM_CLASS):
 
         edit_organ_widget = OrganEditWidget(parent=self, organ=None)
 
+        print("edit_organ_widget=", edit_organ_widget)
+
         edit_dlg = ModelEditDialog(edit_organ_widget)
         edit_dlg.show()
         result = edit_dlg.exec_()
@@ -123,7 +125,7 @@ class OrgansListWidget(BaseDictModelListWidget, FORM_CLASS):
             organ = edit_dlg.get_model()
             print("organ=", organ)
 
-            if self.__controller_organ.create_organ(organ=organ):
+            if self.__controller_organs.create_organ(organ=organ):
                 self.refresh()
 
     def update_element(self):

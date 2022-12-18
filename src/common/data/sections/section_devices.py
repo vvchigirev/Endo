@@ -8,5 +8,4 @@ class SectionDevices(BaseSections):
     def __init__(self):
         """ Конструктор """
 
-        self.group_name = Keys.DEVICES
-        self.element_name = Keys.DEVICE
+        super(SectionDevices, self).__init__(Keys.DEVICES, Keys.DEVICE)
