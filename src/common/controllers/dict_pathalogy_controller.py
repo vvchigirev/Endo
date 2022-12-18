@@ -1,39 +1,39 @@
-from ..Exceptions.bsiness_exception import BusinеssException
-from ...dict.pathalogy.model.pathalogy_model import PathalogyModel
-from ..data.xml_pathalogys import XmlPathalogys
+from ..Exceptions.business_exception import BusinеssException
+from ...dict.pathology.model.pathology_model import PathologyModel
+from ..data.xml_pathologys import XmlPathologys
 
 
-class ControllerDictPathalogy:
+class ControllerDictPathology:
     """ Контроллер Справочник патологий """
 
-    __xml_pathalogys: XmlPathalogys = None  # Xml структур для Патологий
+    __xml_pathologys: XmlPathologys = None  # Xml структур для Патологий
 
     def __init__(self):
         """ Конструктор """
 
-        print(": ControllerDictPathalogy.__init__()")
+        print(": ControllerDictPathology.__init__()")
 
-        self.__xml_pathalogys = XmlPathalogys()
+        self.__xml_pathologys = XmlPathologys()
 
-    def select_pathalogys(self):
+    def select_pathologys(self):
         """Получение списка патологий
         :return список патологий
         """
 
-        print(": ControllerDictPathalogys.select_pathalogys()")
+        print(": ControllerDictPathologys.select_pathologys()")
 
-        pathalogys = []
+        pathologys = []
 
         try:
-            return self.__xml_pathalogys.select_pathalogys()
+            return self.__xml_pathologys.select_pathologys()
         except Exception as e:
             message = "Ошибка получения списка патологий!"
             print(message, e)
             raise BusinеssException(message)
 
-        return pathalogys
+        return pathologys
 
-    def get_pathalogy(self, code):
+    def get_pathology(self, code):
         """ Получение Патологии по коду
         :param code: Код патологии
         :return: Модель. Патология
@@ -41,8 +41,8 @@ class ControllerDictPathalogy:
 
         try:
             if code != "" or code is not None:
-                pathalogy = self.__xml_pathalogys.get_pathalogy(code)
-                return pathalogy
+                pathology = self.__xml_pathologys.get_pathology(code)
+                return pathology
 
             return None
         except Exception as e:
@@ -50,22 +50,22 @@ class ControllerDictPathalogy:
             print(message, e)
             raise BusinеssException(message)
 
-    def create_pathalogy(self, pathalogy: PathalogyModel):
+    def create_pathology(self, pathology: PathologyModel):
         """ Добавление сущности Патология
-        :param pathalogy: Модель - Патология
+        :param pathology: Модель - Патология
         :return: Результат выполнения
         """
 
-        print(": ControllerDictPathalogy.create_pathalogy()")
+        print(": ControllerDictPathology.create_pathology()")
 
-        print(f"Добавления патологии f{pathalogy}")
+        print(f"Добавления патологии f{pathology}")
 
         try:
-            if self.__xml_pathalogys.get_pathalogy(pathalogy.code):
-                print(f"Патология с кодом f{pathalogy.code} уже существует")
+            if self.__xml_pathologys.get_pathology(pathology.code):
+                print(f"Патология с кодом f{pathology.code} уже существует")
                 return False
 
-            if not self.__xml_pathalogys.creat_pathalogy(pathalogy):
+            if not self.__xml_pathologys.creat_pathology(pathology):
                 print("Патология не добавлен")
                 return False
 
@@ -75,19 +75,19 @@ class ControllerDictPathalogy:
             print(message, e)
             raise BusinеssException(message)
 
-    def update_pathalogy(self, pathalogy: PathalogyModel):
+    def update_pathology(self, pathology: PathologyModel):
         """ Обновление сущности Патология
-        :param pathalogy: Модель - Патология
+        :param pathology: Модель - Патология
         :return: Результат выполнения
         """
 
-        print(": ControllerDictPathalogy.update_pathalogy()")
+        print(": ControllerDictPathology.update_pathology()")
         try:
-            if not self.get_pathalogy(pathalogy.code):
-                print(f"Патологии с кодом f{pathalogy.code} не существует")
+            if not self.get_pathology(pathology.code):
+                print(f"Патологии с кодом f{pathology.code} не существует")
                 return False
 
-            if not self.__xml_pathalogys.update_pathalogy(pathalogy):
+            if not self.__xml_pathologys.update_pathology(pathology):
                 print("патология не изменен")
                 return False
 
@@ -97,7 +97,7 @@ class ControllerDictPathalogy:
             print(message, e)
             raise BusinеssException(message)
 
-    def delete_pathalogy(self, code):
+    def delete_pathology(self, code):
         """ Удаление сущности Патология
         :param code: Код патологии
         :return: Результат выполнения
@@ -105,12 +105,12 @@ class ControllerDictPathalogy:
         print(": ControllerDictDoctor.delete_doctor()")
 
         try:
-            pathalogy = self.get_pathalogy(code)
-            if not pathalogy:
-                print(f"Патологии с кодом f{pathalogy} не найдено")
+            pathology = self.get_pathology(code)
+            if not pathology:
+                print(f"Патологии с кодом f{pathology} не найдено")
 
             try:
-                if pathalogy and self.__xml_pathalogys.delete_pathalogy(code):
+                if pathology and self.__xml_pathologys.delete_pathology(code):
                     return True
                 return False
 

@@ -1,8 +1,8 @@
 from ....common.base_classes.models.base_dict_model import *
 
 
-class PathalogyModel(BaseDictModel):
-    """ Модель. Паталогия"""
+class PathologyModel(BaseDictModel):
+    """ Модель. Патjлогия"""
 
     def __init__(self, code, name: str = ""):
         """ Конструктор
@@ -26,6 +26,6 @@ class PathalogyModel(BaseDictModel):
         :return:
         """
 
-        s = f'["PathalogyModel"] ({self.code}) {self.name}'
+        s = f'["PathologyModel"] ({self.code}) {self.name}'
 
         return s
