@@ -8,6 +8,7 @@ from ...dict.doctors.views.doctors_list_widget import DoctorsListWidget
 from ...dict.endos.views.endos_list_widget import EndosListWidget
 from ...dict.organs.views.organ_list_widget import OrgansListWidget
 from ...dict.device.views.devices_list_widget import DevicesListWidget
+from ...dict.hospital.views.hospital_list_widget import HospitalsListWidget
 
 from ...dict.organs.model.organ_model import OrganModel
 from ...dict.device.model.device_model import DeviceModel
@@ -61,6 +62,7 @@ class MainWindow(QMainWindow, FORM_CLASS):
         self.menuItemDictOrgans.triggered.connect(self.__on_triggered_menuItemDictOrgans)
         self.menuItemDictDevices.triggered.connect(self.__on_triggered_menuItemDictDevices)
         self.menuItemDictEndoskop.triggered.connect(self.__on_triggered_menuItemDictEndos)
+        self.menuItemDictHospital.triggered.connect(self.__on_triggered_menuItemDictHospitals)
 
         self.pushButtonDictRefresh.clicked.connect(self.__on_clicked_pushButtonDictRefresh)
         self.pushButtonDictCreate.clicked.connect(self.__on_clicked_pushButtonDictCreate)
@@ -80,20 +82,6 @@ class MainWindow(QMainWindow, FORM_CLASS):
         menubar = self.menuBar()
         menu_file = menubar.addMenu('Файл')
         menu_file.addAction(exit_action)
-
-        # load_action = QAction('Загрузить', self)
-        # load_action.setStatusTip("Загрузить данные")
-        # load_action.triggered.connect(self.__on_click_menu_item_data_load)
-
-        # save_action = QAction('Сохранить', self)
-        # save_action.setStatusTip("Сохранить данные")
-        # save_action.triggered.connect(self.__on_click_menu_item_data_save)
-
-        # menu_operation = menubar.addMenu("Операции")
-        # menu_operation.addAction(load_action)
-        # menu_operation.addAction(save_action)
-
-        # menu_dict = menubar.addMenu('Справочники')
 
         self.toolbar = self.addToolBar('Exit')
         self.toolbar.addAction(exit_action)
@@ -157,6 +145,19 @@ class MainWindow(QMainWindow, FORM_CLASS):
         self.__current_widget_dict = list_devices_widget
 
         self.layoutContaner.addWidget(list_devices_widget)
+
+    def __on_triggered_menuItemDictHospitals(self):
+        """ Обработчик выбора пункта меню 'Справочник Больниц' """
+
+        print(": MainWindow.__on_triggered_menuItemDictDevices")
+
+        if self.__current_widget_dict:
+            self.__current_widget_dict.hide()
+
+        list_hospitals_widget = HospitalsListWidget(parent=self)
+        self.__current_widget_dict = list_hospitals_widget
+
+        self.layoutContaner.addWidget(list_hospitals_widget)
 
     def __on_pushBtn_clicked(self):
         print(": MainWindow.__on_puchBtn_clicked()")

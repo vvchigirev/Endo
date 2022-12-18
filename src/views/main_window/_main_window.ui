@@ -191,6 +191,7 @@
     <addaction name="menuItemDictOrgans"/>
     <addaction name="menuItemDictDevices"/>
     <addaction name="menuItemDictEndoskop"/>
+    <addaction name="menuItemDictHospital"/>
     <addaction name="separator"/>
     <addaction name="actionaaa"/>
    </widget>
@@ -247,6 +248,11 @@
   <action name="menuItemDictDevices">
    <property name="text">
     <string>Приборы</string>
+   </property>
+  </action>
+  <action name="menuItemDictHospital">
+   <property name="text">
+    <string>ЛПУ</string>
    </property>
   </action>
  </widget>
