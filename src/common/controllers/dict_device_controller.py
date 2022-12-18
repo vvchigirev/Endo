@@ -50,7 +50,7 @@ class ControllerDictDevice:
             print(message, e)
             raise BusinеssException(message)
 
-    def creat_device(self, device: DeviceModel):
+    def create_device(self, device: DeviceModel):
         """ Добавление сущности Прибор
         :param device: Модель - Прибор
         :return: Результат выполнения
@@ -97,7 +97,7 @@ class ControllerDictDevice:
             print(message, e)
             raise BusinеssException(message)
 
-    def delet_device(self, code):
+    def delete_device(self, code):
         """ Удаление сущности Прибор
         :param code: Код прибора
         :return: Результат выполнения

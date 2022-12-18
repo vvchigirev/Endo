@@ -1,7 +1,7 @@
 import xml.etree.ElementTree as ET
 
 from ..base_classes.base_sections import BaseSections
-from .sections.section_organs import SectionOrgans
+from .sections.section_devices import SectionDevices
 from .xml_data_provider import XmlDataProvider
 from ...dict.device.model.device_model import DeviceModel
 
@@ -14,7 +14,7 @@ class XmlDevices(BaseSections):
 
         self.__xml_provider: XmlDataProvider = XmlDataProvider()
 
-        self.__section = SectionOrgans()
+        self.__section = SectionDevices()
 
     def get_device_model_from_xml_element(self, xml_element):
         """ Генерация модели Прибора из xml элемента
@@ -38,7 +38,7 @@ class XmlDevices(BaseSections):
         :return: Модель Прибор
         """
 
-        print(": device.get_device()")
+        print(": XmlDevices.get_device()")
 
         print("self.__xml_provider.root=", self.__xml_provider.root)
         if not self.__xml_provider.root:
