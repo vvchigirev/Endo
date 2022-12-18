@@ -8,5 +8,5 @@ class SectionHospitals(BaseSections):
     def __init__(self):
         """ Конструктор """
 
-        self.group_name = Keys.HOSPITALS
-        self.element_name = Keys.HOSPITAL
+        super(SectionHospitals, self).__init__(Keys.HOSPITALS, Keys.HOSPITAL)
+

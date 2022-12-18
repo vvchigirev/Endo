@@ -1,7 +1,7 @@
 import xml.etree.ElementTree as ET
 
 from ..base_classes.base_sections import BaseSections
-from ...common.consts.Keys import Keys
+from .sections.section_hospaitals import SectionHospitals
 from .xml_data_provider import XmlDataProvider
 from ...dict.hospital.model.hospital_model import HospitalModel
 
@@ -9,15 +9,12 @@ from ...dict.hospital.model.hospital_model import HospitalModel
 class XmlHospitals(BaseSections):
     """ Xml Сруктура для сущностей Больниц """
 
-    def __init__(self, xml_provider: XmlDataProvider = None):
-        """ Конструктор
-        :param xml_provider: Xml провайдер
-        """
+    def __init__(self):
+        """ Конструктор """
 
-        self.__xml_provider: XmlDataProvider = xml_provider
+        self.__xml_provider: XmlDataProvider = XmlDataProvider()
 
-        self.group_name = Keys.HOSPITALS
-        self.element_name = Keys.HOSPITAL
+        self.__section = SectionHospitals()
 
     def get_hospital_model_from_xml_element(self, xml_element):
         """ Генерация модели Больницы из xml элемента
@@ -35,26 +32,30 @@ class XmlHospitals(BaseSections):
         return HospitalModel(code, name)
 
     def get_hospital(self, code):
-        """ Получение больницы по коду
-        :param xml_element: xml элеммент группы больниц
-        :param code: Код больницы
+        """ Получение прибора по коду
+        :param xml_element: xml элемент группы приборов
+        :param code: Код прибора
         :return: Модель Больница
         """
-        print(": hospital.get_hospital()")
 
+        print(": XmlHospitals.get_hospital()")
+
+        print("self.__xml_provider.root=", self.__xml_provider.root)
         if not self.__xml_provider.root:
             return None
 
-        xml_group = self.__xml_provider.root.find(self.group_name)
+        xml_group = self.__xml_provider.root.find(self.__section.group_name)
 
-        str_search = self.element_name + "[code='" + str(code) + "']"
+        print("xml_group=", xml_group)
+
+        str_search = self.__section.element_name + "[code='" + str(code) + "']"
         element = xml_group.find(str_search)
 
         if element:
             hospital = self.get_hospital_model_from_xml_element(element)
             return hospital
         else:
-            str_search = self.element_name + "[@code='" + str(code) + "']"
+            str_search = self.__section.element_name + "[@code='" + str(code) + "']"
             element = xml_group.find(str_search)
             if element is not None:
                 hospital = self.get_hospital_model_from_xml_element(element)
@@ -63,22 +64,26 @@ class XmlHospitals(BaseSections):
 
     def update_hospital(self, hospital: HospitalModel):
         """ Обновление xml элемента для Больницы
-        :param xml_element: xml элеммент группы больниц
+        :param xml_element: xml элеммент группы приборов
         :param hospital: Модель Больница
         :return: xml
         """
+        print(": XmlHospitals.update_hospital()")
+
         if not self.__xml_provider.root:
             return False
 
-        xml_group = self.__xml_provider.root.find(self.group_name)
+        xml_group = self.__xml_provider.root.find(self.__section.group_name)
 
-        str_search = self.element_name + "[code='" + str(hospital.code) + "']"
+        str_search = self.__section.element_name + "[code='" + str(hospital.code) + "']"
         xml_hospital = xml_group.find(str_search)
+
+        print("xml_hospitals=", xml_hospital)
 
         if xml_hospital:
             name = xml_hospital.find("name")
             name.text = hospital.name
-
+            return True
     def select_hospitals(self):
         """ Получение списка Больниц
         :return: Список моделей Больниц
@@ -91,11 +96,11 @@ class XmlHospitals(BaseSections):
 
         hospitals = []
 
-        xml_group = self.__xml_provider.root.find(self.group_name)
+        xml_group = self.__xml_provider.root.find(self.__section.group_name)
 
         if xml_group:
             print("xml_group=", xml_group)
-            for xml_hospitals in xml_group.findall(self.element_name):
+            for xml_hospitals in xml_group.findall(self.__section.element_name):
                 hospital: HospitalModel = self.get_hospital_model_from_xml_element(xml_hospitals)
 
                 hospitals.append(hospital)
@@ -127,11 +132,11 @@ class XmlHospitals(BaseSections):
         if not self.__xml_provider.root:
             return False
 
-        xml_group = self.__xml_provider.root.find(self.group_name)
+        xml_group = self.__xml_provider.root.find(self.__section.group_name)
 
         print("xml_group=", xml_group)
 
-        xml_hospital = ET.SubElement(xml_group, self.element_name)
+        xml_hospital = ET.SubElement(xml_group, self.__section.element_name)
 
         print("xml_hospital=", xml_hospital)
 
@@ -142,8 +147,8 @@ class XmlHospitals(BaseSections):
 
     def delete_hospital(self, code):
         """ Удаление xml элемента по коду
-        :param xml_element: xml элеммент группы больниц
-        :param code: Код больницы
+        :param xml_element: xml элеммент группы приборов
+        :param code: Код прибора
         :return: Результат выполнения
         """
         print(": hospital.delete")
@@ -151,10 +156,9 @@ class XmlHospitals(BaseSections):
         if not self.__xml_provider.root:
             return False
 
-        xml_group = self.__xml_provider.root.find(self.group_name)
+        xml_group = self.__xml_provider.root.find(self.__section.group_name)
 
-        str_search = self.element_name + "[code='" + str(code) + "']"
-
+        str_search = self.__section.element_name + "[code='" + str(code) + "']"
         element = xml_group.find(str_search)
 
         if element:
