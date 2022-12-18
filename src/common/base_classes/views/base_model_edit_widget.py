@@ -1,10 +1,11 @@
 from PyQt5.QtWidgets import QWidget
+from ..models.base_dict_model import BaseDictModel
 
 
 class BaseModelEditWidget(QWidget):
     """ Базовый виджет для редактирования моделей """
 
-    __parent = None     # Родительский элемент
+    __parent = None  # Родительский элемент
 
     def __init__(self, parent):
         """ Конструктор
@@ -39,4 +40,3 @@ class BaseModelEditWidget(QWidget):
     def get_value_fields(self):
         """ Получение """
         pass
-
