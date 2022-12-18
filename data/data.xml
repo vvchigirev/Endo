@@ -53,5 +53,5 @@
         <Device>
             <code>1</code><name>Скальпель</name>
         </Device>
-        </Devices>
-</Endo>
+        <Device><code>2</code><name>молток</name></Device></Devices>
+<Endos /></Endo>
