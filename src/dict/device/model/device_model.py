@@ -13,10 +13,17 @@ class DeviceModel(BaseDictModel):
         super().__init__(code, name=name)
 
     # region Свойства
-    
-    @property
-    def code(self):
-        """ Свойство. Код прибора """
-        return self.id
-    
+    #
+    # @property
+    # def code(self):
+    #     """ Свойство. Код прибора """
+    #     return self.id
+
     # endregion
+    def __str__(self):
+        """Строковое представление модели приборов"""
+
+        s = f'["DevicesModel"] ({self.code}) {self.name}'
+
+        return s
+

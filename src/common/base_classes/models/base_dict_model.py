@@ -31,5 +31,10 @@ class BaseDictModel(BaseModel):
 
         self.__name = value
 
+    @property
+    def code(self):
+        """ Свойство. Код """
+        return self.id
+
     def __str__(self):
-        return f"({self.id}) {self.__name}"
+        return f"[BaseDictModel] ({self.id}) {self.__name}"
