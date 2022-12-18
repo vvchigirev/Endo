@@ -1,24 +1,19 @@
 from ..Exceptions.business_exception import BusinеssException
 from ...dict.hospital.model.hospital_model import HospitalModel
-from ..data.xml_data_provider import XmlDataProvider
 from ..data.xml_hospitals import XmlHospitals
 
 
 class ControllerDictHospital:
     """ Контроллер Справочник больниц """
 
-    __data_provider: XmlDataProvider = None  # Провайдер данных XML
-    __xml_hospitals: XmlHospitals = None  # Xml структур для Больниц
+    __xml_hospitals: XmlHospitals = None  # Xml структур для Приборов
 
-    def __init__(self, xml_provider: XmlDataProvider = None):
-        """ Конструктор
-        :param xml_provider: Xml провайдер
-        """
+    def __init__(self):
+        """ Конструктор """
 
         print(": ControllerDictHospital.__init__()")
 
-        self.__data_provider = xml_provider
-        self.__xml_hospitals = XmlHospitals(self.__data_provider)
+        self.__xml_hospitals = XmlHospitals()
 
     def select_hospitals(self):
         """Получение списка больниц
@@ -32,16 +27,16 @@ class ControllerDictHospital:
         try:
             return self.__xml_hospitals.select_hospitals()
         except Exception as e:
-            message = "Ошибка получения списка врачей!"
+            message = "Ошибка получения списка больниц!"
             print(message, e)
             raise BusinеssException(message)
 
         return hospitals
 
     def get_hospital(self, code):
-        """ Получение Больницы по коду
+        """ Получение Прибора по коду
         :param code: Код больницы
-        :return: Модель. Больница
+        :return: Модель. Прибор
         """
 
         try:
@@ -55,9 +50,9 @@ class ControllerDictHospital:
             print(message, e)
             raise BusinеssException(message)
 
-    def creat_hospital(self, hospital: HospitalModel):
-        """ Добавление сущности Больница
-        :param hospital: Модель - Больница
+    def create_hospital(self, hospital: HospitalModel):
+        """ Добавление сущности Прибор
+        :param hospital: Модель - Прибор
         :return: Результат выполнения
         """
 
@@ -67,7 +62,7 @@ class ControllerDictHospital:
 
         try:
             if self.__xml_hospitals.get_hospital(hospital.code):
-                print(f"Больница с кодом f{hospital.code} уже существует")
+                print(f"Прибор с кодом f{hospital.code} уже существует")
                 return False
 
             if not self.__xml_hospitals.creat_hospital(hospital):
@@ -81,19 +76,19 @@ class ControllerDictHospital:
             raise BusinеssException(message)
 
     def update_hospital(self, hospital: HospitalModel):
-        """ Обновление сущности Больница
-        :param hospital: Модель - Больница
+        """ Обновление сущности Прибор
+        :param hospital: Модель - Прибор
         :return: Результат выполнения
         """
 
         print(": ControllerDictHospital.update_hospital()")
         try:
             if not self.get_hospital(hospital.code):
-                print(f"Больницы с кодом f{hospital.code} не существует")
+                print(f"Прибора с кодом f{hospital.code} не существует")
                 return False
 
             if not self.__xml_hospitals.update_hospital(hospital):
-                print("доктор не изменен")
+                print("больница не изменена")
                 return False
 
             return True
@@ -102,8 +97,8 @@ class ControllerDictHospital:
             print(message, e)
             raise BusinеssException(message)
 
-    def delet_hospital(self, code):
-        """ Удаление сущности Больница
+    def delete_hospital(self, code):
+        """ Удаление сущности Прибор
         :param code: Код больницы
         :return: Результат выполнения
         """
@@ -111,9 +106,8 @@ class ControllerDictHospital:
 
         try:
             hospital = self.get_hospital(code)
-            print("hospital", hospital)
             if not hospital:
-                print(f"Больницы с кодом {hospital} не найдено")
+                print(f"Прибора с кодом f{hospital} не найдено")
 
             try:
                 if hospital and self.__xml_hospitals.delete_hospital(code):
