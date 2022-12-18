@@ -40,9 +40,9 @@
         <Doctor>
             <code>125</code><last_name>3</last_name><first_name>3</first_name><middle_name>3</middle_name>
         </Doctor>
-    <Doctor>
-        <code>150</code>
-        <last_name>Сергеев1</last_name><first_name>Сергей1</first_name><middle_name>Сергееч1</middle_name>
+        <Doctor>
+            <code>150</code>
+            <last_name>Сергеев1</last_name><first_name>Сергей1</first_name><middle_name>Сергееч1</middle_name>
     </Doctor>
     </Doctors>
     <Organs>
@@ -53,5 +53,8 @@
         <Device>
             <code>1</code><name>Скальпель</name>
         </Device>
-        <Device><code>2</code><name>молток</name></Device></Devices>
-<Endos /></Endo>
+        <Device>
+            <code>2</code><name>молток</name></Device><Device><code>3</code><name>пила</name>
+        </Device>
+    </Devices>
+<Endos /><Hospitals><Hospital><code>1</code><name>ДГБ</name></Hospital><Hospital><code>2</code><name>КГБ</name></Hospital></Hospitals></Endo>
