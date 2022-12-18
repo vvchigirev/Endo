@@ -3,9 +3,9 @@ from ...consts.Keys import Keys
 
 
 class SectionPathologys(BaseSections):
-    """ Наименовая блоков элементов для справочника Приборов """
+    """ Наименовая блоков элементов для справочника Паталогий """
 
     def __init__(self):
         """ Конструктор """
 
-        super(SectionPathologys, self).__init__(Keys.DEVICES, Keys.DEVICE)
+        super(SectionPathologys, self).__init__(Keys.PATHOLOGYS, Keys.PATHOLOGY)

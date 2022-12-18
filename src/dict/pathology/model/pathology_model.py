@@ -2,7 +2,7 @@ from ....common.base_classes.models.base_dict_model import *
 
 
 class PathologyModel(BaseDictModel):
-    """ Модель. Патjлогия"""
+    """ Модель. Патология"""
 
     def __init__(self, code, name: str = ""):
         """ Конструктор

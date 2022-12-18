@@ -6,18 +6,18 @@ from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from ....common.base_classes.views.base_model_list_widget import BaseDictModelListWidget
 
 from ....common.views.model_edit.dict_model_edit_codename_widget import DictModelEditCodeNameWidget
-from ....common.controllers.dict_device_controller import ControllerDictDevice
+from ....common.controllers.dict_pathology_controller import ControllerDictPathology
 from ....common.views.model_edit.model_edit_dialog import ModelEditDialog
 from ....common.views.model_edit.dict_model_edit_codename_widget import DictModelEditCodeNameWidget
 
-FORM_CLASS, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'devices_list_widget.ui'))
+FORM_CLASS, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'pathologys_list_widget.ui'))
 
 
-class DevicesListWidget(BaseDictModelListWidget, FORM_CLASS):
-    """ Виджет. Список приборов """
+class PathologysListWidget(BaseDictModelListWidget, FORM_CLASS):
+    """ Виджет. Список патологий """
 
     __table_model = None  # Модель таблицы
-    __controller_devices = None  # Контроллер справочника докторов
+    __controller_pathologys = None  # Контроллер справочника докторов
 
     def __init__(self, parent=None):
         """ Конструктор
@@ -25,19 +25,19 @@ class DevicesListWidget(BaseDictModelListWidget, FORM_CLASS):
         :param parent: Родитель
         """
 
-        print(": DevicesListWidget.__init__()")
+        print(": PathologysListWidget.__init__()")
 
-        super(DevicesListWidget, self).__init__(parent)
+        super(PathologysListWidget, self).__init__(parent)
 
         self.__init_table()
 
-        self.__controller_devices = ControllerDictDevice()
+        self.__controller_pathologys = ControllerDictPathology()
         self.refresh()
 
     def __init_table(self):
         """ Инициализация таблицы данных """
 
-        print(": DevicesListWidget.__init_table()")
+        print(": PathologysListWidget.__init_table()")
 
         self.__table_model = QStandardItemModel()
 
@@ -45,24 +45,24 @@ class DevicesListWidget(BaseDictModelListWidget, FORM_CLASS):
         self.table.setModel(self.__table_model)
 
     def refresh(self):
-        """Обновление списка приборов"""
+        """Обновление списка патологий"""
 
-        print(": DevicesListWidget.refresh()")
+        print(": PathologysListWidget.refresh()")
 
         self.__table_model.clear()
         self.__table_model.setHorizontalHeaderLabels(['Код', 'Наименование'])
 
 
-        list_devices = self.__controller_devices.select_devices()
+        list_pathologys = self.__controller_pathologys.select_pathologys()
 
-        print("list_devices=", list_devices)
+        print("list_pathologys=", list_pathologys)
 
-        for row, device in enumerate(list_devices):
-            print("device=", device)
+        for row, pathology in enumerate(list_pathologys):
+            print("pathology=", pathology)
 
-            item_code = QStandardItem(str(device.code))
+            item_code = QStandardItem(str(pathology.code))
             print("item_code=", str(item_code))
-            item_name = QStandardItem(device.name)
+            item_name = QStandardItem(pathology.name)
             print("item_name=", item_name)
 
             self.__table_model.setItem(row, 0, item_code)
@@ -75,61 +75,61 @@ class DevicesListWidget(BaseDictModelListWidget, FORM_CLASS):
         self.table.resizeRowsToContents()
 
     def create_element(self):
-        """ Добавление прибора """
+        """ Добавление патологии """
 
-        print(": DevicesListWidget.create_element()")
+        print(": PathologysListWidget.create_element()")
         try:
-            edit_device_widget = DictModelEditCodeNameWidget(parent=self, model=None)
+            edit_pathology_widget = DictModelEditCodeNameWidget(parent=self, model=None)
 
-            print("edit_device_widget=", edit_device_widget)
+            print("edit_pathology_widget=", edit_pathology_widget)
 
-            edit_dlg = ModelEditDialog(edit_device_widget)
+            edit_dlg = ModelEditDialog(edit_pathology_widget)
             edit_dlg.show()
             result = edit_dlg.exec_()
 
             if result:
-                device = edit_dlg.get_model()
-                print("device=", device)
+                pathology = edit_dlg.get_model()
+                print("pathology=", pathology)
 
-                if self.__controller_devices.create_device(device=device):
+                if self.__controller_pathologys.create_pathology(pathology=pathology):
                     self.refresh()
         except Exception as e:
             print("e=", e)
 
     def update_element(self):
-        """ Обновление прибора """
+        """ Обновление патологии """
 
-        print(": DevicesListWidget.update_element()")
+        print(": PathologysListWidget.update_element()")
 
-        # device = DeviceModel(222, "2", "2", "2")
+        # pathology = PathologyModel(222, "2", "2", "2")
         curr_index = self.table.currentIndex()
         row = curr_index.row()
         col = curr_index.column()
 
         code = self.table.model().index(row, 0).data()
 
-        device = self.__controller_devices.get_device(code)
+        pathology = self.__controller_pathologys.get_pathology(code)
 
-        if not device:
+        if not pathology:
             return
 
-        edit_device_widget = DictModelEditCodeNameWidget(parent=self, model=device)
+        edit_pathology_widget = DictModelEditCodeNameWidget(parent=self, model=pathology)
 
-        edit_dlg = ModelEditDialog(edit_device_widget)
+        edit_dlg = ModelEditDialog(edit_pathology_widget)
         edit_dlg.show()
         result = edit_dlg.exec_()
 
         if result:
-            device = edit_dlg.get_model()
-            print("device=", device)
+            pathology = edit_dlg.get_model()
+            print("pathology=", pathology)
 
-            if self.__controller_devices.update_device(device=device):
+            if self.__controller_pathologys.update_pathology(pathology=pathology):
                 self.refresh()
 
     def delete_element(self):
-        """ Удаление прибора """
+        """ Удаление патологии """
 
-        print(": DevicesListWidget.delete_element()")
+        print(": PathologysListWidget.delete_element()")
 
         try:
             curr_index = self.table.currentIndex()
@@ -139,7 +139,7 @@ class DevicesListWidget(BaseDictModelListWidget, FORM_CLASS):
 
             code = self.table.model().index(row, 0).data()
 
-            if self.__controller_devices.delete_device(code):
+            if self.__controller_pathologys.delete_pathology(code):
                 self.refresh()
         except Exception as e:
             print("e=", e)
