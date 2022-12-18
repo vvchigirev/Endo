@@ -5,7 +5,7 @@ from PyQt5.QtGui import QStandardItemModel, QStandardItem
 
 from ....common.base_classes.views.base_model_list_widget import BaseDictModelListWidget
 
-from ....common.base_classes.views.base_dict_model_list_widget import BaseDictModelListWidget
+from ....common.views.model_edit.dict_model_edit_codename_widget import DictModelEditCodeNameWidget
 from ....common.controllers.dict_device_controller import ControllerDictDevice
 from ....common.views.model_edit.model_edit_dialog import ModelEditDialog
 from ....common.views.model_edit.dict_model_edit_codename_widget import DictModelEditCodeNameWidget

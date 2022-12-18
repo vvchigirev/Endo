@@ -42,8 +42,10 @@ class DictModelEditCodeNameWidget(BaseModelEditWidget, FORM_CLASS):
 
         print(": DictModelEditCodeNameWidget.__prepare_ui()")
 
+
         self.lineEditName.setFocus(True)
         self.__set_fields()
+
 
 
     def get_model(self):
