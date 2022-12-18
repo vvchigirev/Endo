@@ -13,3 +13,5 @@ class Keys:
     ENDO = "Endo"
     HOSPITAL = "Hospital"
     HOSPITALS = "Hospitals"
+    PATHOLOGY = "Pathology"
+    PATHOLOGYS = "Pathologys"
