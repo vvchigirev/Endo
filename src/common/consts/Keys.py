@@ -11,3 +11,5 @@ class Keys:
     ORGAN = "Organ"
     ENDOS = "Endos"
     ENDO = "Endo"
+    HOSPITAL = "Hospital"
+    HOSPITALS = "Hospitals"

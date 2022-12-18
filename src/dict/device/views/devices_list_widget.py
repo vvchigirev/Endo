@@ -3,7 +3,7 @@ import os
 from PyQt5 import uic, QtCore
 from PyQt5.QtWidgets import QWidget
 
-from ....common.base_classes.views.base_dict_model_list_widget import BaseDictModelListWidget
+from ....common.base_classes.views.base_model_list_widget import BaseDictModelListWidget
 
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'devices_list_widget.ui'))

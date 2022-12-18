@@ -8,7 +8,7 @@ class ControllerDictHospital:
     """ Контроллер Справочник больниц """
 
     __data_provider: XmlDataProvider = None  # Провайдер данных XML
-    __xml_hospitals: XmlHospitals = None  # Xml структур для Органов
+    __xml_hospitals: XmlHospitals = None  # Xml структур для Больниц
 
     def __init__(self, xml_provider: XmlDataProvider = None):
         """ Конструктор
@@ -39,9 +39,9 @@ class ControllerDictHospital:
         return hospitals
 
     def get_hospital(self, code):
-        """ Получение Органа по коду
+        """ Получение Больницы по коду
         :param code: Код больницы
-        :return: Модель. Орган
+        :return: Модель. Больница
         """
 
         try:
@@ -56,8 +56,8 @@ class ControllerDictHospital:
             raise BusinеssException(message)
 
     def creat_hospital(self, hospital: HospitalModel):
-        """ Добавление сущности Орган
-        :param hospital: Модель - Орган
+        """ Добавление сущности Больница
+        :param hospital: Модель - Больница
         :return: Результат выполнения
         """
 
@@ -67,11 +67,11 @@ class ControllerDictHospital:
 
         try:
             if self.__xml_hospitals.get_hospital(hospital.code):
-                print(f"Орган с кодом f{hospital.code} уже существует")
+                print(f"Больница с кодом f{hospital.code} уже существует")
                 return False
 
             if not self.__xml_hospitals.creat_hospital(hospital):
-                print("Орган не добавлен")
+                print("Больница не добавлена")
                 return False
 
             return True
@@ -81,15 +81,15 @@ class ControllerDictHospital:
             raise BusinеssException(message)
 
     def update_hospital(self, hospital: HospitalModel):
-        """ Обновление сущности Орган
-        :param hospital: Модель - Орган
+        """ Обновление сущности Больница
+        :param hospital: Модель - Больница
         :return: Результат выполнения
         """
 
         print(": ControllerDictHospital.update_hospital()")
         try:
             if not self.get_hospital(hospital.code):
-                print(f"Органа с кодом f{hospital.code} не существует")
+                print(f"Больницы с кодом f{hospital.code} не существует")
                 return False
 
             if not self.__xml_hospitals.update_hospital(hospital):
@@ -103,7 +103,7 @@ class ControllerDictHospital:
             raise BusinеssException(message)
 
     def delet_hospital(self, code):
-        """ Удаление сущности Орган
+        """ Удаление сущности Больница
         :param code: Код больницы
         :return: Результат выполнения
         """
@@ -113,7 +113,7 @@ class ControllerDictHospital:
             hospital = self.get_hospital(code)
             print("hospital", hospital)
             if not hospital:
-                print(f"Органа с кодом {hospital} не найдено")
+                print(f"Больницы с кодом {hospital} не найдено")
 
             try:
                 if hospital and self.__xml_hospitals.delete_hospital(code):

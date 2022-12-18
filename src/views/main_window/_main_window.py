@@ -12,7 +12,7 @@ from ...dict.organs.model.organ_model import OrganModel
 from ...dict.device.model.device_model import DeviceModel
 from ...dict.doctors.model.doctor_model import DoctorModel
 
-from ...common.base_classes.views.base_dict_model_list_widget import BaseDictModelListWidget
+from ...common.base_classes.views.base_model_list_widget import BaseDictModelListWidget
 
 from ...common.controllers.dict_doctor_controller import ControllerDictDoctor
 from ...common.controllers.dict_organ_controller import ControllerDictOrgan
