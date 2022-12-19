@@ -193,6 +193,8 @@
     <addaction name="menuItemDictEndoskop"/>
     <addaction name="menuItemDictHospital"/>
     <addaction name="menuItemDictPathology"/>
+    <addaction name="menuItemDictCompany"/>
+    <addaction name="menuItemDictComplication"/>
     <addaction name="separator"/>
     <addaction name="actionaaa"/>
    </widget>
@@ -259,6 +261,16 @@
   <action name="menuItemDictPathology">
    <property name="text">
     <string>Патологии</string>
+   </property>
+  </action>
+  <action name="menuItemDictCompany">
+   <property name="text">
+    <string>Страховые компании</string>
+   </property>
+  </action>
+  <action name="menuItemDictComplication">
+   <property name="text">
+    <string>Осложнения</string>
    </property>
   </action>
  </widget>
