@@ -78,4 +78,4 @@
             <name>Деформация</name>
         </Pathology>
     </Pathologys>
-</Endo>
+<Insurance_companys><Insurance_company><code>1</code><name>крутая компания</name></Insurance_company><Insurance_company><code>2</code><name>очень крутая компания</name></Insurance_company></Insurance_companys></Endo>

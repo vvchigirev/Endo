@@ -10,6 +10,7 @@ from ...dict.organs.views.organ_list_widget import OrgansListWidget
 from ...dict.device.views.devices_list_widget import DevicesListWidget
 from ...dict.hospital.views.hospital_list_widget import HospitalsListWidget
 from ...dict.pathology.views.pathologys_list_widget import PathologysListWidget
+from ...dict.insuranсe_company.views.company_list_widget import CompanysListWidget
 
 from ...dict.organs.model.organ_model import OrganModel
 from ...dict.device.model.device_model import DeviceModel
@@ -65,6 +66,7 @@ class MainWindow(QMainWindow, FORM_CLASS):
         self.menuItemDictEndoskop.triggered.connect(self.__on_triggered_menuItemDictEndos)
         self.menuItemDictHospital.triggered.connect(self.__on_triggered_menuItemDictHospitals)
         self.menuItemDictPathology.triggered.connect(self.__on_triggered_menuItemDictPathologys)
+        self.menuItemDictCompany.triggered.connect(self.__on_triggered_menuItemDictCompanys)
 
         self.pushButtonDictRefresh.clicked.connect(self.__on_clicked_pushButtonDictRefresh)
         self.pushButtonDictCreate.clicked.connect(self.__on_clicked_pushButtonDictCreate)
@@ -173,6 +175,19 @@ class MainWindow(QMainWindow, FORM_CLASS):
         self.__current_widget_dict = list_pathologys_widget
 
         self.layoutContaner.addWidget(list_pathologys_widget)
+
+    def __on_triggered_menuItemDictCompanys(self):
+        """ Обработчик выбора пункта меню 'Справочник Страховых компаний' """
+
+        print(": MainWindow.__on_triggered_menuItemDictCompanys")
+
+        if self.__current_widget_dict:
+            self.__current_widget_dict.hide()
+
+        list_companys_widget = CompanysListWidget(parent=self)
+        self.__current_widget_dict = list_companys_widget
+
+        self.layoutContaner.addWidget(list_companys_widget)
 
     def __on_pushBtn_clicked(self):
         print(": MainWindow.__on_puchBtn_clicked()")

@@ -10,7 +10,7 @@ from ....common.controllers.dict_company_controller import ControllerDictCompany
 from ....common.views.model_edit.model_edit_dialog import ModelEditDialog
 from ....common.views.model_edit.dict_model_edit_codename_widget import DictModelEditCodeNameWidget
 
-FORM_CLASS, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'companys_list_widget.ui'))
+FORM_CLASS, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'company_list_widget.ui'))
 
 
 class CompanysListWidget(BaseDictModelListWidget, FORM_CLASS):
