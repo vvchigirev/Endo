@@ -1,7 +1,7 @@
 from ....common.base_classes.models.base_dict_model import BaseDictModel
 from typing import Any
 
-class DoctorModel(BaseDictModel):
+class EndoModel(BaseDictModel):
     """ Модель. Доктор"""
 
     def __init__(self, code, name: str = "", YET: Any = None):
