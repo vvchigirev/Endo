@@ -15,3 +15,5 @@ class Keys:
     HOSPITALS = "Hospitals"
     PATHOLOGY = "Pathology"
     PATHOLOGYS = "Pathologys"
+    COMP = "Insurance_company"
+    COMPS = "Insurance_companys"
