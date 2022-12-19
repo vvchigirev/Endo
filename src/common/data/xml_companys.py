@@ -3,7 +3,7 @@ import xml.etree.ElementTree as ET
 from ..base_classes.base_sections import BaseSections
 from .sections.section_companys import SectionCompanys
 from .xml_data_provider import XmlDataProvider
-from ...dict.company.model.company_model import CompanyModel
+from ...dict.insuranсe_company.model.company_model import CompanyModel
 
 
 class XmlCompanys(BaseSections):
