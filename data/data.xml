@@ -57,7 +57,6 @@
             <code>2</code><name>молток</name></Device><Device><code>3</code><name>пила</name>
         </Device>
     </Devices>
-<Endos />
     <Hospitals>
         <Hospital>
             <code>1</code>
@@ -78,4 +77,12 @@
             <name>Деформация</name>
         </Pathology>
     </Pathologys>
-<Insurance_companys><Insurance_company><code>1</code><name>крутая компания</name></Insurance_company><Insurance_company><code>2</code><name>очень крутая компания</name></Insurance_company></Insurance_companys></Endo>
+    <Insurance_companys>
+        <Insurance_company>
+            <code>1</code><name>крутая компания</name>
+        </Insurance_company>
+        <Insurance_company>
+            <code>2</code><name>очень крутая компания</name>
+        </Insurance_company>
+    </Insurance_companys>
+<Endos><Endo><code>1</code><name>ЭГДС</name><uet>3.0</uet></Endo><Endo><code>2</code><name>РРС</name><uet>4.0</uet></Endo></Endos></Endo>

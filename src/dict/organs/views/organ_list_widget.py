@@ -163,25 +163,6 @@ class OrgansListWidget(BaseDictModelListWidget, FORM_CLASS):
 
         print(": OrgansListWidget.delete_element()")
 
-        # try:
-        #     print("self.table=", self.table)
-        #     print("self.table.selectedIndexes()=", self.table.selectedIndexes())
-        #     # print("self.table.currentItem()= ", self.table.currentItem())
-        #     index = self.table.selectedIndexes()["code"]
-        #     print("index=", str(index))
-        #     code = self.table.model().data(index)
-        #
-        #     print("code=", str(code))
-        #
-        #     print("self.table.currentIndex()=", self.table.currentIndex())
-        #
-        #
-        #
-        #     # row = self.table.currentItem().row()
-        #     # print("row=", row)
-        # except Exception as e:
-        #     print("e=", e)
-
         curr_index = self.table.currentIndex()
 
         row = curr_index.row()

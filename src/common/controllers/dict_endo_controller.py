@@ -112,21 +112,13 @@ class ControllerDictEndo:
             endo = self.get_endo(code)
             if not endo:
                 print(f"эндоскопия с кодом {code} не найден!")
-                return False
 
             try:
-                if endo:
+                if endo and self.__xml_endos.delete_endo(code):
                     print(f"Удалим эндоскопий с кодом: {code}")
-
-                    result = self.__xml_endos.delete_endo(code)
-                    print("result=", result)
-                    if result:
-                        print("эндоскопия удален!")
-                        return True
-                    else:
-                        print("эндоскопия не удален!")
-
+                    return True
                 return False
+
             except Exception as e:
                 message = "Ошибка удаления эндоскопий"
                 print(message + ": ", e)

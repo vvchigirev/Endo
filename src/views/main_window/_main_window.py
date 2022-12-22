@@ -1,4 +1,5 @@
 import os
+import sys
 
 from PyQt5 import uic
 from PyQt5.QtWidgets import QMainWindow, QAction, qApp, QMessageBox
@@ -59,6 +60,7 @@ class MainWindow(QMainWindow, FORM_CLASS):
 
         self.__create_menu()
         self.statusBar().showMessage('Ready')
+        # sys.setrecursionlimit(limit)
 
         self.menuItemDictDoctors.triggered.connect(self.__on_triggered_menuItemDictDoctors)
         self.menuItemDictOrgans.triggered.connect(self.__on_triggered_menuItemDictOrgans)
@@ -134,7 +136,6 @@ class MainWindow(QMainWindow, FORM_CLASS):
 
         self.__current_widget_dict = list_endos_widget
 
-        # self.layoutContaner_2.addWidget(list_endos_widget)
         self.layoutContaner.addWidget(list_endos_widget)
 
     def __on_triggered_menuItemDictDevices(self):

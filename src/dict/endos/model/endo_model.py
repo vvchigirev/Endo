@@ -1,34 +1,34 @@
 from ....common.base_classes.models.base_dict_model import BaseDictModel
 from typing import Any
 
+
 class EndoModel(BaseDictModel):
     """ Модель. Доктор"""
 
-    def __init__(self, code, name: str = "", YET: Any = None):
+    def __init__(self, code, name: str = "", uet: float = 0.0):
         """ Конструктор
         :param code: Код
         :param name: Наименование
-        :param YET: УЕТ
+        :param uet: УЕТ
         """
 
-        super().__init__(code, name=name)
-
-        self.YET = YET
+        super().__init__(code=code, name=name)
+        self.__uet = uet
 
     # region Свойства
 
-    @property
-    def code(self):
-        """ Свойство. Код врача """
-        return self.id
+    # @property
+    # def code(self):
+    #     """ Свойство. Код врача """
+    #     return self.id
 
     @property
-    def YET(self):
-        return self.YET
+    def uet(self):
+        return self.__uet
 
-    @YET.setter
-    def YET(self, value):
-        self.YET =value
+    @uet.setter
+    def uet(self, value):
+        self.__uet = value
 
     # endregion
 
@@ -36,6 +36,6 @@ class EndoModel(BaseDictModel):
         """ Строковое представление модели эндоскопии
         :return:
         """
-        s = f'["EndoModel"] ({self.code}) {self.name} {self.YET}'
+        s = f'["EndoModel"] ({self.code}) {self.name} {self.__uet}'
 
         return s

@@ -39,6 +39,8 @@ class XmlEndos(BaseSections):
         if xml_group:
             # print("xml_group=", xml_group)
             for xml_endo in xml_group.findall(self.__section.element_name):
+                print("xml_endo=", xml_endo)
+
                 endo: EndoModel = self.gen_endo_model_from_xml_element(xml_endo)
 
                 endos.append(endo)
@@ -51,18 +53,18 @@ class XmlEndos(BaseSections):
         :return: Модель Эндоскопия
         """
 
-        # print(": XmlEndos.gen_endo_model_from_xml_element()")
+        print(": XmlEndos.gen_endo_model_from_xml_element()")
 
-        if xml_element.attrib:
-            code = xml_element.get("code")
-            name = xml_element.get("name")
-            YET = xml_element.get("YET")
-        else:
-            code = xml_element.get("code").text
-            name = xml_element.get("name").text
-            YET = xml_element.get("YET").text
+        ET.dump(xml_element)
 
-        return EndoModel(code, name, YET)
+        code = xml_element.find("code").text
+        print("code=", code)
+        name = xml_element.find("name").text
+        print("name=", name)
+        uet = xml_element.find("uet").text
+        print("uet=", uet)
+
+        return EndoModel(code, name, uet)
 
     def get_endo(self, code):
         """ Получение эндоскопии по коду
@@ -92,7 +94,24 @@ class XmlEndos(BaseSections):
                 return endo
         return None
 
-    def create_endo(self, endo: EndoModel, is_attribs = False):
+    def get_endo_model_from_xml_element(self, xml_element):
+        """ Генерация модели Эндоскопии из xml элемента
+        :param xml_element: xml элемент
+        :return: Модель Эндоскопии
+        """
+
+        if xml_element.attrib:
+            code = xml_element.attrib.get("code")
+            name = xml_element.attrib.get("name")
+            uet = xml_element.attrib.get("uet")
+        else:
+            code = xml_element.find("code").text
+            name = xml_element.find("name").text
+            uet = xml_element.find("uet").text
+
+        return EndoModel(code, name, uet)
+
+    def create_endo(self, endo: EndoModel, is_attribs=False):
         """ Создание xml элемента для модели Эндоскопии
         :param endo: Модель Врвча
         :return: Результат выполнения
@@ -127,11 +146,10 @@ class XmlEndos(BaseSections):
         code.text = str(endo.code)
 
         name = ET.SubElement(xml_element, "name")
-        name.text = endo.name
+        name.text = str(endo.name)
 
-        YET = ET.SubElement(xml_element, "YET")
-        YET.text = endo.YET
-
+        uet = ET.SubElement(xml_element, "uet")
+        uet.text = str(endo.uet)
 
         # ET.dump(xml_element)
 
@@ -148,7 +166,7 @@ class XmlEndos(BaseSections):
 
         xml_element.set("code", str(endo.code))
         xml_element.set("name", endo.name)
-        xml_element.set("YET", endo.YET)
+        xml_element.set("uet", endo.uet)
 
         # ET.dump(xml_element)
 
@@ -171,16 +189,21 @@ class XmlEndos(BaseSections):
         str_search = self.__section.element_name + "[code='" + str(endo.code) + "']"
         xml_endo = xml_group.find(str_search)
 
-        if xml_endo:
-            name = xml_endo.find("name")
-            name.text = endo.name
+        try:
+            if xml_endo:
+                code = xml_endo.find("code")
+                code.text = endo.code
 
-            YET = xml_endo.find("YET")
-            YET.text = endo.YET
+                name = xml_endo.find("name")
+                name.text = endo.name
 
-            return True
+                uet = str(xml_endo.find("uet").text)
+                uet = endo.uet
 
-        return False
+                return True
+        except Exception as e:
+            print("e=", e)
+            return False
 
     def delete_endo(self, code):
         """ Удуление xml элемента по коду
@@ -196,16 +219,14 @@ class XmlEndos(BaseSections):
                 return False
 
             xml_group = self.__xml_provider.root.find(self.__section.group_name)
-            print("xml_group=", xml_group)
 
             str_search = self.__section.element_name + "[code='" + str(code) + "']"
-            print("str=", str_search)
             element = xml_group.find(str_search)
 
-            print("element=", element)
             if element:
                 xml_group.remove(element)
                 return True
+
         except Exception as e:
             print("e=", e)
 

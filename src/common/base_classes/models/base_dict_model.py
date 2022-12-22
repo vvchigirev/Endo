@@ -13,7 +13,7 @@ class BaseDictModel(BaseModel):
         :param name: Наименование
         """
 
-        super().__init__(code)
+        super(BaseDictModel, self).__init__(code)
 
         self.__name = name
 
@@ -21,6 +21,7 @@ class BaseDictModel(BaseModel):
     def name(self):
         """ Свойство. Наименование """
 
+        print("self.__name=", self.__name)
         return self.__name
 
     @name.setter
