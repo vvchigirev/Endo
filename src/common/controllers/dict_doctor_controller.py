@@ -4,7 +4,7 @@ from ..data.xml_doctors import XmlDoctors
 
 
 class ControllerDictDoctor:
-    """ Контроллерю Справочник докторов """
+    """ Контроллер Справочник докторов """
 
     __xml_doctors: XmlDoctors = None            # Xml структур для Врачей
 
