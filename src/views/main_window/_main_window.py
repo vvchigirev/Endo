@@ -5,6 +5,9 @@ from PyQt5 import uic
 from PyQt5.QtWidgets import QMainWindow, QAction, qApp, QMessageBox
 from PyQt5.QtGui import QIcon
 
+from ...common.base_classes.views.base_model_list_widget import BaseDictModelListWidget
+from ...common.data.xml_data_provider import XmlDataProvider
+from ...common.utils.message_box import MessageBox
 from ...dict.doctors.views.doctors_list_widget import DoctorsListWidget
 from ...dict.endos.views.endos_list_widget import EndosListWidget
 from ...dict.organs.views.organ_list_widget import OrgansListWidget
@@ -13,18 +16,6 @@ from ...dict.hospital.views.hospital_list_widget import HospitalsListWidget
 from ...dict.pathology.views.pathologys_list_widget import PathologysListWidget
 from ...dict.insuranсe_company.views.company_list_widget import CompanysListWidget
 from ...dict.med_manipulation.view.med_manipulation_list_widget import MedManipulationsListWidget
-
-from ...dict.organs.model.organ_model import OrganModel
-from ...dict.device.model.device_model import DeviceModel
-from ...dict.doctors.model.doctor_model import DoctorModel
-
-from ...common.base_classes.views.base_model_list_widget import BaseDictModelListWidget
-
-from ...common.controllers.dict_doctor_controller import ControllerDictDoctor
-from ...common.controllers.dict_organ_controller import ControllerDictOrgan
-from ...common.controllers.dict_device_controller import ControllerDictDevice
-
-from ...common.data.xml_data_provider import XmlDataProvider
 
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), '_main_window.ui'))
@@ -72,12 +63,14 @@ class MainWindow(QMainWindow, FORM_CLASS):
         self.menuItemDictCompany.triggered.connect(self.__on_triggered_menuItemDictCompanys)
         self.menuItemDictMedManipulation.triggered.connect(self.__on_triggered_menuItemDictMedManipulations)
 
+        self.pushButtonTest.clicked.connect(self.__on_clicked_pushButtonTest)
+
         self.pushButtonDictRefresh.clicked.connect(self.__on_clicked_pushButtonDictRefresh)
         self.pushButtonDictCreate.clicked.connect(self.__on_clicked_pushButtonDictCreate)
         self.pushButtonDictUpdate.clicked.connect(self.__on_clicked_pushButtonDictUpdate)
         self.pushButtonDictDelete.clicked.connect(self.__on_clicked_pushButtonDictDelete)
 
-        self.pushBtn.clicked.connect(self.__on_pushBtn_clicked)
+        self.pushBtn.clicked.connect(self.__on_clicked_pushBtn)
 
     def __create_menu(self):
         """ Создание меню """
@@ -205,9 +198,10 @@ class MainWindow(QMainWindow, FORM_CLASS):
 
         self.layoutContaner.addWidget(list_med_manipulations_widget)
 
-    def __on_pushBtn_clicked(self):
-        print(": MainWindow.__on_puchBtn_clicked()")
-        self.__xml_provider.write()
+    def __on_clicked_pushButtonTest(self):
+        """ Обработчик нажатия на кнопку 'Test' """
+
+        MessageBox.show_question("Привет")
 
     def __on_clicked_pushButtonDictRefresh(self):
         """ Обработчик события нажатия на кнопку 'Обновить' """
@@ -240,3 +234,8 @@ class MainWindow(QMainWindow, FORM_CLASS):
 
         if self.__current_widget_dict:
             self.__current_widget_dict.delete_element()
+
+    def __on_clicked_pushBtn(self):
+        print(": MainWindow.__on_clicked_pushBtn()")
+
+        self.__xml_provider.write()
