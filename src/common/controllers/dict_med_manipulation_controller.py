@@ -6,7 +6,7 @@ from ..data.xml_med_manipulations import XmlMedManipulations
 class ControllerDictMedManipulation:
     """ Контроллер Справочник лечебных манипуляций """
 
-    __xml_med_manipulations: XmlMedManipulations = None  # Xml структур для Лечебная манипуляцияов
+    __xml_med_manipulations: XmlMedManipulations = None  # Xml структур для Лечебная манипуляци
 
     def __init__(self):
         """ Конструктор """
