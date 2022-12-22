@@ -7,6 +7,7 @@ from .sections.section_endos import SectionEndos
 from .sections.section_hospaitals import SectionHospitals
 from .sections.section_pathologys import SectionPathologys
 from .sections.section_companys import SectionCompanys
+from .sections.section_med_manipulations import SectionMedManipulations
 
 
 FILE = ".\data\data.xml"
@@ -25,7 +26,8 @@ class XmlDataProvider:
         SectionEndos(),
         SectionHospitals(),
         SectionPathologys(),
-        SectionCompanys()
+        SectionCompanys(),
+        SectionMedManipulations()
     ]
 
     def __new__(cls):
