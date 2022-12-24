@@ -16,6 +16,7 @@ from ...dict.hospital.views.hospital_list_widget import HospitalsListWidget
 from ...dict.pathology.views.pathologys_list_widget import PathologysListWidget
 from ...dict.insuranсe_company.views.company_list_widget import CompanysListWidget
 from ...dict.med_manipulation.view.med_manipulation_list_widget import MedManipulationsListWidget
+from ...dict.biopsy.view.biopsys_list_widget import BiopsysListWidget
 
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), '_main_window.ui'))
@@ -62,6 +63,7 @@ class MainWindow(QMainWindow, FORM_CLASS):
         self.menuItemDictPathology.triggered.connect(self.__on_triggered_menuItemDictPathologys)
         self.menuItemDictCompany.triggered.connect(self.__on_triggered_menuItemDictCompanys)
         self.menuItemDictMedManipulation.triggered.connect(self.__on_triggered_menuItemDictMedManipulations)
+        self.menuItemDictBiopsy.triggered.connect(self.__on_triggered_menuItemDictBiopsys)
 
         self.pushButtonTest.clicked.connect(self.__on_clicked_pushButtonTest)
 

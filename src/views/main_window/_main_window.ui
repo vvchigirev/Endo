@@ -209,6 +209,7 @@
     <addaction name="menuItemDictCompany"/>
     <addaction name="menuItemDictComplication"/>
     <addaction name="menuItemDictMedManipulation"/>
+    <addaction name="menuItemDictBiopsy"/>
     <addaction name="separator"/>
     <addaction name="actionaaa"/>
    </widget>
@@ -290,6 +291,11 @@
   <action name="menuItemDictMedManipulation">
    <property name="text">
     <string>Лечебные Манипуляции</string>
+   </property>
+  </action>
+  <action name="menuItemDictBiopsy">
+   <property name="text">
+    <string>Результатов биопсии</string>
    </property>
   </action>
  </widget>
