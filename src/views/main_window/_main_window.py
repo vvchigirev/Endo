@@ -18,6 +18,7 @@ from ...dict.insuranсe_company.views.company_list_widget import CompanysListWid
 from ...dict.complication.views.complications_list_widget import ComplicationsListWidget
 from ...dict.med_manipulation.view.med_manipulation_list_widget import MedManipulationsListWidget
 from ...dict.biopsy.view.biopsys_list_widget import BiopsysListWidget
+from ...dict.reason.views.reasons_list_widget import ReasonsListWidget
 
 
 
@@ -66,6 +67,7 @@ class MainWindow(QMainWindow, FORM_CLASS):
         self.menuItemDictMedManipulation.triggered.connect(self.__on_triggered_menuItemDictMedManipulations)
         self.menuItemDictBiopsy.triggered.connect(self.__on_triggered_menuItemDictBiopsys)
         self.menuItemDictComplication.triggered.connect(self.__on_triggered_menuItemDictComplications)
+        self.menuItemDictReason.triggered.connect(self.__on_triggered_menuItemDictReasons)
 
 
         self.pushButtonTest.clicked.connect(self.__on_clicked_pushButtonTest)
@@ -229,6 +231,18 @@ class MainWindow(QMainWindow, FORM_CLASS):
 
         self.layoutContaner.addWidget(list_сomplications_widget)
 
+    def __on_triggered_menuItemDictReasons(self):
+        """ Обработчик выбора пункта меню 'Справочник причин обращения' """
+
+        print(": MainWindow.__on_triggered_menuItemDictReasons")
+
+        if self.__current_widget_dict:
+            self.__current_widget_dict.hide()
+
+        list_reasons_widget = ReasonsListWidget(parent=self)
+        self.__current_widget_dict = list_reasons_widget
+
+        self.layoutContaner.addWidget(list_reasons_widget)
     def __on_clicked_pushButtonTest(self):
         """ Обработчик нажатия на кнопку 'Test' """
 

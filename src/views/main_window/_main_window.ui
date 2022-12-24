@@ -210,6 +210,7 @@
     <addaction name="menuItemDictComplication"/>
     <addaction name="menuItemDictMedManipulation"/>
     <addaction name="menuItemDictBiopsy"/>
+    <addaction name="menuItemDictReason"/>
     <addaction name="separator"/>
     <addaction name="actionaaa"/>
    </widget>
@@ -301,6 +302,11 @@
   <action name="menuItemDictComplication_2">
    <property name="text">
     <string>Осложнения</string>
+   </property>
+  </action>
+  <action name="menuItemDictReason">
+   <property name="text">
+    <string>Причины обращения</string>
    </property>
   </action>
  </widget>

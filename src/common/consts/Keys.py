@@ -23,3 +23,5 @@ class Keys:
     BIOPSYS = "Biopsys"
     COMPLICATION = "Complication"
     COMPLICATIONS = "Complications"
+    REASON = "Reason"
+    REASONS = "Reasons"
