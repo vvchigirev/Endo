@@ -19,3 +19,5 @@ class Keys:
     COMPANYS = "Insurance_companys"
     MED_MANIPULATION = "Med_manipulation"
     MED_MANIPULATIONS = "Med_manipulations"
+    BIOPSY = "Biopsy"
+    BIOPSYS = "Biopsys"

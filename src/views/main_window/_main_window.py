@@ -13,6 +13,7 @@ from ...dict.hospital.views.hospital_list_widget import HospitalsListWidget
 from ...dict.pathology.views.pathologys_list_widget import PathologysListWidget
 from ...dict.insuranсe_company.views.company_list_widget import CompanysListWidget
 from ...dict.med_manipulation.view.med_manipulation_list_widget import MedManipulationsListWidget
+from ...dict.biopsy.view.biopsys_list_widget import BiopsysListWidget
 
 from ...dict.organs.model.organ_model import OrganModel
 from ...dict.device.model.device_model import DeviceModel
@@ -71,6 +72,7 @@ class MainWindow(QMainWindow, FORM_CLASS):
         self.menuItemDictPathology.triggered.connect(self.__on_triggered_menuItemDictPathologys)
         self.menuItemDictCompany.triggered.connect(self.__on_triggered_menuItemDictCompanys)
         self.menuItemDictMedManipulation.triggered.connect(self.__on_triggered_menuItemDictMedManipulations)
+        self.menuItemDictBiopsy.triggered.connect(self.__on_triggered_menuItemDictBiopsys)
 
         self.pushButtonDictRefresh.clicked.connect(self.__on_clicked_pushButtonDictRefresh)
         self.pushButtonDictCreate.clicked.connect(self.__on_clicked_pushButtonDictCreate)
@@ -204,6 +206,19 @@ class MainWindow(QMainWindow, FORM_CLASS):
         self.__current_widget_dict = list_med_manipulations_widget
 
         self.layoutContaner.addWidget(list_med_manipulations_widget)
+
+    def __on_triggered_menuItemDictBiopsys(self):
+        """ Обработчик выбора пункта меню 'Справочник Биопсий' """
+
+        print(": MainWindow.__on_triggered_menuItemDictBiopsys")
+
+        if self.__current_widget_dict:
+            self.__current_widget_dict.hide()
+
+        list_biopsy_widget = BiopsysListWidget(parent=self)
+        self.__current_widget_dict = list_biopsy_widget
+
+        self.layoutContaner.addWidget(list_biopsy_widget)
 
     def __on_pushBtn_clicked(self):
         print(": MainWindow.__on_puchBtn_clicked()")
