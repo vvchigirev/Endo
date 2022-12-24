@@ -21,3 +21,5 @@ class Keys:
     MED_MANIPULATIONS = "Med_manipulations"
     BIOPSY = "Biopsy"
     BIOPSYS = "Biopsys"
+    COMPLICATION = "Complication"
+    COMPLICATIONS = "Complications"

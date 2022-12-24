@@ -162,14 +162,14 @@
    <widget class="QPushButton" name="pushButtonTest">
     <property name="geometry">
      <rect>
-      <x>620</x>
-      <y>30</y>
+      <x>630</x>
+      <y>40</y>
       <width>75</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>Test</string>
+     <string>Тест</string>
     </property>
    </widget>
   </widget>
@@ -296,6 +296,11 @@
   <action name="menuItemDictBiopsy">
    <property name="text">
     <string>Результатов биопсии</string>
+   </property>
+  </action>
+  <action name="menuItemDictComplication_2">
+   <property name="text">
+    <string>Осложнения</string>
    </property>
   </action>
  </widget>

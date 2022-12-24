@@ -15,8 +15,10 @@ from ...dict.device.views.devices_list_widget import DevicesListWidget
 from ...dict.hospital.views.hospital_list_widget import HospitalsListWidget
 from ...dict.pathology.views.pathologys_list_widget import PathologysListWidget
 from ...dict.insuranсe_company.views.company_list_widget import CompanysListWidget
+from ...dict.complication.views.complications_list_widget import ComplicationsListWidget
 from ...dict.med_manipulation.view.med_manipulation_list_widget import MedManipulationsListWidget
 from ...dict.biopsy.view.biopsys_list_widget import BiopsysListWidget
+
 
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), '_main_window.ui'))
@@ -53,7 +55,6 @@ class MainWindow(QMainWindow, FORM_CLASS):
 
         self.__create_menu()
         self.statusBar().showMessage('Ready')
-        # sys.setrecursionlimit(limit)
 
         self.menuItemDictDoctors.triggered.connect(self.__on_triggered_menuItemDictDoctors)
         self.menuItemDictOrgans.triggered.connect(self.__on_triggered_menuItemDictOrgans)
@@ -64,6 +65,8 @@ class MainWindow(QMainWindow, FORM_CLASS):
         self.menuItemDictCompany.triggered.connect(self.__on_triggered_menuItemDictCompanys)
         self.menuItemDictMedManipulation.triggered.connect(self.__on_triggered_menuItemDictMedManipulations)
         self.menuItemDictBiopsy.triggered.connect(self.__on_triggered_menuItemDictBiopsys)
+        self.menuItemDictComplication.triggered.connect(self.__on_triggered_menuItemDictComplications)
+
 
         self.pushButtonTest.clicked.connect(self.__on_clicked_pushButtonTest)
 
@@ -199,6 +202,32 @@ class MainWindow(QMainWindow, FORM_CLASS):
         self.__current_widget_dict = list_med_manipulations_widget
 
         self.layoutContaner.addWidget(list_med_manipulations_widget)
+
+    def __on_triggered_menuItemDictBiopsys(self):
+        """ Обработчик выбора пункта меню 'Справочник Биопсий' """
+
+        print(": MainWindow.__on_triggered_menuItemDictBiopsys")
+
+        if self.__current_widget_dict:
+            self.__current_widget_dict.hide()
+
+        list_biopsys_widget = BiopsysListWidget(parent=self)
+        self.__current_widget_dict = list_biopsys_widget
+
+        self.layoutContaner.addWidget(list_biopsys_widget)
+
+    def __on_triggered_menuItemDictComplications(self):
+        """ Обработчик выбора пункта меню 'Справочник Осложнений' """
+
+        print(": MainWindow.__on_triggered_menuItemDictComplications")
+
+        if self.__current_widget_dict:
+            self.__current_widget_dict.hide()
+
+        list_сomplications_widget = ComplicationsListWidget(parent=self)
+        self.__current_widget_dict = list_сomplications_widget
+
+        self.layoutContaner.addWidget(list_сomplications_widget)
 
     def __on_clicked_pushButtonTest(self):
         """ Обработчик нажатия на кнопку 'Test' """
