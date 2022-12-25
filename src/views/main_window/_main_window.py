@@ -9,6 +9,7 @@ from ...common.base_classes.views.base_model_list_widget import BaseDictModelLis
 from ...common.data.xml_data_provider import XmlDataProvider
 from ...common.utils.message_box import MessageBox
 from ...dict.doctors.views.doctors_list_widget import DoctorsListWidget
+from ...dict.nurse.views.nurse_list_widget import NursesListWidget
 from ...dict.endos.views.endos_list_widget import EndosListWidget
 from ...dict.organs.views.organ_list_widget import OrgansListWidget
 from ...dict.device.views.devices_list_widget import DevicesListWidget
@@ -58,6 +59,7 @@ class MainWindow(QMainWindow, FORM_CLASS):
         self.statusBar().showMessage('Ready')
 
         self.menuItemDictDoctors.triggered.connect(self.__on_triggered_menuItemDictDoctors)
+        self.menuItemDictNurse.triggered.connect(self.__on_triggered_menuItemDictNurses)
         self.menuItemDictOrgans.triggered.connect(self.__on_triggered_menuItemDictOrgans)
         self.menuItemDictDevices.triggered.connect(self.__on_triggered_menuItemDictDevices)
         self.menuItemDictEndoskop.triggered.connect(self.__on_triggered_menuItemDictEndos)
@@ -111,6 +113,19 @@ class MainWindow(QMainWindow, FORM_CLASS):
         self.__current_widget_dict = list_doctors_widget
 
         self.layoutContaner.addWidget(list_doctors_widget)
+
+    def __on_triggered_menuItemDictNurses(self):
+        """ Обработчик нажатия на кнопку 'Справочник' """
+
+        print(": MainWindow.__on_triggered_menuItemDictDoctors")
+
+        if self.__current_widget_dict:
+            self.__current_widget_dict.hide()
+
+        list_nurses_widget = NursesListWidget (parent=self)
+        self.__current_widget_dict = list_nurses_widget
+
+        self.layoutContaner.addWidget(list_nurses_widget)
 
     def __on_triggered_menuItemDictOrgans(self):
         """ Обработчик выбора пункта меню 'Справочник Органов' """
