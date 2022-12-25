@@ -20,6 +20,7 @@ from ...dict.complication.views.complications_list_widget import ComplicationsLi
 from ...dict.med_manipulation.view.med_manipulation_list_widget import MedManipulationsListWidget
 from ...dict.biopsy.view.biopsys_list_widget import BiopsysListWidget
 from ...dict.reason.views.reasons_list_widget import ReasonsListWidget
+from ...dict.iendo.views.iendo_list_widget import IEndosListWidget
 
 
 
@@ -70,6 +71,7 @@ class MainWindow(QMainWindow, FORM_CLASS):
         self.menuItemDictBiopsy.triggered.connect(self.__on_triggered_menuItemDictBiopsys)
         self.menuItemDictComplication.triggered.connect(self.__on_triggered_menuItemDictComplications)
         self.menuItemDictReason.triggered.connect(self.__on_triggered_menuItemDictReasons)
+        self.menuItemDictIEndo.triggered.connect(self.__on_triggered_menuItemDictIEndos)
 
 
         self.pushButtonTest.clicked.connect(self.__on_clicked_pushButtonTest)
@@ -258,6 +260,19 @@ class MainWindow(QMainWindow, FORM_CLASS):
         self.__current_widget_dict = list_reasons_widget
 
         self.layoutContaner.addWidget(list_reasons_widget)
+
+    def __on_triggered_menuItemDictIEndos(self):
+        """ Обработчик выбора пункта меню 'Справочник неп. эндоскопий' """
+
+        print(": MainWindow.__on_triggered_menuItemDictEndos")
+
+        if self.__current_widget_dict:
+            self.__current_widget_dict.hide()
+
+        list_iendos_widget = IEndosListWidget(parent=self)
+        self.__current_widget_dict = list_iendos_widget
+
+        self.layoutContaner.addWidget(list_iendos_widget)
     def __on_clicked_pushButtonTest(self):
         """ Обработчик нажатия на кнопку 'Test' """
 

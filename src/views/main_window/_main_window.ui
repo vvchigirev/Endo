@@ -211,6 +211,7 @@
     <addaction name="menuItemDictMedManipulation"/>
     <addaction name="menuItemDictBiopsy"/>
     <addaction name="menuItemDictReason"/>
+    <addaction name="menuItemDictIEndo"/>
     <addaction name="separator"/>
     <addaction name="actionaaa"/>
    </widget>
@@ -307,6 +308,11 @@
   <action name="menuItemDictReason">
    <property name="text">
     <string>Причины обращения</string>
+   </property>
+  </action>
+  <action name="menuItemDictIEndo">
+   <property name="text">
+    <string>Неполные эндоскопии</string>
    </property>
   </action>
  </widget>

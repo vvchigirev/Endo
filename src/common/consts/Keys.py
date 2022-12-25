@@ -25,3 +25,5 @@ class Keys:
     COMPLICATIONS = "Complications"
     REASON = "Reason"
     REASONS = "Reasons"
+    IENDO = "IEndo"
+    IENDOS = "IEndos"
