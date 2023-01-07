@@ -14,3 +14,6 @@
     https://python-scripts.com/pyqt5
     Работа с Menu/ToolBarами
     https://dev-gang.ru/article/python-i-pyqt-sozdanie-menu-panelei-instrumentov-i-strok-sostojanija-l7ubf6mm7n/
+Работа с БД postrgeSQL:
+    https://pythonru.com/biblioteki/vvedenie-v-postgresql-s-python-psycopg2
+
