@@ -6,7 +6,7 @@ from ..data.xml_doctors import XmlDoctors
 class ControllerDictDoctor:
     """ Контроллер Справочник докторов """
 
-    __xml_doctors: XmlDoctors = None            # Xml структур для Врачей
+    __xml_doctors: XmlDoctors = None            # Xml структур для Мед сестер
 
     def __init__(self):
         """ Конструктор
@@ -19,7 +19,7 @@ class ControllerDictDoctor:
 
     def select_doctors(self):
         """ Получение списка вречей
-        :return: Список моделей врачей
+        :return: Список моделей мед сестер
         """
 
         print(": ControllerDictDoctor.select_doctors()")
@@ -29,15 +29,15 @@ class ControllerDictDoctor:
         try:
             return self.__xml_doctors.select_doctors()
         except Exception as e:
-            message = "Ошибка получения списка врачей!"
+            message = "Ошибка получения списка мед сестер!"
             print(message, e)
             raise BusinеssException(message, e)
 
         return doctors
 
     def get_doctor(self, code):
-        """ Получение Врача по коду
-        :param code: Код врача
+        """ Получение Мед сестры по коду
+        :param code: Код мед сестры
         :return: Модель. Врач
         """
 
@@ -49,7 +49,7 @@ class ControllerDictDoctor:
             return None
 
         except Exception as e:
-            message = "Ошибка получения врача"
+            message = "Ошибка получения мед сестры"
             print(message, e)
             raise BusinеssException(message)
 
@@ -61,7 +61,7 @@ class ControllerDictDoctor:
 
         print(": ControllerDictDoctor.create_doctor()")
 
-        print(f"Добавление врача: f{doctor}")
+        print(f"Добавление мед сестры: f{doctor}")
 
         try:
             if self.__xml_doctors.get_doctor(doctor.code):
@@ -74,7 +74,7 @@ class ControllerDictDoctor:
 
             return True
         except Exception as e:
-            message = "Ошибка добавления врача"
+            message = "Ошибка добавления мед сестры"
             print(message + ": ", e)
             raise BusinеssException(message)
 
@@ -97,13 +97,13 @@ class ControllerDictDoctor:
 
             return True
         except Exception as e:
-            message = "Ошибка изменения врача"
+            message = "Ошибка изменения мед сестры"
             print(message, e)
             raise BusinеssException(message)
 
     def delete_doctor(self, code):
         """ Удаление сущности Врач
-        :param code: Код Врача
+        :param code: Код Мед сестры
         :return: Результат выполнения
         """
         print(": ControllerDictDoctor.delete_doctor()")
@@ -116,7 +116,7 @@ class ControllerDictDoctor:
 
             try:
                 if doctor:
-                    print(f"Удалим врача с кодом: {code}")
+                    print(f"Удалим мед сестры с кодом: {code}")
 
                     result = self.__xml_doctors.delete_doctor(code)
                     print("result=", result)
@@ -128,12 +128,12 @@ class ControllerDictDoctor:
 
                 return False
             except Exception as e:
-                message = "Ошибка удаления врача"
+                message = "Ошибка удаления мед сестры"
                 print(message + ": ", e)
                 raise BusinеssException(message)
 
             return True
         except Exception as e:
-            message = "Ошибка удаления врача"
+            message = "Ошибка удаления мед сестры"
             print(message, e)
             raise BusinеssException(message, e)
