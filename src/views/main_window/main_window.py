@@ -8,6 +8,7 @@ from PyQt5.QtGui import QIcon
 from ...common.base_classes.views.base_model_list_widget import BaseDictModelListWidget
 from ...common.data.xml_data_provider import XmlDataProvider
 from ...common.utils.message_box import MessageBox
+from ...common.utils.config import Config
 from ...dict.doctors.views.doctors_list_widget import DoctorsListWidget
 from ...dict.endos.views.endos_list_widget import EndosListWidget
 from ...dict.organs.views.organ_list_widget import OrgansListWidget
@@ -18,7 +19,7 @@ from ...dict.insuranсe_company.views.company_list_widget import CompanysListWid
 from ...dict.med_manipulation.view.med_manipulation_list_widget import MedManipulationsListWidget
 
 
-FORM_CLASS, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), '_main_window.ui'))
+FORM_CLASS, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'main_window.ui'))
 
 
 class MainWindow(QMainWindow, FORM_CLASS):
@@ -200,6 +201,13 @@ class MainWindow(QMainWindow, FORM_CLASS):
 
     def __on_clicked_pushButtonTest(self):
         """ Обработчик нажатия на кнопку 'Test' """
+
+        config = Config().config
+
+        print("config=", config)
+        settings = config["SETTINGS"]
+        print("settings=", settings)
+        print("settings['DB_NAME']=", settings["DB_NAME"])
 
         MessageBox.show_question("Привет")
 
