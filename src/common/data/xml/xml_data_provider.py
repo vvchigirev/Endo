@@ -1,13 +1,13 @@
 import xml.etree.ElementTree as ET
 
-from .sections.section_doctors import SectionDoctors
-from .sections.section_organs import SectionOrgans
-from .sections.section_devices import SectionDevices
-from .sections.section_endos import SectionEndos
-from .sections.section_hospaitals import SectionHospitals
-from .sections.section_pathologys import SectionPathologys
-from .sections.section_companys import SectionCompanys
-from .sections.section_med_manipulations import SectionMedManipulations
+from src.common.data.xml.sections.section_doctors import SectionDoctors
+from src.common.data.xml.sections.section_organs import SectionOrgans
+from src.common.data.xml.sections.section_devices import SectionDevices
+from src.common.data.xml.sections.section_endos import SectionEndos
+from src.common.data.xml.sections.section_hospaitals import SectionHospitals
+from src.common.data.xml.sections.section_pathologys import SectionPathologys
+from src.common.data.xml.sections.section_companys import SectionCompanys
+from src.common.data.xml.sections.section_med_manipulations import SectionMedManipulations
 
 
 FILE = ".\data\data.xml"

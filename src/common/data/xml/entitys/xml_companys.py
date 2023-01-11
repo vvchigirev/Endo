@@ -1,9 +1,9 @@
 import xml.etree.ElementTree as ET
 
-from ..base_classes.base_sections import BaseSections
-from .sections.section_companys import SectionCompanys
-from .xml_data_provider import XmlDataProvider
-from ...dict.insuranсe_company.model.company_model import CompanyModel
+from src.common.base_classes.base_sections import BaseSections
+from src.common.data.xml.sections.section_companys import SectionCompanys
+from src.common.data.xml.xml_data_provider import XmlDataProvider
+from src.dict.insuranсe_company.model.company_model import CompanyModel
 
 
 class XmlCompanys(BaseSections):

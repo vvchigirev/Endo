@@ -1,9 +1,9 @@
 import xml.etree.ElementTree as ET
 
-from ..base_classes.base_sections import BaseSections
-from .sections.section_endos import SectionEndos
-from .xml_data_provider import XmlDataProvider
-from ...dict.endos.model.endo_model import EndoModel
+from src.common.base_classes.base_sections import BaseSections
+from src.common.data.xml.sections.section_endos import SectionEndos
+from src.common.data.xml.xml_data_provider import XmlDataProvider
+from src.dict.endos.model.endo_model import EndoModel
 
 
 class XmlEndos(BaseSections):

@@ -1,9 +1,9 @@
 import xml.etree.ElementTree as ET
 
-from ..base_classes.base_sections import BaseSections
-from .sections.section_doctors import SectionDoctors
-from .xml_data_provider import XmlDataProvider
-from ...dict.doctors.model.doctor_model import DoctorModel
+from ....base_classes.base_sections import BaseSections
+from ..sections.section_doctors import SectionDoctors
+from ..xml_data_provider import XmlDataProvider
+from .....dict.doctors.model.doctor_model import DoctorModel
 
 
 class XmlDoctors(BaseSections):
