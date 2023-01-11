@@ -1,6 +1,6 @@
 from ..Exceptions.business_exception import BusinеssException
 from ...dict.endos.model.endo_model import EndoModel
-from ..data.xml_endos import XmlEndos
+from src.common.data.xml.entitys.xml_endos import XmlEndos
 
 
 class ControllerDictEndo:

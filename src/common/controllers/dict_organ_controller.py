@@ -1,6 +1,6 @@
 from ..Exceptions.business_exception import BusinеssException
 from ...dict.organs.model.organ_model import OrganModel
-from ..data.xml_organs import XmlOrgans
+from src.common.data.xml.entitys.xml_organs import XmlOrgans
 
 
 class ControllerDictOrgan:

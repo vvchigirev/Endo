@@ -1,6 +1,6 @@
 from ..Exceptions.business_exception import BusinеssException
 from ...dict.insuranсe_company.model.company_model import CompanyModel
-from ..data.xml_companys import XmlCompanys
+from ...common.data.xml.entitys.xml_companys import XmlCompanys
 
 
 class ControllerDictCompany:

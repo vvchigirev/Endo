@@ -1,6 +1,6 @@
 from ..Exceptions.business_exception import BusinеssException
 from ...dict.med_manipulation.model.med_manipulation_model import MedManipulationModel
-from ..data.xml_med_manipulations import XmlMedManipulations
+from src.common.data.xml.entitys.xml_med_manipulations import XmlMedManipulations
 
 
 class ControllerDictMedManipulation:
