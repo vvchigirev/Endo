@@ -1,17 +1,12 @@
 import os
 
-from PyQt5 import uic, QtCore
-from PyQt5.QtWidgets import QWidget
+from PyQt5 import uic
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 
-from ....common.base_classes.views.base_model_edit_widget import BaseModelEditWidget
 from ....common.base_classes.views.base_model_list_widget import BaseDictModelListWidget
-from ....common.data.xml_data_provider import XmlDataProvider
 from ....common.controllers.dict_organ_controller import ControllerDictOrgan
 from ....common.views.model_edit.model_edit_dialog import ModelEditDialog
 from .organ_edit_widget import OrganEditWidget
-from ..model.organ_model import OrganModel
-
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'organ_list_widget.ui'))
 

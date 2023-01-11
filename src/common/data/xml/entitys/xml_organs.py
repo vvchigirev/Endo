@@ -1,9 +1,9 @@
 import xml.etree.ElementTree as ET
 
-from ..base_classes.base_sections import BaseSections
-from ...common.consts.Keys import Keys
-from .xml_data_provider import XmlDataProvider
-from ...dict.organs.model.organ_model import OrganModel
+from ....base_classes.base_sections import BaseSections
+from ..sections.section_organs import SectionOrgans
+from ..xml_data_provider import XmlDataProvider
+from .....dict.organs.model.organ_model import OrganModel
 
 
 class XmlOrgans(BaseSections):
@@ -14,8 +14,7 @@ class XmlOrgans(BaseSections):
 
         self.__xml_provider: XmlDataProvider = XmlDataProvider()
 
-        self.group_name = Keys.ORGANS
-        self.element_name = Keys.ORGAN
+        self.__section = SectionOrgans()
 
     def get_organ_model_from_xml_element(self, xml_element):
         """ Генерация модели Органа из xml элемента
@@ -43,16 +42,16 @@ class XmlOrgans(BaseSections):
         if not self.__xml_provider.root:
             return None
 
-        xml_group = self.__xml_provider.root.find(self.group_name)
+        xml_group = self.__xml_provider.root.find(self.__section.group_name)
 
-        str_search = self.element_name + "[code='" + str(code) + "']"
+        str_search = self.__section.element_name + "[code='" + str(code) + "']"
         element = xml_group.find(str_search)
 
         if element:
             organ = self.get_organ_model_from_xml_element(element)
             return organ
         else:
-            str_search = self.element_name + "[@code='" + str(code) + "']"
+            str_search = self.__section.element_name + "[@code='" + str(code) + "']"
             element = xml_group.find(str_search)
             if element is not None:
                 organ = self.get_organ_model_from_xml_element(element)
@@ -68,9 +67,9 @@ class XmlOrgans(BaseSections):
         if not self.__xml_provider.root:
             return False
 
-        xml_group = self.__xml_provider.root.find(self.group_name)
+        xml_group = self.__xml_provider.root.find(self.__section.group_name)
 
-        str_search = self.element_name + "[code='" + str(organ.code) + "']"
+        str_search = self.__section.element_name + "[code='" + str(organ.code) + "']"
         xml_organ = xml_group.find(str_search)
 
         if xml_organ:
@@ -89,11 +88,11 @@ class XmlOrgans(BaseSections):
 
         organs = []
 
-        xml_group = self.__xml_provider.root.find(self.group_name)
+        xml_group = self.__xml_provider.root.find(self.__section.group_name)
 
         if xml_group:
             print("xml_group=", xml_group)
-            for xml_organs in xml_group.findall(self.element_name):
+            for xml_organs in xml_group.findall(self.__section.element_name):
                 organ: OrganModel = self.get_organ_model_from_xml_element(xml_organs)
 
                 organs.append(organ)
@@ -125,11 +124,11 @@ class XmlOrgans(BaseSections):
         if not self.__xml_provider.root:
             return False
 
-        xml_group = self.__xml_provider.root.find(self.group_name)
+        xml_group = self.__xml_provider.root.find(self.__section.group_name)
 
         print("xml_group=", xml_group)
 
-        xml_organ = ET.SubElement(xml_group, self.element_name)
+        xml_organ = ET.SubElement(xml_group, self.__section.element_name)
 
         print("xml_organ=", xml_organ)
 
@@ -149,9 +148,9 @@ class XmlOrgans(BaseSections):
         if not self.__xml_provider.root:
             return False
 
-        xml_group = self.__xml_provider.root.find(self.group_name)
+        xml_group = self.__xml_provider.root.find(self.__section.group_name)
 
-        str_search = self.element_name + "[code='" + str(code) + "']"
+        str_search = self.__section.element_name + "[code='" + str(code) + "']"
 
         element = xml_group.find(str_search)
 

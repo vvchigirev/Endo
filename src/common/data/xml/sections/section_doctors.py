@@ -1,5 +1,5 @@
-from ...base_classes.base_sections import BaseSections
-from ...consts.Keys import Keys
+from .....common.base_classes.base_sections import BaseSections
+from .....common.consts.Keys import Keys
 
 
 class SectionDoctors(BaseSections):

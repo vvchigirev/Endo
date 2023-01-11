@@ -1,6 +1,6 @@
 from ..Exceptions.business_exception import BusinеssException
 from ...dict.device.model.device_model import DeviceModel
-from ..data.xml_devices import XmlDevices
+from src.common.data.xml.entitys.xml_devices import XmlDevices
 
 
 class ControllerDictDevice:

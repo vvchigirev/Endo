@@ -1,9 +1,9 @@
 import xml.etree.ElementTree as ET
 
-from ..base_classes.base_sections import BaseSections
-from .sections.section_pathologys import SectionPathologys
-from .xml_data_provider import XmlDataProvider
-from ...dict.pathology.model.pathology_model import PathologyModel
+from ....base_classes.base_sections import BaseSections
+from ..sections.section_pathologys import SectionPathologys
+from ..xml_data_provider import XmlDataProvider
+from .....dict.pathology.model.pathology_model import PathologyModel
 
 
 class XmlPathologys(BaseSections):

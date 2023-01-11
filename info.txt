@@ -16,4 +16,8 @@
     https://dev-gang.ru/article/python-i-pyqt-sozdanie-menu-panelei-instrumentov-i-strok-sostojanija-l7ubf6mm7n/
 Работа с БД postrgeSQL:
     https://pythonru.com/biblioteki/vvedenie-v-postgresql-s-python-psycopg2
+    https://khashtamov.com/ru/postgresql-python-psycopg2/
+    https://habr.com/ru/post/322086/
+Использование DB-API:
+    https://habr.com/ru/post/321510/
 

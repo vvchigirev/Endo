@@ -1,12 +1,11 @@
 import os
-import sys
 
 from PyQt5 import uic
-from PyQt5.QtWidgets import QMainWindow, QAction, qApp, QMessageBox
+from PyQt5.QtWidgets import QMainWindow, QAction, qApp
 from PyQt5.QtGui import QIcon
 
 from ...common.base_classes.views.base_model_list_widget import BaseDictModelListWidget
-from ...common.data.xml_data_provider import XmlDataProvider
+from ...common.data.xml.xml_data_provider import XmlDataProvider
 from ...common.utils.message_box import MessageBox
 from ...common.utils.config import Config
 from ...dict.doctors.views.doctors_list_widget import DoctorsListWidget

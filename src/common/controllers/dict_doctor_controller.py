@@ -1,6 +1,6 @@
 from ..Exceptions.business_exception import BusinеssException
 from ...dict.doctors.model.doctor_model import DoctorModel
-from ..data.xml_doctors import XmlDoctors
+from src.common.data.xml.entitys.xml_doctors import XmlDoctors
 
 
 class ControllerDictDoctor:

@@ -1,6 +1,6 @@
 from ..Exceptions.business_exception import BusinеssException
 from ...dict.pathology.model.pathology_model import PathologyModel
-from ..data.xml_pathologys import XmlPathologys
+from src.common.data.xml.entitys.xml_pathologys import XmlPathologys
 
 
 class ControllerDictPathology:
