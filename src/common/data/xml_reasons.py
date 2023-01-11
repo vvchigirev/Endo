@@ -2,7 +2,7 @@ import xml.etree.ElementTree as ET
 
 from ..base_classes.base_sections import BaseSections
 from .sections.section_reasons import SectionReasons
-from .xml_data_provider import XmlDataProvider
+from .xml.xml_data_provider import XmlDataProvider
 from ...dict.reason.model.reason_model import ReasonModel
 
 

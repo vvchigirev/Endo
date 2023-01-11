@@ -2,7 +2,7 @@ import xml.etree.ElementTree as ET
 
 from ..base_classes.base_sections import BaseSections
 from .sections.section_iendo import SectionIEndos
-from .xml_data_provider import XmlDataProvider
+from .xml.xml_data_provider import XmlDataProvider
 from ...dict.iendo.model.iendo_model import IEndoModel
 
 
