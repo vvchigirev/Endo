@@ -3,14 +3,10 @@ import os
 from PyQt5 import uic, QtCore
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 
-from ....common.base_classes.views.base_model_edit_widget import BaseModelEditWidget
 from ....common.base_classes.views.base_model_list_widget import BaseDictModelListWidget
-from ....common.data.xml_data_provider import XmlDataProvider
 from ....common.controllers.dict_doctor_controller import ControllerDictDoctor
 from ....common.views.model_edit.model_edit_dialog import ModelEditDialog
 from .doctor_edit_widget import DoctorEditWidget
-from ..model.doctor_model import DoctorModel
-
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'doctors_list_widget.ui'))
 
