@@ -1,5 +1,5 @@
-from ...base_classes.base_sections import BaseSections
-from ...consts.Keys import Keys
+from ....base_classes.base_sections import BaseSections
+from ....consts.Keys import Keys
 
 
 class SectionMedManipulations(BaseSections):
